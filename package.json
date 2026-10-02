@@ -1,0 +1,55 @@
+{
+  "name": "claro-md",
+  "version": "3.0.0",
+  "description": "Editor y lector Markdown para Windows, con gráficos sin conexión",
+  "main": "electron/main.cjs",
+  "author": "Claro MD",
+  "private": true,
+  "scripts": {
+    "build": "node electron/build.cjs",
+    "start": "npm run build && electron .",
+    "test": "node --test electron/core.test.cjs",
+    "audit": "npm run build && electron . --audit",
+    "dist": "npm run build && electron-builder --win dir"
+  },
+  "devDependencies": {
+    "electron": "44.5.1",
+    "electron-builder": "26.15.3",
+    "esbuild": "^0.25.10",
+    "@codemirror/lang-markdown": "^6.3.4",
+    "@codemirror/search": "^6.5.11",
+    "@codemirror/theme-one-dark": "^6.1.3",
+    "codemirror": "^6.0.2",
+    "dompurify": "^3.2.7",
+    "highlight.js": "^11.11.1",
+    "katex": "0.16.22",
+    "lucide": "^0.468.0",
+    "markdown-it": "^14.1.0",
+    "markdown-it-task-lists": "^2.1.1",
+    "mermaid": "11.17.2"
+  },
+  "build": {
+    "appId": "com.claromd.desktop",
+    "productName": "Claro MD",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron/main.cjs",
+      "electron/preload.cjs",
+      "electron/core.cjs",
+      "electron/ui/**",
+      "branding/**",
+      "examples/**",
+      "package.json",
+      "electron/audit.cjs",
+      "src/Assets/audit.md"
+    ],
+    "win": {
+      "icon": "branding/ClaroMD.ico",
+      "signAndEditExecutable": true,
+      "target": "dir"
+    },
+    "asar": true
+  }
+}

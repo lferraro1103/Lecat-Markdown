@@ -1,61 +1,66 @@
-# Claro MD
+# Claro MD 3
 
-Lector nativo de Markdown para Windows 10/11 x64. Explorador de discos, acceso rápido de Windows,
-interfaz clara/oscura, iconos originales y gráficos sin conexión.
+Editor y lector Markdown para Windows 10/11 x64 con **Electron y Chromium incluidos**. No necesita WebView2, .NET ni Internet para leer, editar y dibujar documentos locales.
 
-## Descargar y abrir
-Descomprimí el portable completo y ejecutá ClaroMD.exe. Conservá la carpeta Assets al lado del ejecutable.
-Incluye .NET; la vista previa requiere [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/).
-Si WebView2 no está disponible, permite leer el código Markdown.
+## Abrir
+
+Descomprimí el portable completo y ejecutá `Claro MD.exe`. Conservá todos los archivos y carpetas: el exe necesita los recursos de Electron. No hay cuenta ni instalador. El documento de bienvenida demuestra edición, gráficos, fórmulas e imágenes.
 
 ## Funciones
-- Acceso rápido: Escritorio, Descargas, Documentos, Imágenes, Música y Vídeos con sus rutas reales.
-- Otros accesos de Windows cuando Shell los expone; debajo de una línea, las unidades de Este equipo.
-- Árbol de carpetas diferido, filtro .md/.markdown, navegación, ruta editable y menús contextuales.
-- Menús Archivo, Navegación, Vista y Ayuda con atajos, tooltips e iconos.
-- Lectura/código, índice de encabezados, búsqueda, zoom 50–250%, temas y recarga automática.
-- Mermaid: flujo, secuencia, clases, entidades, estados, sectores, Gantt, mindmap, timeline y XY.
-- Vista ampliada, código por gráfico y exportación SVG.
-- KaTeX inline/bloque, código resaltado, tablas e imágenes locales incluyendo espacios/Unicode.
-- Icono original SVG/PNG/ICO de nueve resoluciones, incrustado en el ejecutable y ventana.
 
-## Uso
-Elegí una carpeta y después un documento del listado. Arrastrar un archivo/carpeta también funciona.
-Abrí examples/Bienvenido.md para probar gráficos, matemáticas e imágenes.
-Ctrl+O abre documentos; Ctrl+L permite escribir una ruta. El menú Ayuda muestra los demás atajos.
+- Lectura, edición Markdown y vista dividida con previsualización en vivo.
+- CodeMirror: deshacer/rehacer, selección, resaltado, números de línea, buscar/reemplazar.
+- Formato: títulos, negrita, cursiva, enlaces, imágenes, listas, tareas, citas, código, tablas y Mermaid.
+- Pestañas, Nuevo, Guardar, Guardar como y protección al cerrar con cambios.
+- Borradores de recuperación locales y detección de conflictos externos.
+- Acceso rápido real de Windows, otros shortcuts del Shell y línea antes de los discos.
+- Explorador de carpetas, ruta editable, subir/actualizar y filtro.
+- Temas claro/oscuro, icono original, Lucide, índice, enfoque y zoom.
+- Mermaid, KaTeX, tablas, código e imágenes locales empaquetados sin CDN.
+- Ampliar gráficos e imágenes, exportar SVG y PDF de lectura.
 
-También admite: ClaroMD.exe "C:\ruta\documento.md"
+Referencia de experiencia: MarkText. Este editor ofrece **Markdown con vista previa**, no reproduce su motor WYSIWYG Muya.
 
-## Compilar
-Requisitos: Windows x64 y SDK .NET 8.
-Desde PowerShell en la raíz:
+## Atajos
 
-    ./scripts/publish.ps1
+| Acción | Atajo |
+| --- | --- |
+| Nuevo / abrir / carpeta | Ctrl+N / Ctrl+O / Ctrl+Shift+O |
+| Guardar / guardar como | Ctrl+S / Ctrl+Shift+S |
+| Cerrar pestaña | Ctrl+W |
+| Lectura / edición / dividida | Ctrl+1 / Ctrl+2 / Ctrl+3 |
+| Buscar y reemplazar | Ctrl+F |
+| Negrita / cursiva | Ctrl+B / Ctrl+I |
+| Enfoque / tema | Ctrl+Shift+F / Ctrl+Shift+T |
+| Exportar PDF | Ctrl+Alt+P |
+| Zoom | Ctrl+Plus / Ctrl+Minus / Ctrl+0 |
 
-Los recursos de renderizado ya están incluidos; no hace falta npm para compilar ni Internet para leer gráficos.
-src/Assets/package-lock.json registra las dependencias JavaScript. src/packages.lock.json fija NuGet.
+## Datos y límites
 
-## Auditar
+Guardar es explícito. Borradores y preferencias se almacenan en `%APPDATA%/ClaroMD`; no hay sincronización ni telemetría. El original permanece intacto hasta guardar. Los conflictos externos evitan sobrescritura silenciosa y permiten guardar una copia.
 
-    ./scripts/audit.ps1
+UTF-8, BOM y UTF-16 LE; CRLF conservado. Máximo 20 MB por documento. UTF-16 BE y bytes UTF-8 inválidos se rechazan para evitar corrupción. Imágenes remotas muestran aviso y no se descargan. Enlaces web sólo se abren al hacer clic. HTML/scripts del Markdown no se ejecutan. Directivas Mermaid rechazadas y errores aislados por bloque. PlantUML/Graphviz se muestran como código.
 
-La auditoría usa una ventana real WinForms/WebView2 y revisa renderizado, gráficos, seguridad,
-imágenes, navegación, modos, búsqueda, tema, icono y contraste.
-[Investigación visual](docs/INVESTIGACION-VISUAL.md) · [Contrato UI](docs/UI-SPEC.md)
-[Auditoría visual](docs/UI-REVIEW.md) · [Auditoría de lectura](docs/AUDITORIA-LECTURA.md)
+## Desarrollo y auditoría
 
-Las capturas locales de interfaz no se suben al repositorio porque pueden mostrar nombres de carpetas personales.
+Node.js 22+ y npm; Windows x64 para esta entrega.
 
-## Límites
-Solo lectura, archivos hasta 20 MB. No evalúa HTML ni scripts incluidos en el Markdown.
-Las imágenes remotas se activan opcionalmente desde Vista.
-Las directivas de configuración Mermaid se rechazan. PlantUML/Graphviz y scripts arbitrarios se muestran como código.
-WebView2 es un runtime externo; las carpetas siguen los permisos de tu cuenta.
-Las preferencias se guardan en %LOCALAPPDATA%/ClaroMD/settings.json.
+```powershell
+npm ci
+npm run build
+npm test
+npm run audit
+npm run dist
+```
 
-## Dependencias y licencias
-Markdig 1.3.2 (BSD-2-Clause), Mermaid 11.12.0 (MIT), KaTeX 0.16.22 (MIT),
-highlight.js 11.11.1 (BSD-3-Clause) y Microsoft.Web.WebView2 1.0.4191.47.
-Licencias de recursos en src/Assets/vendor; licenses/Markdig.txt para Markdig.
-Las dependencias de Microsoft conservan sus términos de distribución. El código del proyecto no recibe una licencia pública automáticamente.
+`npm start` abre desde el código. `dist/win-unpacked` es el portable. Auditoría en Electron real y capturas en `docs/previews/electron`, excluidas de Git por posibles rutas personales. Los lockfiles fijan dependencias.
 
+- [Investigación GSD](docs/INVESTIGACION-ELECTRON.md)
+- [Contrato UI](docs/UI-SPEC-ELECTRON.md)
+- [Auditoría y límites](docs/AUDITORIA-ELECTRON.md)
+
+`src` y los documentos de versión 2 conservan la implementación histórica WinForms/WebView2. El punto de entrada actual es `electron/`.
+
+## Licencias
+
+Electron, CodeMirror, markdown-it, DOMPurify, Mermaid, KaTeX, highlight.js y Lucide conservan sus licencias. El build genera las licencias del bundle dentro de `electron/ui`. El código del proyecto no recibe automáticamente una licencia pública por estar en un repositorio privado.

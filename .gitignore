@@ -4,3 +4,6 @@ dist/
 *.pdb
 node_modules/
 docs/previews/
+
+electron/ui/
+electron/refine.cjs

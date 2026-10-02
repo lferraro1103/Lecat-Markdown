@@ -1,0 +1,35 @@
+PASS sandbox and isolated context
+PASS renderer has no Node globals
+PASS Windows quick access and drives
+PASS bundled welcome image loads
+PASS 10 Mermaid diagram families rendered
+PASS invalid graph has isolated fallback
+PASS inline and block math
+PASS code highlighted
+PASS scrollable tables
+PASS HTML and script cannot execute
+PASS local Unicode image path works
+PASS headings index exists
+PASS math layout retains generated inline styles
+PASS real editor updates dirty state
+PASS save reaches disk
+PASS format toolbar edits Markdown
+PASS search and replace panel
+PASS theme dark active
+PASS editing mode hides preview
+PASS reading mode hides editor
+PASS CRLF preserved by real editor save
+PASS external changes cannot be overwritten silently
+PASS dirty draft persisted without overwriting original
+PASS cancel closing preserves dirty document
+PASS cancel Save As preserves document
+PASS Save As creates separate file
+PASS discard closing removes only selected tab
+PASS editor undo restores exact text
+PASS editor redo restores edit
+PASS tab and theme changes preserve undo history
+PASS PDF export generated
+PASS 900px window has no horizontal shell overflow
+PASS offline renderer makes no network connections
+PASS multiple tabs preserve edits
+SUCCESS

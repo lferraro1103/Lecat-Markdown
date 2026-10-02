@@ -1,72 +1,62 @@
-# Claro MD 2
+# Claro MD 3
 
-Tu biblioteca, a mano. Explorá las carpetas de Windows y leé Markdown con una interfaz tranquila.
+**Leé, escribí y explorá tus ideas.** Todo queda en tu equipo, sin conexión y sin WebView2.
 
-## Empezá por tu disco
+## Tu espacio de escritura
 
-**Acceso rápido** reúne Escritorio, Descargas, Documentos, Imágenes, Música y Vídeos.
-Debajo de la línea divisoria están las unidades de **Este equipo**.
-En **Más accesos de Windows** se muestran otros lugares disponibles en el acceso rápido del sistema.
+Elegí **Dividida** para editar Markdown y ver el resultado en vivo. **Edición** te deja toda la pantalla para escribir. **Lectura** muestra el documento terminado.
 
-Usá la barra superior para entrar a una ruta, ir atrás o subir una carpeta.
-Los menús tienen todas las acciones y sus atajos.
+- Creá un documento con **Ctrl+N**.
+- Abrí un archivo con **Ctrl+O** o una carpeta con **Ctrl+Shift+O**.
+- Guardá con **Ctrl+S** y elegí otra ubicación con **Ctrl+Shift+S**.
+- Buscá y reemplazá texto con **Ctrl+F**.
+
+> Los cambios se guardan en el archivo sólo cuando lo decidís. Si cerrás con cambios pendientes, Claro MD te pregunta qué hacer. Los borradores permiten recuperar trabajo interrumpido.
+
+## Carpetas a mano
+
+Acceso rápido muestra las carpetas reales de Windows: Escritorio, Descargas, Documentos, Imágenes, Música y Vídeos. Debajo de la línea están tus discos. También podés escribir una ruta en el explorador.
 
 ## Ideas que se ven
 
-~~~mermaid
+```mermaid
 flowchart LR
-    A[Explorá tus carpetas] --> B[Abrí un Markdown]
-    B --> C[Leé tus ideas]
-    B --> D[Visualizá los gráficos]
-~~~
+    A[Explorá] --> B[Escribí]
+    B --> C[Visualizá]
+    C --> D[Guardá]
+```
 
-Cada gráfico ofrece **Código**, **Ampliar** y **Guardar SVG**.
+Los gráficos se pueden ampliar, ver como código o exportar a SVG.
 
-### Tu biblioteca
+### Fórmulas
 
-~~~mermaid
-pie title Documentos
-    "Notas" : 45
-    "Proyectos" : 35
-    "Manuales" : 20
-~~~
+Una fórmula en línea: $E = mc^2$.
 
-### Cambios por mes
+$$
+\int_0^1 x^2\,dx = \frac{1}{3}
+$$
 
-~~~mermaid
-xychart-beta
-    title "Documentos por mes"
-    x-axis [Ene, Feb, Mar, Abr]
-    y-axis "Archivos" 0 --> 40
-    bar [12, 23, 18, 35]
-    line [12, 23, 18, 35]
-~~~
+### Código
 
-## Matemáticas y código
+```javascript
+const ideas = ["Leer", "Editar", "Compartir"];
+ideas.forEach(idea => console.log(idea));
+```
 
-La energía es $E=mc^2$.
+### Tu lista
 
-~~~csharp
-var archivos = Directory.GetFiles(carpeta, "*.md");
-Console.WriteLine(archivos.Length);
-~~~
+- [x] Chromium incluido
+- [x] Markdown y gráficos sin conexión
+- [ ] Escribir mi próximo documento
 
-## Un icono propio
+| Modo | Para qué sirve |
+| --- | --- |
+| Lectura | Leer con calma |
+| Edición | Escribir sin distracciones |
+| Dividida | Ver cada cambio en vivo |
+
+## Identidad propia
 
 ![Icono de Claro MD](../branding/ClaroMD.png)
 
-## A tu manera
-
-| Acción | Atajo |
-|---|---|
-| Abrir un Markdown | Ctrl+O |
-| Ir a una carpeta | Ctrl+L |
-| Lectura / código | Ctrl+1 / Ctrl+2 |
-| Buscar texto | Ctrl+F |
-| Mostrar índice | Ctrl+Mayús+I |
-| Cambiar tema | Ctrl+T |
-| Ajustar tamaño | Ctrl++ / Ctrl+- |
-| Actualizar | F5 |
-
-Los documentos se leen sin modificar los archivos.
-Los gráficos funcionan sin conexión; las imágenes remotas se habilitan desde el menú Vista.
+Claro MD 3 · Electron · Tu biblioteca y tus documentos, en tu equipo.
