@@ -1,7 +1,7 @@
 {
   "name": "lecat-markdown",
   "version": "3.2.0",
-  "description": "Editor y lector Markdown para Windows, con gráficos sin conexión",
+  "description": "Editor y lector Markdown para Windows y macOS, con gráficos sin conexión",
   "main": "electron/main.cjs",
   "author": "Lecat",
   "private": true,
@@ -11,7 +11,8 @@
     "test": "node --test electron/core.test.cjs electron/persistence.test.cjs",
     "audit": "npm run build && electron . --audit",
     "dist": "npm run build && electron-builder --win dir",
-    "installer": "npm run build && electron-builder --win nsis --x64 --publish never"
+    "installer": "npm run build && electron-builder --win nsis --x64 --publish never",
+    "dist:mac": "npm run build && electron-builder --mac dmg zip --publish never"
   },
   "devDependencies": {
     "@codemirror/lang-markdown": "^6.3.4",
@@ -93,6 +94,27 @@
       "deleteAppDataOnUninstall": false,
       "runAfterFinish": true,
       "artifactName": "Lecat-Markdown-${version}-Setup-x64.exe"
-    }
+    },
+    "mac": {
+      "icon": "branding/Lecat.png",
+      "category": "public.app-category.productivity",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "identity": null,
+      "hardenedRuntime": false,
+      "artifactName": "Lecat-Markdown-${version}-macOS-${arch}.${ext}"
+    },
+    "fileAssociations": [
+      {
+        "ext": [
+          "md",
+          "markdown"
+        ],
+        "name": "Markdown document",
+        "role": "Editor"
+      }
+    ]
   }
 }

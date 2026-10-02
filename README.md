@@ -1,5 +1,15 @@
 # Lecat - Markdown
 
+## Versión alternativa para macOS
+
+La rama `develop` incluye paquetes DMG y ZIP para Apple Silicon (`arm64`) e Intel
+(`x64`), compilados y auditados en GitHub Actions. Consultá
+[la release alternativa](https://github.com/lferraro1103/ClaroMD/releases/tag/v3.2.0-macos.1)
+y [las instrucciones de instalación](docs/RELEASE-MACOS.md).
+Los atajos usan ⌘ en macOS; preferencias y borradores se guardan en
+`~/Library/Application Support/ClaroMD`. Para compilar en un Mac:
+`npm ci` y `npm run dist:mac -- --arm64` (o `--x64`).
+
 Editor y lector Markdown para Windows 10/11 x64 con **Electron y Chromium incluidos**. No necesita WebView2, .NET ni Internet para leer, editar y dibujar documentos locales.
 
 ## Abrir
