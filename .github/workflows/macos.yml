@@ -1,6 +1,7 @@
 name: macOS alternative release
 on:
   push:
+    branches: [developer]
     tags: ['v*-macos.*', 'v*-macos-signed.*']
   workflow_dispatch:
     inputs:

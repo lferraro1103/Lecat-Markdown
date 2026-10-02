@@ -1,6 +1,21 @@
 # Lecat - Markdown
 
-Versión del código: **3.2.1**, integrada en `main` para Windows y macOS.
+Versión de esta rama: **3.2.1-macos12.1**, preparada para **macOS 12 Monterey**.
+
+## Rama developer para macOS 12
+
+`developer` parte de `main` 3.2.1 y usa Electron **43.7.7**, con versión mínima
+de macOS **12.0**, para Intel y Apple Silicon. Electron 44 exige macOS 13 según
+[la documentación oficial](https://www.electronjs.org/blog/electron-44-0).
+No actualizar esta rama a Electron 44 o superior mientras mantenga Monterey.
+
+Cada push a `developer` compila DMG y ZIP para ambas arquitecturas en
+[GitHub Actions](https://github.com/lferraro1103/Lecat-Markdown/actions/workflows/macos.yml).
+Los archivos se descargan de los artefactos `macOS-x64` y `macOS-arm64` de esa
+ejecución. Las releases anteriores usan Electron 44 y no sirven para macOS 12.
+Los runners de compilación usan macOS 15; la apertura en un Mac con Monterey
+queda pendiente. Esta adaptación no confirma por sí sola la resolución del
+aviso de aplicación dañada ni garantiza que Gatekeeper ofrezca autorización.
 
 ## Versión alternativa para Windows y macOS
 
