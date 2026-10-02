@@ -17,6 +17,7 @@ Instalador NSIS 3.2.0 listo: licencia verificada, payload auditado y hashes. Rel
 | 261002-dhe | Home por defecto en macOS; discos sin Time Machine, Recovery ni symlinks duplicados; macos.4 publicada | 2026-10-02 | 9a7a177 | [use-user-home-as-default-directory-on-ma](./quick/261002-dhe-use-user-home-as-default-directory-on-ma/) |
 | 261002-dqq | Tema del sistema en primera apertura, avisos eliminados y títulos YAML; release Windows/macOS desktop.1 publicada | 2026-10-02 | 94ddac3 | [default-to-system-theme-and-remove-ui-no](./quick/261002-dqq-default-to-system-theme-and-remove-ui-no/) |
 | 261002-ecq | Bump a 3.2.1 e integración de develop en main, autorizada por el usuario | 2026-10-02 | 37172a1 | [bump-stable-version-to-3-2-1-and-promote](./quick/261002-ecq-bump-stable-version-to-3-2-1-and-promote/) |
+| 261002-eq3 | Release estable 3.2.1 publicada y rama/release separadas para macOS 12 | 2026-10-02 | 688d095 / 38318fe | [publish-stable-3-2-1-and-separate-develo](./quick/261002-eq3-publish-stable-3-2-1-and-separate-develo/) |
 
 Última actividad: release alternativa v3.2.0-macos.1 publicada. GitHub Actions
 37001654216 exitoso; 12 tests y 80 comprobaciones de aplicación empaquetada por arquitectura.
@@ -60,3 +61,9 @@ main fue actualizado mediante fast-forward de 3e8d843 a 37172a1, integrando deve
 Push de main confirmado; la prohibición anterior de modificar main fue revocada.
 No se generó nueva release binaria en esta promoción; última descarga publicada:
 v3.2.1-desktop.1. Registros GSD sincronizados en main y develop.
+
+Última actividad: v3.2.1 estable publicada desde main (688d095), Actions
+37014254254, nueve assets de Windows y macOS. API /releases/latest confirma
+v3.2.1. Rama developer-macos12 (38318fe) y prerelease v3.2.1-macos12.1
+publicadas; Actions 37014158490 aprobó ambas arquitecturas y publicó seis assets.
+Apertura y autorización en macOS 12 real pendientes. No se agregaron pruebas.
