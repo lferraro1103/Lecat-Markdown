@@ -1,5 +1,7 @@
 # Lecat - Markdown
 
+Versión del código: **3.2.1**, integrada en `main` para Windows y macOS.
+
 ## Versión alternativa para Windows y macOS
 
 La rama `develop` incluye instalador y ZIP portable para Windows x64, y paquetes

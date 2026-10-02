@@ -1,6 +1,6 @@
 {
   "name": "lecat-markdown",
-  "version": "3.2.1-desktop.1",
+  "version": "3.2.1",
   "description": "Editor y lector Markdown para Windows y macOS, con gráficos sin conexión",
   "main": "electron/main.cjs",
   "author": "Lecat",
