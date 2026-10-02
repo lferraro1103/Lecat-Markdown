@@ -12,7 +12,8 @@
     "audit": "npm run build && electron . --audit",
     "dist": "npm run build && electron-builder --win dir",
     "installer": "npm run build && electron-builder --win nsis --x64 --publish never",
-    "dist:mac": "npm run build && electron-builder --mac dmg zip --publish never"
+    "dist:mac": "npm run build && electron-builder --mac dmg zip --publish never",
+    "dist:mac:signed": "npm run build && electron-builder --config electron-builder.developer-id.cjs --mac dmg zip --publish never"
   },
   "devDependencies": {
     "@codemirror/lang-markdown": "^6.3.4",

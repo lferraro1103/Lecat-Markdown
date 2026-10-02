@@ -3,7 +3,9 @@ set -euo pipefail
 
 # Inspect the distributed containers, not just electron-builder's working copy.
 arch=${1:?Pass arm64 or x64}
+signing=${2:-adhoc}
 case "$arch" in arm64|x64) ;; *) echo "Unsupported architecture" >&2; exit 1;; esac
+case "$signing" in adhoc|developer-id) ;; *) echo "Unsupported signing mode" >&2; exit 1;; esac
 version=$(node -p 'require("./package.json").version')
 base="dist/Lecat-Markdown-${version}-macOS-${arch}"
 scratch=$(mktemp -d "${RUNNER_TEMP:-${TMPDIR:-/tmp}}/lecat-verify.XXXXXX")
@@ -18,8 +20,14 @@ ditto -x -k "$base.zip" "$scratch/zip"
 zip_app="$scratch/zip/Lecat - Markdown.app"
 codesign --verify --deep --strict --verbose=2 "$zip_app"
 codesign --display --verbose=4 "$zip_app" 2>&1 | tee "$scratch/signature.txt"
-grep -q 'Signature=adhoc' "$scratch/signature.txt"
-echo 'PASS ZIP has a valid ad-hoc signature'
+if [ "$signing" = developer-id ]; then
+  grep -q '^Authority=Developer ID Application:' "$scratch/signature.txt"
+  grep -Eq '^TeamIdentifier=[A-Z0-9]+$' "$scratch/signature.txt"
+  echo 'PASS ZIP has a valid Developer ID signature'
+else
+  grep -q 'Signature=adhoc' "$scratch/signature.txt"
+  echo 'PASS ZIP has a valid ad-hoc signature'
+fi
 
 hdiutil verify "$base.dmg"
 mkdir "$scratch/mounted"

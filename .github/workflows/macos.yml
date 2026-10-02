@@ -1,8 +1,14 @@
 name: macOS alternative release
 on:
   push:
-    tags: ['v*-macos.*']
+    tags: ['v*-macos.*', 'v*-macos-signed.*']
   workflow_dispatch:
+    inputs:
+      signing:
+        description: Signing mode
+        type: choice
+        options: [adhoc, developer-id]
+        default: adhoc
 permissions:
   contents: read
 jobs:
@@ -19,6 +25,7 @@ jobs:
     timeout-minutes: 30
     env:
       CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      SIGNING_MODE: ${{ contains(github.ref_name, '-macos-signed.') && 'developer-id' || inputs.signing || 'adhoc' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,9 +34,23 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
-      - run: npm run dist:mac -- --${{ matrix.arch }}
+      - name: Build ad-hoc package
+        if: env.SIGNING_MODE == 'adhoc'
+        run: npm run dist:mac -- --${{ matrix.arch }}
+      - name: Build Developer ID package
+        if: env.SIGNING_MODE == 'developer-id'
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'true'
+          CSC_LINK: ${{ secrets.MACOS_CERTIFICATE_P12 }}
+          CSC_KEY_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PASSWORD }}
+        run: |
+          if [ -z "$CSC_LINK" ] || [ -z "$CSC_KEY_PASSWORD" ]; then
+            echo '::error::Configure MACOS_CERTIFICATE_P12 and MACOS_CERTIFICATE_PASSWORD in repository Actions secrets.'
+            exit 1
+          fi
+          npm run dist:mac:signed -- --${{ matrix.arch }}
       - name: Verify distributed signatures and audit installed application
-        run: bash scripts/verify-macos.sh ${{ matrix.arch }}
+        run: bash scripts/verify-macos.sh ${{ matrix.arch }} "$SIGNING_MODE"
       - name: Checksums
         run: |
           cd dist
@@ -64,7 +85,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          NOTES=docs/RELEASE-MACOS.md
+          if [[ "$GITHUB_REF_NAME" == *-macos-signed.* ]]; then
+            NOTES=docs/RELEASE-MACOS-SIGNED.md
+          fi
           gh release create "$GITHUB_REF_NAME" release-assets/* \
             --repo "$GITHUB_REPOSITORY" --verify-tag --prerelease --latest=false \
             --title "Lecat Markdown 3.2.0 — macOS alternativa" \
-            --notes-file docs/RELEASE-MACOS.md
+            --notes-file "$NOTES"

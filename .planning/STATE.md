@@ -21,3 +21,9 @@ DMG, ZIP y SHA256 disponibles. Main y release estable de Windows conservados.
 Actualización: v3.2.0-macos.2 corrige la falta de firma. Actions 37003112459
 aprobado en Intel y ARM64 (95 comprobaciones por arquitectura). Pendiente confirmar
 apertura en el Mac del usuario; requiere aprobación manual al no estar notarizada.
+
+### Tarea en curso
+
+261002-ch7: preparado el flujo Developer ID para autorización desde la interfaz
+de macOS. Pendiente certificado Developer ID Application y contraseña en secrets
+de Actions; aún no compilado ni publicado con ese certificado.
