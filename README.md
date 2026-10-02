@@ -1,10 +1,10 @@
-# Claro MD 3
+# Lecat - Markdown
 
 Editor y lector Markdown para Windows 10/11 x64 con **Electron y Chromium incluidos**. No necesita WebView2, .NET ni Internet para leer, editar y dibujar documentos locales.
 
 ## Abrir
 
-Descomprimí el portable completo y ejecutá `Claro MD.exe`. Conservá todos los archivos y carpetas: el exe necesita los recursos de Electron. No hay cuenta ni instalador. El documento de bienvenida demuestra edición, gráficos, fórmulas e imágenes.
+Descomprimí el portable completo y ejecutá `Lecat - Markdown.exe`. Conservá todos los archivos y carpetas: el exe necesita los recursos de Electron. No hay cuenta ni instalador. El documento de bienvenida demuestra edición, gráficos, fórmulas e imágenes.
 
 ## Funciones
 

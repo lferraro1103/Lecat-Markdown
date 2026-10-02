@@ -1,9 +1,9 @@
 {
-  "name": "claro-md",
-  "version": "3.0.0",
+  "name": "lecat-markdown",
+  "version": "3.1.0",
   "description": "Editor y lector Markdown para Windows, con gráficos sin conexión",
   "main": "electron/main.cjs",
-  "author": "Claro MD",
+  "author": "Lecat",
   "private": true,
   "scripts": {
     "build": "node electron/build.cjs",
@@ -29,8 +29,8 @@
     "mermaid": "11.17.2"
   },
   "build": {
-    "appId": "com.claromd.desktop",
-    "productName": "Claro MD",
+    "appId": "com.lecat.markdown",
+    "productName": "Lecat - Markdown",
     "directories": {
       "output": "dist"
     },
@@ -46,7 +46,7 @@
       "src/Assets/audit.md"
     ],
     "win": {
-      "icon": "branding/ClaroMD.ico",
+      "icon": "branding/Lecat.ico",
       "signAndEditExecutable": true,
       "target": "dir"
     },

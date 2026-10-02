@@ -13,7 +13,7 @@ async function read(file){if(!/\.(md|markdown)$/i.test(file))throw Error('Elegí
 async function atomicSave(doc,content,{allowOverwrite=false}={}){
  if(typeof content!=='string'||Buffer.byteLength(content,'utf8')>MAX)throw Error('Documento mayor que 20 MB.');
  let current;try{current=await fs.readFile(doc.path);}catch(e){if(e.code!=='ENOENT')throw e;}
- if(!allowOverwrite&&((current&&digest(current)!==doc.hash)||(!current&&doc.hash)))throw Error('El archivo cambió fuera de Claro MD. Guardá una copia con Guardar como para conservar ambas versiones.');
+ if(!allowOverwrite&&((current&&digest(current)!==doc.hash)||(!current&&doc.hash)))throw Error('El archivo cambió fuera de Lecat - Markdown. Guardá una copia con Guardar como para conservar ambas versiones.');
  const buffer=encode(content,doc),temp=doc.path+'.claro-'+crypto.randomUUID()+'.tmp';
  try{await fs.writeFile(temp,buffer,{flag:'wx'});const h=await fs.open(temp,'r+');try{await h.sync();}finally{await h.close();}await fs.rename(temp,doc.path);}finally{await fs.unlink(temp).catch(()=>{});}
  return {...doc,content,hash:digest(buffer)};
