@@ -4,7 +4,7 @@ Editor y lector Markdown para Windows 10/11 x64 con **Electron y Chromium inclui
 
 ## Abrir
 
-Descomprimí el portable completo y ejecutá `Lecat - Markdown.exe`. Conservá todos los archivos y carpetas: el exe necesita los recursos de Electron. No hay cuenta ni instalador. El documento de bienvenida demuestra edición, gráficos, fórmulas e imágenes.
+El instalador `Lecat-Markdown-3.2.0-Setup-x64.exe` ofrece licencia, carpeta de destino, accesos directos y desinstalador. Alternativamente, descomprimí el portable completo y ejecutá `Lecat - Markdown.exe`. Conservá todos los archivos y carpetas: el exe necesita los recursos de Electron. No hay cuenta ni instalador. El documento de bienvenida demuestra edición, gráficos, fórmulas e imágenes.
 
 ## Funciones
 
@@ -53,6 +53,7 @@ npm run build
 npm test
 npm run audit
 npm run dist
+npm run installer
 ```
 
 `npm start` abre desde el código. `dist/win-unpacked` es el portable. Auditoría en Electron real y capturas en `docs/previews/electron`, excluidas de Git por posibles rutas personales. Los lockfiles fijan dependencias.

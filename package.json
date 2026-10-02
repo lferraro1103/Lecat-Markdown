@@ -10,7 +10,8 @@
     "start": "npm run build && electron .",
     "test": "node --test electron/core.test.cjs electron/persistence.test.cjs",
     "audit": "npm run build && electron . --audit",
-    "dist": "npm run build && electron-builder --win dir"
+    "dist": "npm run build && electron-builder --win dir",
+    "installer": "npm run build && electron-builder --win nsis --x64 --publish never"
   },
   "devDependencies": {
     "@codemirror/lang-markdown": "^6.3.4",
@@ -61,6 +62,37 @@
       "signAndEditExecutable": true,
       "target": "dir"
     },
-    "asar": true
+    "asar": true,
+    "extraResources": [
+      {
+        "from": "build/LICENCIA.txt",
+        "to": "LICENCIA.txt"
+      },
+      {
+        "from": "electron/ui/THIRD-PARTY-LICENSES.txt",
+        "to": "THIRD-PARTY-LICENSES.txt"
+      }
+    ],
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Lecat - Markdown",
+      "uninstallDisplayName": "Lecat - Markdown",
+      "installerIcon": "branding/Lecat.ico",
+      "uninstallerIcon": "branding/Lecat.ico",
+      "license": "build/LICENCIA.rtf",
+      "installerLanguages": [
+        "es_ES",
+        "en_US"
+      ],
+      "displayLanguageSelector": true,
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": true,
+      "artifactName": "Lecat-Markdown-${version}-Setup-x64.exe"
+    }
   }
 }

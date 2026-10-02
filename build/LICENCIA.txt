@@ -1,0 +1,21 @@
+LECAT - MARKDOWN
+LICENCIA DE USO
+Copyright (c) 2026 Lecat. Todos los derechos reservados.
+
+1. Uso de la aplicación
+Se permite instalar y utilizar gratuitamente Lecat - Markdown para fines personales, educativos y profesionales. Se permite compartir copias completas y sin modificaciones del instalador o del portable, conservando esta licencia y los avisos de terceros.
+
+2. Titularidad
+La aplicación, su nombre y sus recursos propios conservan sus derechos de autor. Esta licencia de uso no concede una licencia pública sobre el código fuente ni transfiere la titularidad de la aplicación. Los derechos no concedidos expresamente se reservan a sus respectivos titulares.
+
+3. Documentos y privacidad
+Los documentos creados o editados pertenecen a sus autores. Lecat trabaja con archivos locales y no incluye sincronización remota ni telemetría. Abrir enlaces externos lleva al navegador y se rige por las condiciones del sitio visitado. La desinstalación conserva los borradores y preferencias del usuario.
+
+4. Software de terceros
+Electron, Chromium, Tiptap, ProseMirror, CodeMirror y las demás bibliotecas conservan sus propias licencias. Estas condiciones no limitan los derechos concedidos por esas licencias. Sus textos y avisos se incluyen con la aplicación, en LICENSE, LICENSES.chromium.html y resources/app.asar/electron/ui/THIRD-PARTY-LICENSES.txt.
+
+5. Garantías y responsabilidad
+La aplicación se entrega tal como está, sin garantía de funcionamiento ininterrumpido o ausencia de errores. Conservá copias de seguridad de los documentos importantes. En la medida permitida por la legislación aplicable, sus autores no asumen responsabilidad por daños derivados de su uso. No se excluyen derechos irrenunciables del usuario.
+
+6. Aceptación
+Al instalar o utilizar la aplicación aceptás estas condiciones de uso. Si no estás de acuerdo, cancelá la instalación y no utilices la aplicación.
