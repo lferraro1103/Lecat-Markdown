@@ -12,7 +12,12 @@ Instalador NSIS 3.2.0 listo: licencia verificada, payload auditado y hashes. Rel
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 261002-brl | macOS alternativa publicada desde develop; ARM64 e Intel verificados | 2026-10-02 | 6824ae4 | [macos-alternative-release](./quick/261002-brl-macos-alternative-release/) |
+| 261002-c77 | Firma ad-hoc y verificación de DMG/ZIP/copia instalada; macOS.2 publicada | 2026-10-02 | 3ce4538 | [fix-macos-package-signatures-and-launch](./quick/261002-c77-fix-macos-package-signatures-and-launch/) |
 
 Última actividad: release alternativa v3.2.0-macos.1 publicada. GitHub Actions
 37001654216 exitoso; 12 tests y 80 comprobaciones de aplicación empaquetada por arquitectura.
 DMG, ZIP y SHA256 disponibles. Main y release estable de Windows conservados.
+
+Actualización: v3.2.0-macos.2 corrige la falta de firma. Actions 37003112459
+aprobado en Intel y ARM64 (95 comprobaciones por arquitectura). Pendiente confirmar
+apertura en el Mac del usuario; requiere aprobación manual al no estar notarizada.
