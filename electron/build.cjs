@@ -1,6 +1,7 @@
 const fs=require('node:fs'),path=require('node:path');
 fs.mkdirSync(path.join(__dirname,'ui'),{recursive:true});
 const result=require('esbuild').buildSync({entryPoints:[path.join(__dirname,'renderer.js')],bundle:true,outfile:path.join(__dirname,'ui/bundle.js'),platform:'browser',target:'chrome140',loader:{'.woff2':'file','.woff':'file','.ttf':'file'},assetNames:'fonts/[name]-[hash]',minify:true,metafile:true});
+fs.copyFileSync(path.join(__dirname,'startup-theme.js'),path.join(__dirname,'ui/startup-theme.js'));
 fs.copyFileSync(path.join(__dirname,'index.html'),path.join(__dirname,'ui/index.html'));
 fs.copyFileSync(path.join(__dirname,'style.css'),path.join(__dirname,'ui/style.css'));
 const packages=new Set();for(const input of Object.keys(result.metafile.inputs)){let folder=path.dirname(path.resolve(input));while(folder!==path.dirname(folder)){if(fs.existsSync(path.join(folder,'package.json'))){packages.add(folder);break;}folder=path.dirname(folder);}}

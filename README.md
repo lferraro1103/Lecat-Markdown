@@ -1,8 +1,8 @@
 # Lecat - Markdown
 
-Versión del código: **3.2.1**, integrada en `main` para Windows y macOS.
+Versión del código: **3.2.2**, integrada en `main` para Windows y macOS.
 
-[Descargar release estable 3.2.1](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.1).
+[Descargar release estable 3.2.2](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.2).
 Para **macOS 12 Monterey**, usá la
 [release alternativa](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.1-macos12.1)
 de la [rama developer-macos12](https://github.com/lferraro1103/Lecat-Markdown/tree/developer-macos12).
@@ -29,7 +29,7 @@ Editor y lector Markdown para Windows 10/11 x64 con **Electron y Chromium inclui
 
 ## Abrir
 
-El instalador `Lecat-Markdown-3.2.0-Setup-x64.exe` ofrece licencia, carpeta de destino, accesos directos y desinstalador. Alternativamente, descomprimí el portable completo y ejecutá `Lecat - Markdown.exe`. Conservá todos los archivos y carpetas: el exe necesita los recursos de Electron. No hay cuenta ni instalador. El documento de bienvenida demuestra edición, gráficos, fórmulas e imágenes.
+El instalador `Lecat-Markdown-3.2.2-Setup-x64.exe` ofrece licencia, carpeta de destino, accesos directos y desinstalador. Alternativamente, descomprimí el portable completo y ejecutá `Lecat - Markdown.exe`. Conservá todos los archivos y carpetas: el exe necesita los recursos de Electron. No requiere cuenta. El documento de bienvenida demuestra edición, gráficos, fórmulas e imágenes.
 
 ## Funciones
 

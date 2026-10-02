@@ -67,3 +67,9 @@ v3.2.1-desktop.1. Registros GSD sincronizados en main y develop.
 v3.2.1. Rama developer-macos12 (38318fe) y prerelease v3.2.1-macos12.1
 publicadas; Actions 37014158490 aprobó ambas arquitecturas y publicó seis assets.
 Apertura y autorización en macOS 12 real pendientes. No se agregaron pruebas.
+
+## Quick Tasks Completed
+
+| ID | Description | Date | Verification |
+| --- | --- | --- | --- |
+| 261002-lv5 | Fix initial white theme flash; prepare 3.2.2 stable release | 2026-10-02 | Passed: 12 unit + 84 integration checks in each of dark/light/system |

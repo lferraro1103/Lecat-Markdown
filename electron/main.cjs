@@ -11,8 +11,8 @@ if(!auditing&&!app.requestSingleInstanceLock())app.exit(0);
 if(process.platform==='win32')app.setAppUserModelId('com.lecat.markdown');
 app.on('open-file',(event,file)=>{event.preventDefault();if(!rendererReady){pendingFiles.push(file);return;}openDoc(file).then(d=>{win.show();win.focus();command({openDoc:d});}).catch(e=>dialog.showMessageBox(win,{type:'error',message:e.message}));});
 app.on('before-quit',event=>{if(!isMac||closing||auditing||!win)return;event.preventDefault();quitting=true;win.close();});
-app.on('activate',()=>{if(win&&!win.isDestroyed()){win.show();win.focus();}});
-app.on('second-instance',async(_event,argv)=>{if(!win)return;if(win.isMinimized())win.restore();win.show();win.focus();const file=argv.find(a=>/\.(md|markdown)$/i.test(a)&&path.isAbsolute(a));if(file)try{command({openDoc:await openDoc(file)});}catch(e){dialog.showMessageBox(win,{type:'error',message:e.message});}});
+app.on('activate',()=>{if(win&&!win.isDestroyed()&&rendererReady){win.show();win.focus();}});
+app.on('second-instance',async(_event,argv)=>{if(!win)return;if(!rendererReady){const initial=argv.find(a=>/\.(md|markdown)$/i.test(a)&&path.isAbsolute(a));if(initial)pendingFiles.push(initial);return;}if(win.isMinimized())win.restore();win.show();win.focus();const file=argv.find(a=>/\.(md|markdown)$/i.test(a)&&path.isAbsolute(a));if(file)try{command({openDoc:await openDoc(file)});}catch(e){dialog.showMessageBox(win,{type:'error',message:e.message});}});
 const settingsFile=()=>path.join(app.getPath('userData'),'settings.json');const draftFile=()=>path.join(app.getPath('userData'),'drafts.json');
 const saveJobs=new Map();
 const mediaCache=new Map();
@@ -53,15 +53,17 @@ function register(name,handler){ipcMain.handle('claro:'+name,async(e,...args)=>{
 app.whenReady().then(async()=>{
  try{settings=JSON.parse(await fs.readFile(settingsFile(),'utf8'));}catch{}
  settings.theme=['system','light','dark'].includes(settings.theme)?settings.theme:'system';
+ if(auditing&&['system','light','dark'].includes(process.env.CLARO_AUDIT_THEME))settings.theme=process.env.CLARO_AUDIT_THEME;
  nativeTheme.themeSource=settings.theme;
+ const startupTheme=nativeTheme.shouldUseDarkColors?'dark':'light';
  protocol.handle('claro-media',async request=>{try{const u=new URL(request.url),file=mediaRoots.get(u.hostname);if(!file||decodeURIComponent(u.pathname)!=='/'+path.basename(file))return new Response('',{status:403});if((await fs.stat(file)).size>core.MAX)return new Response('',{status:413});return net.fetch(pathToFileURL(file).href);}catch{return new Response('',{status:404});}});
- win=new BrowserWindow({width:1320,height:860,minWidth:820,minHeight:560,show:false,backgroundColor:'#f7f8fa',title:'Lecat - Markdown',icon:path.join(__dirname,isMac?'../branding/Lecat.png':'../branding/Lecat.ico'),autoHideMenuBar:false,webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,spellcheck:false}});
+ win=new BrowserWindow({width:1320,height:860,minWidth:820,minHeight:560,show:false,backgroundColor:startupTheme==='dark'?'#141923':'#f6f7fa',title:'Lecat - Markdown',icon:path.join(__dirname,isMac?'../branding/Lecat.png':'../branding/Lecat.ico'),autoHideMenuBar:false,webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,spellcheck:false,additionalArguments:['--lecat-theme='+startupTheme]}});
  win.webContents.setWindowOpenHandler(()=>({action:'deny'}));win.webContents.on('will-navigate',e=>e.preventDefault());win.webContents.session.setPermissionRequestHandler((_wc,_p,cb)=>cb(false));
  win.on('close',e=>{if(closing||auditing)return;e.preventDefault();if(isMac&&!quitting){win.hide();return;}if(closeInProgress)return;closeInProgress=true;(async()=>{if(!await approveWindowClose()){quitting=false;win.show();return;}docs.clear();mediaRoots.clear();mediaCache.clear();clearTimeout(draftTimer);closing=true;win.close();if(isMac)app.quit();})().catch(error=>dialog.showMessageBox(win,{type:'error',message:error.message})).finally(()=>{closeInProgress=false;});});
  register('bootstrap',async()=>{const locations=await places(),warnings=[];let recovered=[];if(!auditing){const recovery=await persistence.readRecovery(draftFile());recovered=recovery.documents.map(d=>addDoc({...d,dirty:true}));warnings.push(...recovery.warnings);}
  const initial=process.argv.find(a=>/\.(md|markdown)$/i.test(a)&&path.isAbsolute(a));if(initial){const opened=await loadInitialFile(initial,warnings);if(opened)recovered.push(opened);}
  if(!recovered.length){const example=await core.read(path.join(__dirname,'../examples/Bienvenido.md'));recovered.push(addDoc({...example,path:null,hash:null,assetBase:path.dirname(example.path)}));}for(const file of pendingFiles.splice(0)){const opened=await loadInitialFile(file,warnings);if(opened&&!recovered.some(d=>d.id===opened.id))recovered.push(opened);}return {places:locations,defaultFolder:defaultFolder(),settings,docs:recovered,auditing,warnings,platform:process.platform,theme:nativeTheme.shouldUseDarkColors?'dark':'light'};});
- register('ready',async()=>{rendererReady=true;for(const file of pendingFiles.splice(0))try{command({openDoc:await openDoc(file)});}catch(e){dialog.showMessageBox(win,{type:'error',message:e.message});}return true;});
+ register('ready',async()=>{rendererReady=true;if(!auditing)win.show();for(const file of pendingFiles.splice(0))try{command({openDoc:await openDoc(file)});}catch(e){dialog.showMessageBox(win,{type:'error',message:e.message});}return true;});
  register('list',async folder=>{if(typeof folder!=='string'||!path.isAbsolute(folder))throw Error('Ruta no válida.');const result=await core.list(folder);folders.add(folder);for(const e of result)if(e.directory)folders.add(e.path);return result;});
  register('open',async file=>{if(typeof file!=='string'||!path.isAbsolute(file))throw Error('Ruta no válida.');return openDoc(file);});
  register('new',()=>addDoc({name:'Sin título.md',content:'',encoding:'utf8',bom:false,eol:'LF',hash:null,path:null}));
@@ -78,6 +80,6 @@ app.whenReady().then(async()=>{
  register('window',action=>{if(action==='minimize')win.minimize();else if(action==='maximize')win.isMaximized()?win.unmaximize():win.maximize();else if(action==='close')win.close();});
  register('audit',async()=>{if(!auditing)throw Error('Auditoría desactivada.');return true;});
  if(auditing)win.webContents.session.webRequest.onBeforeRequest({urls:['http://*/*','https://*/*']},(_details,cb)=>cb({cancel:true}));
- setMenu();await win.loadFile(path.join(__dirname,'ui/index.html'));if(!auditing)win.show();else await require('./audit.cjs').run({win,docs,openDoc,saveDoc,confirmClose,saveDrafts,draftFile,dialog,core,app,approveWindowClose,persistSettings,settingsFile,loadInitialFile});
+ setMenu();await win.loadFile(path.join(__dirname,'ui/index.html'));if(auditing)await require('./audit.cjs').run({win,docs,openDoc,saveDoc,confirmClose,saveDrafts,draftFile,dialog,core,app,approveWindowClose,persistSettings,settingsFile,loadInitialFile});
 }).catch(e=>{console.error(e);app.exit(1);});
 app.on('window-all-closed',()=>{if(!isMac||quitting)app.quit();});
