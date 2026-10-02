@@ -8,7 +8,7 @@
   "scripts": {
     "build": "node electron/build.cjs",
     "start": "npm run build && electron .",
-    "test": "node --test electron/core.test.cjs",
+    "test": "node --test electron/core.test.cjs electron/persistence.test.cjs",
     "audit": "npm run build && electron . --audit",
     "dist": "npm run build && electron-builder --win dir"
   },
@@ -43,7 +43,9 @@
       "examples/**",
       "package.json",
       "electron/audit.cjs",
-      "src/Assets/audit.md"
+      "src/Assets/audit.md",
+      "electron/persistence.cjs",
+      "electron/regressions.cjs"
     ],
     "win": {
       "icon": "branding/Lecat.ico",
