@@ -73,3 +73,5 @@ Apertura y autorización en macOS 12 real pendientes. No se agregaron pruebas.
 | ID | Description | Date | Verification |
 | --- | --- | --- | --- |
 | 261002-lv5 | Fix initial white theme flash; prepare 3.2.2 stable release | 2026-10-02 | Passed: 12 unit + 84 integration checks in each of dark/light/system |
+
+Última actividad: corrección del destello blanco al iniciar publicada como v3.2.2 estable desde b1bb7c6. Actions 37050126373 finalizado correctamente en Windows y macOS ARM64/Intel; nueve assets y SHA256 confirmados. Inicio claro, oscuro y del sistema verificado localmente (84 comprobaciones por modo), más 12 pruebas unitarias. API latest confirma v3.2.2.

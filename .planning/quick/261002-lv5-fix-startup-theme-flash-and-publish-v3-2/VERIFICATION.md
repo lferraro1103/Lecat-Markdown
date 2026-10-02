@@ -15,3 +15,5 @@ PASS: first-frame screenshots visually inspected; documents/graphs/editor render
 PASS: no remote loading, unsafe IPC or profile changes introduced.
 
 Local Windows verified. macOS package verification is delegated to the existing CI release matrix; no physical macOS session was claimed.
+
+Publication verified: v3.2.2 is the latest stable release; Windows, macOS ARM64/Intel build/audit jobs and release job all succeeded in Actions 37050126373. Installer and eight other assets publicly available with SHA256.
