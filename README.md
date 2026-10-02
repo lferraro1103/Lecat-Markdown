@@ -4,12 +4,13 @@ Versión de esta rama: **3.2.1-macos12.1**, preparada para **macOS 12 Monterey**
 
 ## Rama developer para macOS 12
 
-`developer` parte de `main` 3.2.1 y usa Electron **43.7.7**, con versión mínima
+`developer-macos12` parte de `developer`, basada en `main` 3.2.1, y usa Electron **43.7.7**, con versión mínima
 de macOS **12.0**, para Intel y Apple Silicon. Electron 44 exige macOS 13 según
 [la documentación oficial](https://www.electronjs.org/blog/electron-44-0).
 No actualizar esta rama a Electron 44 o superior mientras mantenga Monterey.
 
-Cada push a `developer` compila DMG y ZIP para ambas arquitecturas en
+La [release para Monterey](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.1-macos12.1)
+ofrece DMG y ZIP para ambas arquitecturas. Cada push a `developer` o `developer-macos12` compila en
 [GitHub Actions](https://github.com/lferraro1103/Lecat-Markdown/actions/workflows/macos.yml).
 Los archivos se descargan de los artefactos `macOS-x64` y `macOS-arm64` de esa
 ejecución. Las releases anteriores usan Electron 44 y no sirven para macOS 12.
