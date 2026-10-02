@@ -44,12 +44,15 @@ for variant in release control; do
   xattr -l "$target" > "$out/$variant-attributes.txt" 2>&1
   screencapture -x "$out/$variant-screen.png" > "$out/$variant-screenshot-status.txt" 2>&1
   if [ "$variant" = release ]; then
+    # Dismiss only the observed "Done" warning button; do not approve execution.
+    osascript -e 'tell application "System Events" to tell process "CoreServicesUIAgent" to click button "Done" of window 1' > "$out/warning-dismissal.txt" 2>&1
     open 'x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Security'
     sleep 5
     osascript -e 'tell application "System Settings" to activate' > "$out/settings-activation.txt" 2>&1
     sleep 2
     screencapture -x "$out/privacy-security-screen.png" > "$out/settings-screenshot-status.txt" 2>&1
     osascript -e 'tell application "System Events" to tell process "System Settings" to get entire contents of window 1' > "$out/settings-accessibility.txt" 2>&1
+    osascript -e 'tell application "System Events" to tell process "System Settings" to get {name, description, value, enabled} of every button of entire contents of window 1' > "$out/settings-buttons.txt" 2>&1
   fi
   /usr/bin/log show --last 2m --style compact --predicate 'process == "syspolicyd" OR process CONTAINS "XProtect"' > "$out/$variant-security.log" 2>&1
   set -e
