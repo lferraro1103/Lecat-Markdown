@@ -15,6 +15,7 @@ Instalador NSIS 3.2.0 listo: licencia verificada, payload auditado y hashes. Rel
 | 261002-c77 | Firma ad-hoc y verificación de DMG/ZIP/copia instalada; macOS.2 publicada | 2026-10-02 | 3ce4538 | [fix-macos-package-signatures-and-launch](./quick/261002-c77-fix-macos-package-signatures-and-launch/) |
 | 261002-d6q | Nueva compilación y release v3.2.0-macos.3, ZIP/DMG ARM64 e Intel | 2026-10-02 | ef90ec4 | [publish-rebuilt-macos-packages-as-v3-2-0](./quick/261002-d6q-publish-rebuilt-macos-packages-as-v3-2-0/) |
 | 261002-dhe | Home por defecto en macOS; discos sin Time Machine, Recovery ni symlinks duplicados; macos.4 publicada | 2026-10-02 | 9a7a177 | [use-user-home-as-default-directory-on-ma](./quick/261002-dhe-use-user-home-as-default-directory-on-ma/) |
+| 261002-dqq | Tema del sistema en primera apertura, avisos eliminados y títulos YAML; release Windows/macOS desktop.1 publicada | 2026-10-02 | 94ddac3 | [default-to-system-theme-and-remove-ui-no](./quick/261002-dqq-default-to-system-theme-and-remove-ui-no/) |
 
 Última actividad: release alternativa v3.2.0-macos.1 publicada. GitHub Actions
 37001654216 exitoso; 12 tests y 80 comprobaciones de aplicación empaquetada por arquitectura.
@@ -45,3 +46,10 @@ captura del usuario sigue sin diagnóstico confirmado; no se anuncia como correg
 nuevo en Home; filtrado de backups/recovery y deduplicación de discos implementados.
 Seis assets públicos confirmados. Pendiente observar los volúmenes del Mac del
 usuario; sin corrección confirmada para su aviso anterior de aplicación dañada.
+
+Última publicación: v3.2.1-desktop.1 desde develop, commit 94ddac3. Actions
+37010272493 completado con éxito en Windows x64 y macOS ARM64/Intel; nueve
+assets públicos confirmados. Primera apertura con tema del sistema y preferencias
+manuales posteriores conservadas, carteles retirados y encabezados YAML renderizados.
+Main sin cambios. No se agregaron tests para las nuevas rutas de tema/metadata;
+la comprobación específica en los equipos del usuario sigue pendiente.
