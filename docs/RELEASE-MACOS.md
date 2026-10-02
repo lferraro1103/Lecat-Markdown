@@ -1,9 +1,14 @@
-# Lecat Markdown 3.2.0-macos.3 — macOS alternativa
+# Lecat Markdown 3.2.0-macos.4 — macOS alternativa
 
 Versión alternativa compilada desde la rama `develop` con GitHub Actions.
 
-La revisión `v3.2.0-macos.3` recompila la rama actual y utiliza una versión nueva
-en la aplicación y en los nombres de sus archivos. Conserva la firma ad-hoc de
+La revisión `v3.2.0-macos.4` recompila la rama actual y utiliza una versión nueva
+en la aplicación y en los nombres de sus archivos. En macOS, el explorador
+y el guardado de documentos nuevos comienzan en la carpeta personal del usuario
+(`~`), en lugar de Documentos. Si abrís un archivo existente, se utiliza su carpeta.
+La lista de discos oculta volúmenes de Time Machine y Recovery, y muestra el
+disco de arranque una sola vez usando su nombre real, sin duplicar sus symlinks.
+Conserva la firma ad-hoc de
 `macos.2` e incluye las instrucciones de autorización desde la interfaz.
 El aviso «está dañada» mostrado en el Mac del usuario sigue pendiente de diagnóstico;
 esta recompilación no se anuncia como una corrección confirmada de ese caso.

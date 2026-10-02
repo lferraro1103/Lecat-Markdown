@@ -1,6 +1,6 @@
 {
   "name": "lecat-markdown",
-  "version": "3.2.0-macos.3",
+  "version": "3.2.0-macos.4",
   "description": "Editor y lector Markdown para Windows y macOS, con gráficos sin conexión",
   "main": "electron/main.cjs",
   "author": "Lecat",
@@ -49,6 +49,7 @@
       "electron/main.cjs",
       "electron/preload.cjs",
       "electron/core.cjs",
+      "electron/macos-locations.cjs",
       "electron/ui/**",
       "branding/**",
       "examples/**",
