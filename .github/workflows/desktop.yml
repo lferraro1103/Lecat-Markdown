@@ -1,0 +1,93 @@
+name: Desktop alternative release
+on:
+  push:
+    tags: ['v*-desktop.*']
+permissions:
+  contents: read
+jobs:
+  build:
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-latest
+            platform: Windows
+            arch: x64
+          - runner: macos-15
+            platform: macOS
+            arch: arm64
+          - runner: macos-15-intel
+            platform: macOS
+            arch: x64
+    runs-on: ${{ matrix.runner }}
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Build macOS
+        if: matrix.platform == 'macOS'
+        run: npm run dist:mac -- --${{ matrix.arch }}
+      - name: Verify macOS distributed packages
+        if: matrix.platform == 'macOS'
+        run: bash scripts/verify-macos.sh ${{ matrix.arch }} adhoc
+      - name: macOS checksums
+        if: matrix.platform == 'macOS'
+        run: |
+          cd dist
+          shasum -a 256 *.dmg *.zip > SHA256-macOS-${{ matrix.arch }}.txt
+      - name: Audit Windows application
+        if: matrix.platform == 'Windows'
+        run: npm run audit
+      - name: Build Windows installer and portable
+        if: matrix.platform == 'Windows'
+        shell: pwsh
+        run: |
+          npm run installer
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $desktopVersion = (Get-Content package.json -Raw | ConvertFrom-Json).version
+          $desktopZip = "dist/Lecat-Markdown-$desktopVersion-Windows-x64.zip"
+          Compress-Archive -LiteralPath dist/win-unpacked -DestinationPath $desktopZip
+          Get-ChildItem dist -File | Where-Object { $_.Extension -in '.exe', '.zip' } |
+            ForEach-Object { "$( (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant() )  $($_.Name)" } |
+            Set-Content -LiteralPath dist/SHA256-Windows-x64.txt -Encoding utf8
+      - uses: actions/upload-artifact@v4
+        with:
+          name: desktop-${{ matrix.platform }}-${{ matrix.arch }}
+          if-no-files-found: error
+          path: |
+            dist/*.dmg
+            dist/*.zip
+            dist/*-Setup-x64.exe
+            dist/SHA256-*.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: audit-desktop-${{ matrix.platform }}-${{ matrix.arch }}
+          path: docs/previews/electron
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: desktop-*
+          merge-multiple: true
+          path: release-assets
+      - name: Publish Windows and macOS alternative release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" release-assets/* \
+            --repo "$GITHUB_REPOSITORY" --verify-tag --prerelease --latest=false \
+            --title "Lecat Markdown $GITHUB_REF_NAME — Windows y macOS" \
+            --notes-file docs/RELEASE-DESKTOP.md

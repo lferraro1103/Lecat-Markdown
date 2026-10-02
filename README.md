@@ -1,11 +1,13 @@
 # Lecat - Markdown
 
-## Versión alternativa para macOS
+## Versión alternativa para Windows y macOS
 
-La rama `develop` incluye paquetes DMG y ZIP para Apple Silicon (`arm64`) e Intel
-(`x64`), compilados y auditados en GitHub Actions. Consultá
-[la release alternativa](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.0-macos.4)
-y [las instrucciones de instalación](docs/RELEASE-MACOS.md).
+La rama `develop` incluye instalador y ZIP portable para Windows x64, y paquetes
+DMG y ZIP para Mac Apple Silicon (`arm64`) e Intel (`x64`), compilados en GitHub
+Actions. Consultá [la release alternativa](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.1-desktop.1)
+y [las instrucciones de instalación](docs/RELEASE-DESKTOP.md).
+El tema sigue al sistema por defecto; **Vista → Usar tema del sistema** restaura
+el modo automático después de elegir claro u oscuro manualmente.
 Los atajos usan ⌘ en macOS; preferencias y borradores se guardan en
 `~/Library/Application Support/ClaroMD`. Para compilar en un Mac:
 `npm ci` y `npm run dist:mac -- --arm64` (o `--x64`).

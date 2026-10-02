@@ -6,3 +6,5 @@
 .visual-definition{display:none}.visual-document ul[data-type=taskList]>li[data-checked]{display:flex;align-items:baseline;gap:10px}.visual-document ul[data-type=taskList]>li[data-checked]>div{flex:1}.tiptap-mathematics-render[data-type=block-math]{text-align:center;margin:24px 0;cursor:pointer}.tiptap-mathematics-render[data-type=inline-math]{cursor:pointer}.visual-document .tableWrapper{overflow:auto}#table-tools{display:flex;gap:6px;padding:5px 20px;background:var(--panel);border-bottom:1px solid var(--border)}#table-tools[hidden]{display:none}#table-tools button{font-size:12px}.visual-document .ProseMirror-separator{display:inline!important;border:0!important;border-radius:0!important;width:0!important;height:0!important}
 
 .visual-document ul[data-type=taskList] p,.visual-document td p,.visual-document th p{margin:4px 0}
+
+.front-matter{margin-bottom:1.75em;padding-bottom:1em;border-bottom:1px solid var(--border)}.front-matter h1{margin:0 0 .4em}.front-matter-subtitle{color:var(--muted);font-size:1.1em;line-height:1.5;margin:0;white-space:pre-line}.front-matter-source{white-space:pre-wrap}
