@@ -1,0 +1,247 @@
+{
+  "items": [
+    {
+      "requirement_id": "navigation",
+      "category": "empty",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Empty file/filter states and welcome screen are explicit; failed media has alternative text.",
+      "reason": null,
+      "probe": "What is shown when there is no data — zero items, an unfilled form, or absent media?"
+    },
+    {
+      "requirement_id": "navigation",
+      "category": "loading",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Folder loading sets wait cursor/status; rendering badge says Preparando lectura until completion.",
+      "reason": null,
+      "probe": "What is shown while data or content is still loading (skeleton, spinner, progressive reveal)?"
+    },
+    {
+      "requirement_id": "navigation",
+      "category": "error",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Invalid path preserves current folder; malformed diagrams and missing images show isolated fallback.",
+      "reason": null,
+      "probe": "What is shown when the load or submit fails (message, retry affordance, partial fallback)?"
+    },
+    {
+      "requirement_id": "navigation",
+      "category": "partial",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Unreadable size metadata falls back to Markdown label; failed media does not abort document.",
+      "reason": null,
+      "probe": "What is shown for partial or incomplete data — some fields or rows present, others missing?"
+    },
+    {
+      "requirement_id": "navigation",
+      "category": "overflow",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Route stays in main toolbar at 900px; diagram/table/code areas scroll independently.",
+      "reason": null,
+      "probe": "What happens when content exceeds its container — scroll, clip, wrap, or truncate?"
+    },
+    {
+      "requirement_id": "navigation",
+      "category": "long-text",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Document title/path truncate with full tooltip; reading wraps and has no global horizontal overflow.",
+      "reason": null,
+      "probe": "What happens with unusually long text — truncation, wrapping, ellipsis, or reflow?"
+    },
+    {
+      "requirement_id": "files",
+      "category": "empty",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Empty file/filter states and welcome screen are explicit; failed media has alternative text.",
+      "reason": null,
+      "probe": "What is shown when there is no data — zero items, an unfilled form, or absent media?"
+    },
+    {
+      "requirement_id": "files",
+      "category": "loading",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Folder loading sets wait cursor/status; rendering badge says Preparando lectura until completion.",
+      "reason": null,
+      "probe": "What is shown while data or content is still loading (skeleton, spinner, progressive reveal)?"
+    },
+    {
+      "requirement_id": "files",
+      "category": "error",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Invalid path preserves current folder; malformed diagrams and missing images show isolated fallback.",
+      "reason": null,
+      "probe": "What is shown when the load or submit fails (message, retry affordance, partial fallback)?"
+    },
+    {
+      "requirement_id": "files",
+      "category": "populated",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Normal document list, ten diagrams, two equations and image fixtures pass integration audit.",
+      "reason": null,
+      "probe": "What does the normal populated (happy-path) state look like at a typical volume of content?"
+    },
+    {
+      "requirement_id": "files",
+      "category": "partial",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Unreadable size metadata falls back to Markdown label; failed media does not abort document.",
+      "reason": null,
+      "probe": "What is shown for partial or incomplete data — some fields or rows present, others missing?"
+    },
+    {
+      "requirement_id": "files",
+      "category": "overflow",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Route stays in main toolbar at 900px; diagram/table/code areas scroll independently.",
+      "reason": null,
+      "probe": "What happens when content exceeds its container — scroll, clip, wrap, or truncate?"
+    },
+    {
+      "requirement_id": "files",
+      "category": "zero-one-many",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "File count, empty message and list selection work at zero/one/multiple documents.",
+      "reason": null,
+      "probe": "How does the layout read at zero, one, and many items (singular vs plural copy, spacing)?"
+    },
+    {
+      "requirement_id": "files",
+      "category": "long-text",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Document title/path truncate with full tooltip; reading wraps and has no global horizontal overflow.",
+      "reason": null,
+      "probe": "What happens with unusually long text — truncation, wrapping, ellipsis, or reflow?"
+    },
+    {
+      "requirement_id": "preview",
+      "category": "empty",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Empty file/filter states and welcome screen are explicit; failed media has alternative text.",
+      "reason": null,
+      "probe": "What is shown when there is no data — zero items, an unfilled form, or absent media?"
+    },
+    {
+      "requirement_id": "preview",
+      "category": "loading",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Folder loading sets wait cursor/status; rendering badge says Preparando lectura until completion.",
+      "reason": null,
+      "probe": "What is shown while data or content is still loading (skeleton, spinner, progressive reveal)?"
+    },
+    {
+      "requirement_id": "preview",
+      "category": "error",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Invalid path preserves current folder; malformed diagrams and missing images show isolated fallback.",
+      "reason": null,
+      "probe": "What is shown when the load or submit fails (message, retry affordance, partial fallback)?"
+    },
+    {
+      "requirement_id": "preview",
+      "category": "populated",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Normal document list, ten diagrams, two equations and image fixtures pass integration audit.",
+      "reason": null,
+      "probe": "What does the normal populated (happy-path) state look like at a typical volume of content?"
+    },
+    {
+      "requirement_id": "preview",
+      "category": "partial",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Unreadable size metadata falls back to Markdown label; failed media does not abort document.",
+      "reason": null,
+      "probe": "What is shown for partial or incomplete data — some fields or rows present, others missing?"
+    },
+    {
+      "requirement_id": "preview",
+      "category": "overflow",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Route stays in main toolbar at 900px; diagram/table/code areas scroll independently.",
+      "reason": null,
+      "probe": "What happens when content exceeds its container — scroll, clip, wrap, or truncate?"
+    },
+    {
+      "requirement_id": "preview",
+      "category": "zero-one-many",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "File count, empty message and list selection work at zero/one/multiple documents.",
+      "reason": null,
+      "probe": "How does the layout read at zero, one, and many items (singular vs plural copy, spacing)?"
+    },
+    {
+      "requirement_id": "preview",
+      "category": "long-text",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Document title/path truncate with full tooltip; reading wraps and has no global horizontal overflow.",
+      "reason": null,
+      "probe": "What happens with unusually long text — truncation, wrapping, ellipsis, or reflow?"
+    },
+    {
+      "requirement_id": "reading-actions",
+      "category": "loading",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Folder loading sets wait cursor/status; rendering badge says Preparando lectura until completion.",
+      "reason": null,
+      "probe": "What is shown while data or content is still loading (skeleton, spinner, progressive reveal)?"
+    },
+    {
+      "requirement_id": "reading-actions",
+      "category": "error",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Invalid path preserves current folder; malformed diagrams and missing images show isolated fallback.",
+      "reason": null,
+      "probe": "What is shown when the load or submit fails (message, retry affordance, partial fallback)?"
+    },
+    {
+      "requirement_id": "reading-actions",
+      "category": "overflow",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Route stays in main toolbar at 900px; diagram/table/code areas scroll independently.",
+      "reason": null,
+      "probe": "What happens when content exceeds its container — scroll, clip, wrap, or truncate?"
+    },
+    {
+      "requirement_id": "reading-actions",
+      "category": "long-text",
+      "status": "resolved",
+      "verification": "explicit",
+      "resolution": "Document title/path truncate with full tooltip; reading wraps and has no global horizontal overflow.",
+      "reason": null,
+      "probe": "What happens with unusually long text — truncation, wrapping, ellipsis, or reflow?"
+    }
+  ],
+  "coverage": {
+    "applicable": 26,
+    "resolved": 26,
+    "unresolved": 0,
+    "byVerification": {
+      "explicit": 26,
+      "backstop": 0
+    }
+  }
+}

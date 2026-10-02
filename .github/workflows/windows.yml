@@ -1,0 +1,21 @@
+name: Windows build and rendering audit
+on: [push, workflow_dispatch]
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Publish portable
+        shell: pwsh
+        run: ./scripts/publish.ps1
+      - name: Audit Markdown rendering
+        shell: pwsh
+        run: ./scripts/audit.ps1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ClaroMD-Windows-x64
+          path: dist/ClaroMD

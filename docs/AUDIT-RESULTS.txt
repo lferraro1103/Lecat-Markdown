@@ -1,0 +1,38 @@
+PASS WebView2 initialized
+PASS Markdown extension filtering
+PASS filtered empty state
+PASS lazy folder enumeration
+PASS Windows quick access known folders
+PASS all Windows drives beneath separator
+PASS ten Mermaid families render (flow, sequence, class, ER, state, pie, gantt, mindmap, timeline, XY)
+PASS invalid Mermaid isolated with readable fallback
+PASS all diagram SVG viewboxes have nonzero dimensions
+PASS SVG and Unicode/space PNG paths load
+PASS inline and display math rendered with KaTeX
+PASS syntax highlighting
+PASS tables receive independent horizontal scrolling
+PASS raw Markdown script injection blocked; only packaged scripts
+PASS reading pane has no document-wide horizontal overflow
+PASS heading outline populated
+PASS XY chart contains its title and plotted bars
+PASS diagram source toggle
+PASS diagram enlarged view
+PASS outline toggles
+PASS source mode
+PASS reading zoom
+PASS document text search
+PASS dark theme and diagrams
+PASS compact layout keeps address and reading area
+PASS Mermaid embedded security override rejected
+PASS missing and blocked remote images have explicit fallback
+PASS content after rendering error survives
+PASS local Markdown link with spaces
+PASS automatic external modification reload
+PASS missing folder does not corrupt navigation
+PASS navigation history
+PASS unsupported extension rejected without losing current file
+PASS application icon embedded and assigned
+PASS nine-resolution ICO
+PASS light text and links contrast >=4.5:1
+PASS dark text and links contrast >=4.5:1
+SUCCESS
