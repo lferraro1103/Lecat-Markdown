@@ -77,3 +77,5 @@ Apertura y autorización en macOS 12 real pendientes. No se agregaron pruebas.
 Última actividad: corrección del destello blanco al iniciar publicada como v3.2.2 estable desde b1bb7c6. Actions 37050126373 finalizado correctamente en Windows y macOS ARM64/Intel; nueve assets y SHA256 confirmados. Inicio claro, oscuro y del sistema verificado localmente (84 comprobaciones por modo), más 12 pruebas unitarias. API latest confirma v3.2.2.
 
 GSD quick 261002-mae: CI explicit Electron preparation/retry implemented in Windows and desktop/macOS workflows. Local preparation and 16 tests passed; preserves official checksum validation and permanent failure reporting. No application version change. Remote check scheduled by push.
+
+CI 37051769203 aprobado tras corrección 92b7c3c: descarga verificada de Electron, pruebas, auditoría, compilación y subida de artefactos exitosas.
