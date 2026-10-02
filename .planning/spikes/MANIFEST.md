@@ -18,4 +18,4 @@ Requirements:
 
 | # | Idea | Name | Type | Validates | Verdict | Tags |
 |---|------|------|------|-----------|---------|------|
-| 001 | macos-gui-approval | gatekeeper-without-developer-id | comparison | Given quarantined release and an invalid-signature control, when LaunchServices assesses them, then distinguish integrity from trust and evaluate CI reliability | PENDING | macos, gatekeeper, quarantine |
+| 001 | macos-gui-approval | gatekeeper-without-developer-id | comparison | Native Open Anyway observed on macOS 15 ARM/Intel and 26 ARM; real-browser user launch remains unverified | PARTIAL | macos, gatekeeper, quarantine |

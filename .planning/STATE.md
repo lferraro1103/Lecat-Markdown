@@ -24,6 +24,11 @@ apertura en el Mac del usuario; requiere aprobación manual al no estar notariza
 
 ### Tarea en curso
 
-261002-ch7: preparado el flujo Developer ID para autorización desde la interfaz
-de macOS. Pendiente certificado Developer ID Application y contraseña en secrets
-de Actions; aún no compilado ni publicado con ese certificado.
+El modo Developer ID quedó como opcional; el usuario requiere autorización sin
+ese certificado. Spike 001 (GSD inline): Actions 37005730897 reprodujo el aviso de
+app no verificada y capturó **Open Anyway** en Privacidad y seguridad en macOS
+15.7.9 ARM64/Intel y 26.6.2 ARM64 usando el ZIP publicado macos.2. Gatekeeper
+habilitado, sin quitar cuarentena ni conceder la excepción automáticamente.
+Documentación y release actualizadas con pasos exclusivamente de interfaz.
+Pendiente la apertura real en el Mac del usuario; el experimento usa cuarentena
+de API pública, no descarga de navegador. Main conservado.

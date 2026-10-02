@@ -10,9 +10,11 @@ Los atajos usan ⌘ en macOS; preferencias y borradores se guardan en
 `~/Library/Application Support/ClaroMD`. Para compilar en un Mac:
 `npm ci` y `npm run dist:mac -- --arm64` (o `--x64`).
 
-Para preparar una distribución con firma Developer ID y autorización desde la
-interfaz de macOS, consultá [la configuración de firma](docs/FIRMA-MACOS.md).
-Este modo requiere el certificado del desarrollador en los secrets de GitHub Actions.
+La autorización manual de una app no verificada se realiza desde **Privacidad y
+seguridad → Abrir de todos modos**, cuando macOS ofrece esa opción; no requiere
+Developer ID. Consultá las instrucciones de instalación para DMG y ZIP.
+Existe además un [modo opcional de firma Developer ID](docs/FIRMA-MACOS.md),
+que requiere un certificado del desarrollador en los secrets de GitHub Actions.
 
 Editor y lector Markdown para Windows 10/11 x64 con **Electron y Chromium incluidos**. No necesita WebView2, .NET ni Internet para leer, editar y dibujar documentos locales.
 

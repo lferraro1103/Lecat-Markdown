@@ -1,5 +1,5 @@
 ---
-status: incomplete
+status: optional-not-requested
 date: 2026-10-02
 branch: develop
 ---
@@ -15,9 +15,11 @@ Static validation passed: configuration has forceCodeSigning=true and no ad-hoc
 identity, original ad-hoc mode is preserved, YAML parses, secret absence exits with
 failure and release depends on successful builds. Bash and JavaScript syntax pass.
 
-Publication is pending the owner's Apple Developer signing credentials. No new
-signed build or release was attempted and no Gatekeeper acceptance is claimed.
-Asked whether the owner has a Developer ID Application certificate; no answer yet.
+The user subsequently required approval without Developer ID. This optional mode
+is not a blocker for that investigation. No new signed build or release was
+attempted. Spike 001 investigates native Privacy & Security authorization using
+the published ad-hoc release. Developer ID is not universally required for manual
+exceptions; the previous mandatory framing was incorrect.
 
 Required Actions secrets:
 - MACOS_CERTIFICATE_P12: base64-encoded certificate and private key exported as p12.

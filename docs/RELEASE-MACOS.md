@@ -10,6 +10,8 @@ antes de publicarse. Reemplazá la aplicación anterior con esta descarga.
 - Intel: descargá `macOS-x64.dmg`.
 - Abrí el DMG y arrastrá **Lecat - Markdown** a **Aplicaciones**.
 - Los ZIP contienen la misma aplicación para instalación manual.
+  Hacé doble clic en el ZIP desde Finder y mové la aplicación extraída a
+  **Aplicaciones**, antes de abrirla.
 - Atajos con Command (⌘), apertura de Markdown desde Finder, volúmenes montados
   en el explorador y menú de aplicación de macOS.
 - Cerrar la ventana conserva los documentos; el Dock la vuelve a mostrar.
@@ -22,26 +24,25 @@ notarización de Apple. macOS puede
 bloquear la primera apertura. Tras intentar abrirla, utilizá **Configuración del
 Sistema → Privacidad y seguridad → Abrir de todos modos**, si aparece.
 
-Si esa opción no aparece y macOS ofrece mover la aplicación a la papelera,
-instalá primero la revisión `v3.2.0-macos.2` en **Aplicaciones**. Para esta copia
-descargada del repositorio oficial, abrí **Terminal** y ejecutá:
+El botón **Mover a la papelera** puede acompañar el aviso de aplicación no
+verificada: por sí solo no indica que se haya detectado malware. Elegí **Listo**
+y revisá **Privacidad y seguridad**, abajo en **Seguridad**.
+Pulsá **Abrir de todos modos** y confirmá **Abrir** en el aviso siguiente.
 
-```sh
-codesign --verify --deep --strict --verbose=2 "/Applications/Lecat - Markdown.app"
-```
+Se observó ese botón con el ZIP publicado de `macos.2` en macOS 15 Intel,
+macOS 15 Apple Silicon y macOS 26 Apple Silicon, sin Developer ID, manteniendo
+Gatekeeper habilitado y la cuarentena. [Capturas y límites de la prueba](../.planning/spikes/001-gatekeeper-without-developer-id/README.md).
+La autorización completa en tu Mac aún debe comprobarse.
 
-Si la comprobación termina sin errores, quitá la cuarentena únicamente de esta
-aplicación y abrila:
+No necesitás una cuenta Apple Developer para conceder una excepción manual de
+desarrollador no identificado. El sistema decide si ofrece **Abrir de todos modos**;
+la aplicación no puede forzarlo. Si el aviso afirma que se detectó software dañino,
+o no aparece la excepción, informá la versión de macOS y el texto exacto del aviso.
+No se propone quitar la cuarentena ni desactivar Gatekeeper.
 
-```sh
-xattr -dr com.apple.quarantine "/Applications/Lecat - Markdown.app"
-open "/Applications/Lecat - Markdown.app"
-```
-
-Esto permite ejecutar esta aplicación; no desactiva Gatekeeper para otras apps.
 Una firma ad-hoc comprueba que el paquete no cambió, pero no identifica al autor
-ante Apple. Para distribución sin esta aprobación manual se requiere certificado
-Developer ID y notarización. [Guía de seguridad de Apple](https://support.apple.com/102445).
+ante Apple. Developer ID y notarización son una vía opcional de distribución
+verificada. [Guía de seguridad de Apple](https://support.apple.com/102445).
 Requiere una versión de macOS compatible con Electron 44.
 
 Ambas arquitecturas deben superar los tests y la auditoría de la aplicación

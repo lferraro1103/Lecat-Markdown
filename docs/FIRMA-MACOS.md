@@ -1,8 +1,9 @@
-# Preparar la firma Developer ID en GitHub Actions
+# Firma Developer ID opcional en GitHub Actions
 
-Objetivo: distribuir una aplicación con firma reconocida por macOS y permitir
-su autorización manual desde Privacidad y seguridad, sin comandos en Terminal
-para los usuarios. La aplicación no puede forzar ni elegir el aviso de Gatekeeper.
+Este modo opcional distribuye una aplicación con firma reconocida por macOS.
+Developer ID no es un requisito universal para autorizar aplicaciones manualmente
+desde Privacidad y seguridad. El modo ad-hoc sin certificado continúa disponible.
+La aplicación no puede forzar ni elegir el aviso de Gatekeeper.
 
 La firma ad-hoc de macos.2 no identifica al autor ante Apple. El nuevo modo
 `developer-id` requiere un certificado **Developer ID Application** de una cuenta

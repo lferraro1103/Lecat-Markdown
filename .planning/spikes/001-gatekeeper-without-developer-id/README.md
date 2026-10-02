@@ -4,7 +4,7 @@ idea: macos-gui-approval
 name: gatekeeper-without-developer-id
 type: comparison
 validates: Given a downloaded ad-hoc app and an invalid-signature control, distinguish integrity, Gatekeeper trust and malware detection without security overrides
-verdict: PENDING
+verdict: PARTIAL
 related: []
 tags: [macos, gatekeeper, quarantine]
 ---
@@ -65,5 +65,41 @@ quarantine removal is not an acceptable proposed fix for this spike.
 
 ## Results
 
-Pending native experiment. Simulated quarantine is not a real Safari download;
-even a successful launch does not establish a GUI authorization button.
+**Native approval button observed.** Research run
+[37005730897](https://github.com/lferraro1103/Lecat-Markdown/actions/runs/37005730897)
+completed successfully on all three runners, using the already-published macos.2
+ZIP without rebuilding or changing its signature. Checksums matched and strict
+deep signature verification passed on each runner. The negative control failed
+integrity verification as intended.
+
+| System | Architecture | Initial warning | After Done, Privacy & Security |
+|---|---|---|---|
+| macOS 15.7.9 | ARM64 | Apple could not verify the app is free of malware; Move to Trash / Done | Open Anyway for Lecat - Markdown |
+| macOS 15.7.9 | Intel | Same unverified-app warning | Open Anyway for Lecat - Markdown |
+| macOS 26.6.2 | ARM64 | Same unverified-app warning | Open Anyway for Lecat - Markdown |
+
+Screenshots in [evidence](evidence/) show the actual native button. The first
+attempt left the warning open; dismissing **Done** caused the exception row to
+appear. No approval button was clicked, no quarantine was removed and Gatekeeper
+remained enabled. `spctl` rejection is expected for an unnotarized ad-hoc app and
+did not prevent macOS from offering a manual exception.
+
+`syspolicy_check` also reported a missing notary ticket and an Internal Xprotect
+Error. That internal error is not evidence of a named malware detection; the
+observed native UI identified the app as unverified and offered an exception.
+It does not establish that a user's genuinely different harmful-software warning
+is a false positive. Raw diagnostics remain in the Actions artifacts.
+
+**Limits / verdict PARTIAL:** the presence of the native approval button is
+validated in these CI environments. Quarantine was applied through Apple's public
+API, rather than a Safari/Chrome download. The complete manual authorization and
+launch on the user's Mac remains unverified, including their exact warning text.
+No new binary release is needed to obtain this observed button: use macos.2.
+
+## User path
+
+Download macos.2 for the correct architecture. Extract the ZIP in Finder (or mount
+the DMG), move the app to Applications, try opening it, choose **Done** on the
+unverified-app warning, then **System Settings → Privacy & Security → Security →
+Open Anyway**. Confirm the native prompt if offered. No paid certificate or user
+Terminal commands are involved. Apple's support page documents this exception.

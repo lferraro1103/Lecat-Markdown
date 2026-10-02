@@ -52,7 +52,6 @@ for variant in release control; do
     sleep 2
     screencapture -x "$out/privacy-security-screen.png" > "$out/settings-screenshot-status.txt" 2>&1
     osascript -e 'tell application "System Events" to tell process "System Settings" to get entire contents of window 1' > "$out/settings-accessibility.txt" 2>&1
-    osascript -e 'tell application "System Events" to tell process "System Settings" to get {name, description, value, enabled} of every button of entire contents of window 1' > "$out/settings-buttons.txt" 2>&1
   fi
   /usr/bin/log show --last 2m --style compact --predicate 'process == "syspolicyd" OR process CONTAINS "XProtect"' > "$out/$variant-security.log" 2>&1
   set -e
