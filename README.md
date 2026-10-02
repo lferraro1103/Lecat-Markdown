@@ -2,6 +2,11 @@
 
 Versión del código: **3.2.1**, integrada en `main` para Windows y macOS.
 
+[Descargar release estable 3.2.1](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.1).
+Para **macOS 12 Monterey**, usá la
+[release alternativa](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.1-macos12.1)
+de la [rama developer-macos12](https://github.com/lferraro1103/Lecat-Markdown/tree/developer-macos12).
+
 ## Versión alternativa para Windows y macOS
 
 La rama `develop` incluye instalador y ZIP portable para Windows x64, y paquetes
