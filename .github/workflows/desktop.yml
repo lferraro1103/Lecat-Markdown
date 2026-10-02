@@ -31,6 +31,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Prepare verified Electron binary with retry
+        run: node scripts/prepare-electron.cjs
       - run: npm test
       - name: Build macOS
         if: matrix.platform == 'macOS'

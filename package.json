@@ -8,7 +8,7 @@
   "scripts": {
     "build": "node electron/build.cjs",
     "start": "npm run build && electron .",
-    "test": "node --test electron/core.test.cjs electron/persistence.test.cjs",
+    "test": "node --test electron/core.test.cjs electron/persistence.test.cjs scripts/prepare-electron.test.cjs",
     "audit": "npm run build && electron . --audit",
     "dist": "npm run build && electron-builder --win dir",
     "installer": "npm run build && electron-builder --win nsis --x64 --publish never",
