@@ -56,5 +56,6 @@ Las preferencias se guardan en %LOCALAPPDATA%/ClaroMD/settings.json.
 ## Dependencias y licencias
 Markdig 1.3.2 (BSD-2-Clause), Mermaid 11.12.0 (MIT), KaTeX 0.16.22 (MIT),
 highlight.js 11.11.1 (BSD-3-Clause) y Microsoft.Web.WebView2 1.0.4191.47.
-Licencias de recursos en src/Assets/vendor; Markdig-LICENSE.txt en la raíz.
+Licencias de recursos en src/Assets/vendor; licenses/Markdig.txt para Markdig.
 Las dependencias de Microsoft conservan sus términos de distribución. El código del proyecto no recibe una licencia pública automáticamente.
+
