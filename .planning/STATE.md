@@ -16,6 +16,7 @@ Instalador NSIS 3.2.0 listo: licencia verificada, payload auditado y hashes. Rel
 | 261002-d6q | Nueva compilación y release v3.2.0-macos.3, ZIP/DMG ARM64 e Intel | 2026-10-02 | ef90ec4 | [publish-rebuilt-macos-packages-as-v3-2-0](./quick/261002-d6q-publish-rebuilt-macos-packages-as-v3-2-0/) |
 | 261002-dhe | Home por defecto en macOS; discos sin Time Machine, Recovery ni symlinks duplicados; macos.4 publicada | 2026-10-02 | 9a7a177 | [use-user-home-as-default-directory-on-ma](./quick/261002-dhe-use-user-home-as-default-directory-on-ma/) |
 | 261002-dqq | Tema del sistema en primera apertura, avisos eliminados y títulos YAML; release Windows/macOS desktop.1 publicada | 2026-10-02 | 94ddac3 | [default-to-system-theme-and-remove-ui-no](./quick/261002-dqq-default-to-system-theme-and-remove-ui-no/) |
+| 261002-ecq | Bump a 3.2.1 e integración de develop en main, autorizada por el usuario | 2026-10-02 | 37172a1 | [bump-stable-version-to-3-2-1-and-promote](./quick/261002-ecq-bump-stable-version-to-3-2-1-and-promote/) |
 
 Última actividad: release alternativa v3.2.0-macos.1 publicada. GitHub Actions
 37001654216 exitoso; 12 tests y 80 comprobaciones de aplicación empaquetada por arquitectura.
@@ -53,3 +54,9 @@ assets públicos confirmados. Primera apertura con tema del sistema y preferenci
 manuales posteriores conservadas, carteles retirados y encabezados YAML renderizados.
 Main sin cambios. No se agregaron tests para las nuevas rutas de tema/metadata;
 la comprobación específica en los equipos del usuario sigue pendiente.
+
+Última actividad: versión del código 3.2.1. Por instrucción explícita del usuario,
+main fue actualizado mediante fast-forward de 3e8d843 a 37172a1, integrando develop.
+Push de main confirmado; la prohibición anterior de modificar main fue revocada.
+No se generó nueva release binaria en esta promoción; última descarga publicada:
+v3.2.1-desktop.1. Registros GSD sincronizados en main y develop.
