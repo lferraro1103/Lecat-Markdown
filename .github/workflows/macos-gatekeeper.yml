@@ -1,0 +1,32 @@
+name: macOS Gatekeeper research
+on:
+  push:
+    branches: [develop]
+    paths:
+      - '.github/workflows/macos-gatekeeper.yml'
+      - '.planning/spikes/001-gatekeeper-without-developer-id/**'
+permissions:
+  contents: read
+jobs:
+  probe:
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15
+            arch: arm64
+          - runner: macos-26
+            arch: arm64
+          - runner: macos-15-intel
+            arch: x64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect published app and invalid-signature control
+        run: bash .planning/spikes/001-gatekeeper-without-developer-id/probe.sh ${{ matrix.arch }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gatekeeper-${{ matrix.runner }}-${{ matrix.arch }}
+          path: work/gatekeeper-probe
