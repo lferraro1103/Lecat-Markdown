@@ -17,6 +17,7 @@ Instalador NSIS 3.2.0 listo: licencia verificada, payload auditado y hashes. Rel
 | 261002-dhe | Home por defecto en macOS; discos sin Time Machine, Recovery ni symlinks duplicados; macos.4 publicada | 2026-10-02 | 9a7a177 | [use-user-home-as-default-directory-on-ma](./quick/261002-dhe-use-user-home-as-default-directory-on-ma/) |
 | 261002-dqq | Tema del sistema en primera apertura, avisos eliminados y títulos YAML; release Windows/macOS desktop.1 publicada | 2026-10-02 | 94ddac3 | [default-to-system-theme-and-remove-ui-no](./quick/261002-dqq-default-to-system-theme-and-remove-ui-no/) |
 | 261002-ecq | Bump a 3.2.1 e integración de develop en main, autorizada por el usuario | 2026-10-02 | 37172a1 | [bump-stable-version-to-3-2-1-and-promote](./quick/261002-ecq-bump-stable-version-to-3-2-1-and-promote/) |
+| 261002-ehw | Rama developer para macOS 12; Electron 43.7.7 y paquetes ARM64/Intel | 2026-10-02 | eb89b86 | [create-developer-branch-for-macos-12-mon](./quick/261002-ehw-create-developer-branch-for-macos-12-mon/) |
 
 Última actividad: release alternativa v3.2.0-macos.1 publicada. GitHub Actions
 37001654216 exitoso; 12 tests y 80 comprobaciones de aplicación empaquetada por arquitectura.
@@ -60,3 +61,10 @@ main fue actualizado mediante fast-forward de 3e8d843 a 37172a1, integrando deve
 Push de main confirmado; la prohibición anterior de modificar main fue revocada.
 No se generó nueva release binaria en esta promoción; última descarga publicada:
 v3.2.1-desktop.1. Registros GSD sincronizados en main y develop.
+
+Última actividad: rama developer creada desde main 937c407, variante
+3.2.1-macos12.1 con Electron 43.7.7 y mínimo de paquete 12.0. Actions
+37013087285 generó DMG/ZIP Intel y Apple Silicon y sus artefactos publicados.
+Main y develop conservados. CI usa macOS 15; apertura en Monterey pendiente.
+No se confirma resuelto el aviso de aplicación dañada. No hay nueva release;
+esta tarea publica la rama y los paquetes como artefactos de Actions.
