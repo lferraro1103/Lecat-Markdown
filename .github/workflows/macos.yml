@@ -91,5 +91,5 @@ jobs:
           fi
           gh release create "$GITHUB_REF_NAME" release-assets/* \
             --repo "$GITHUB_REPOSITORY" --verify-tag --prerelease --latest=false \
-            --title "Lecat Markdown 3.2.0 — macOS alternativa" \
+            --title "Lecat Markdown $GITHUB_REF_NAME — macOS alternativa" \
             --notes-file "$NOTES"

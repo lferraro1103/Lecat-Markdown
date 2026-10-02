@@ -1,8 +1,12 @@
-# Lecat Markdown 3.2.0 — macOS alternativa
+# Lecat Markdown 3.2.0-macos.3 — macOS alternativa
 
 Versión alternativa compilada desde la rama `develop` con GitHub Actions.
 
-La revisión `v3.2.0-macos.2` corrige la falta de firma del paquete anterior.
+La revisión `v3.2.0-macos.3` recompila la rama actual y utiliza una versión nueva
+en la aplicación y en los nombres de sus archivos. Conserva la firma ad-hoc de
+`macos.2` e incluye las instrucciones de autorización desde la interfaz.
+El aviso «está dañada» mostrado en el Mac del usuario sigue pendiente de diagnóstico;
+esta recompilación no se anuncia como una corrección confirmada de ese caso.
 DMG, ZIP y la copia instalada se comprueban con `codesign --verify --deep --strict`
 antes de publicarse. Reemplazá la aplicación anterior con esta descarga.
 
@@ -31,7 +35,7 @@ Pulsá **Abrir de todos modos** y confirmá **Abrir** en el aviso siguiente.
 
 Se observó ese botón con el ZIP publicado de `macos.2` en macOS 15 Intel,
 macOS 15 Apple Silicon y macOS 26 Apple Silicon, sin Developer ID, manteniendo
-Gatekeeper habilitado y la cuarentena. [Capturas y límites de la prueba](../.planning/spikes/001-gatekeeper-without-developer-id/README.md).
+Gatekeeper habilitado y la cuarentena. [Capturas y límites de la prueba](https://github.com/lferraro1103/Lecat-Markdown/blob/develop/.planning/spikes/001-gatekeeper-without-developer-id/README.md).
 La autorización completa en tu Mac aún debe comprobarse.
 
 No necesitás una cuenta Apple Developer para conceder una excepción manual de

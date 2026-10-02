@@ -4,7 +4,7 @@
 
 La rama `develop` incluye paquetes DMG y ZIP para Apple Silicon (`arm64`) e Intel
 (`x64`), compilados y auditados en GitHub Actions. Consultá
-[la release alternativa](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.0-macos.2)
+[la release alternativa](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.0-macos.3)
 y [las instrucciones de instalación](docs/RELEASE-MACOS.md).
 Los atajos usan ⌘ en macOS; preferencias y borradores se guardan en
 `~/Library/Application Support/ClaroMD`. Para compilar en un Mac:
