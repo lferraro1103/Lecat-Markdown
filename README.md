@@ -8,8 +8,10 @@ Descomprimí el portable completo y ejecutá `Lecat - Markdown.exe`. Conservá t
 
 ## Funciones
 
-- Lectura, edición Markdown y vista dividida con previsualización en vivo.
-- CodeMirror: deshacer/rehacer, selección, resaltado, números de línea, buscar/reemplazar.
+- Edición visual por defecto: escribí directamente sobre títulos, párrafos, listas y tablas renderizadas.
+- Lectura y código Markdown con vista previa como opciones separadas.
+- Tiptap/ProseMirror: selección, formato, pegado enriquecido y tablas con filas/columnas editables.
+- Deshacer/rehacer y buscar/reemplazar en el documento visual. CodeMirror disponible en Código.
 - Formato: títulos, negrita, cursiva, enlaces, imágenes, listas, tareas, citas, código, tablas y Mermaid.
 - Pestañas, Nuevo, Guardar, Guardar como y protección al cerrar con cambios.
 - Borradores de recuperación locales y detección de conflictos externos.
@@ -19,7 +21,7 @@ Descomprimí el portable completo y ejecutá `Lecat - Markdown.exe`. Conservá t
 - Mermaid, KaTeX, tablas, código e imágenes locales empaquetados sin CDN.
 - Ampliar gráficos e imágenes, exportar SVG y PDF de lectura.
 
-Referencia de experiencia: MarkText. Este editor ofrece **Markdown con vista previa**, no reproduce su motor WYSIWYG Muya.
+Referencia de experiencia: MarkText. La edición principal ocurre sobre el documento visual. Mermaid y fórmulas se ven renderizados; hacer clic en la fórmula o en Editar diagrama abre su diálogo específico. Los bloques no modificados conservan su Markdown original; al editar un bloque se serializa su nuevo formato Markdown.
 
 ## Atajos
 
@@ -28,7 +30,7 @@ Referencia de experiencia: MarkText. Este editor ofrece **Markdown con vista pre
 | Nuevo / abrir / carpeta | Ctrl+N / Ctrl+O / Ctrl+Shift+O |
 | Guardar / guardar como | Ctrl+S / Ctrl+Shift+S |
 | Cerrar pestaña | Ctrl+W |
-| Lectura / edición / dividida | Ctrl+1 / Ctrl+2 / Ctrl+3 |
+| Lectura / edición visual / código | Ctrl+1 / Ctrl+2 / Ctrl+3 |
 | Buscar y reemplazar | Ctrl+F |
 | Negrita / cursiva | Ctrl+B / Ctrl+I |
 | Enfoque / tema | Ctrl+Shift+F / Ctrl+Shift+T |

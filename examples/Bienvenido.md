@@ -4,7 +4,7 @@
 
 ## Tu espacio de escritura
 
-Elegí **Dividida** para editar Markdown y ver el resultado en vivo. **Edición** te deja toda la pantalla para escribir. **Lectura** muestra el documento terminado.
+En **Edición** escribís directamente sobre este documento: hacé clic en un título, párrafo, lista o celda de tabla. La barra aplica formato al texto seleccionado. **Código** muestra el Markdown y su vista previa. **Lectura** permite leer sin modificarlo.
 
 - Creá un documento con **Ctrl+N**.
 - Abrí un archivo con **Ctrl+O** o una carpeta con **Ctrl+Shift+O**.
@@ -52,8 +52,8 @@ ideas.forEach(idea => console.log(idea));
 | Modo | Para qué sirve |
 | --- | --- |
 | Lectura | Leer con calma |
-| Edición | Escribir sin distracciones |
-| Dividida | Ver cada cambio en vivo |
+| Edición | Escribir sobre el documento visual |
+| Código | Markdown y vista previa |
 
 ## Identidad propia
 
