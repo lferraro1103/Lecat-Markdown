@@ -68,3 +68,5 @@ v3.2.1-desktop.1. Registros GSD sincronizados en main y develop.
 Main y develop conservados. CI usa macOS 15; apertura en Monterey pendiente.
 No se confirma resuelto el aviso de aplicación dañada. No hay nueva release;
 esta tarea publica la rama y los paquetes como artefactos de Actions.
+
+Publicacion completada: v3.2.1 estable (main, nueve assets) y v3.2.1-macos12.1 (developer-macos12, seis assets). Actions 37014254254 y 37014158490 exitosos. Apertura en Monterey real pendiente.
