@@ -28,11 +28,8 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run dist:mac -- --${{ matrix.arch }}
-      - name: Audit packaged application
-        run: |
-          APP=$(find dist -maxdepth 2 -name '*.app' -print -quit)
-          test -n "$APP"
-          "$APP/Contents/MacOS/Lecat - Markdown" --audit
+      - name: Verify distributed signatures and audit installed application
+        run: bash scripts/verify-macos.sh ${{ matrix.arch }}
       - name: Checksums
         run: |
           cd dist
