@@ -93,9 +93,6 @@ npm run installer
 
 `npm start` abre desde el código. `dist/win-unpacked` es el portable. Auditoría en Electron real y capturas en `docs/previews/electron`, excluidas de Git por posibles rutas personales. Los lockfiles fijan dependencias.
 
-- [Investigación GSD](docs/INVESTIGACION-ELECTRON.md)
-- [Contrato UI](docs/UI-SPEC-ELECTRON.md)
-- [Auditoría y límites](docs/AUDITORIA-ELECTRON.md)
 
 `src` y los documentos de versión 2 conservan la implementación histórica WinForms/WebView2. El punto de entrada actual es `electron/`.
 
