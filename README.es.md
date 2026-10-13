@@ -90,7 +90,6 @@ El punto de entrada de la aplicación es `electron/`. `src/` contiene la impleme
 
 Las capturas y los resultados de auditoría se generan en `docs/previews/electron` y se excluyen de Git porque pueden contener rutas locales. Las dependencias están fijadas en `package-lock.json`.
 
-Más documentación: [investigación de implementación](docs/INVESTIGACION-ELECTRON.md), [diseño de interfaz](docs/UI-SPEC-ELECTRON.md) y [auditoría y límites](docs/AUDITORIA-ELECTRON.md).
 
 ## Licencias
 

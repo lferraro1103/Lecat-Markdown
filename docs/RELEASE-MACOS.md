@@ -40,7 +40,7 @@ Pulsá **Abrir de todos modos** y confirmá **Abrir** en el aviso siguiente.
 
 Se observó ese botón con el ZIP publicado de `macos.2` en macOS 15 Intel,
 macOS 15 Apple Silicon y macOS 26 Apple Silicon, sin Developer ID, manteniendo
-Gatekeeper habilitado y la cuarentena. [Capturas y límites de la prueba](https://github.com/lferraro1103/Lecat-Markdown/blob/develop/.planning/spikes/001-gatekeeper-without-developer-id/README.md).
+Gatekeeper habilitado y la cuarentena..
 La autorización completa en tu Mac aún debe comprobarse.
 
 No necesitás una cuenta Apple Developer para conceder una excepción manual de

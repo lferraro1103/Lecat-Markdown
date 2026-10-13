@@ -90,7 +90,6 @@ The application entry point is `electron/`. The `src/` directory contains the hi
 
 Audit screenshots and results are generated in `docs/previews/electron` and excluded from Git because they may contain local paths. Dependencies are pinned in `package-lock.json`.
 
-Further documentation (Spanish): [implementation research](docs/INVESTIGACION-ELECTRON.md), [UI design](docs/UI-SPEC-ELECTRON.md), and [audit findings and limitations](docs/AUDITORIA-ELECTRON.md).
 
 ## Licensing
 
