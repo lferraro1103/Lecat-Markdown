@@ -1,94 +1,99 @@
-# Lecat - Markdown
+# Lecat — Markdown
 
-Versión del código: **3.2.2**, integrada en `main` para Windows y macOS.
+**English** · [Español](README.es.md)
 
-[Descargar release estable 3.2.2](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.2).
-Para **macOS 12 Monterey**, usá la
-[release alternativa](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.1-macos12.1)
-de la [rama developer-macos12](https://github.com/lferraro1103/Lecat-Markdown/tree/developer-macos12).
+An offline Markdown editor and reader for Windows and macOS. Write directly in the rendered document, browse local folders, and work with diagrams, equations, tables, and images in one desktop app.
 
-## Versión alternativa para Windows y macOS
+[Download the latest release](https://github.com/lferraro1103/Lecat-Markdown/releases/latest) · [Release notes](https://github.com/lferraro1103/Lecat-Markdown/releases)
 
-La rama `develop` incluye instalador y ZIP portable para Windows x64, y paquetes
-DMG y ZIP para Mac Apple Silicon (`arm64`) e Intel (`x64`), compilados en GitHub
-Actions. Consultá [la release alternativa](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.1-desktop.1)
-y [las instrucciones de instalación](docs/RELEASE-DESKTOP.md).
-El tema sigue al sistema por defecto; **Vista → Usar tema del sistema** restaura
-el modo automático después de elegir claro u oscuro manualmente.
-Los atajos usan ⌘ en macOS; preferencias y borradores se guardan en
-`~/Library/Application Support/ClaroMD`. Para compilar en un Mac:
-`npm ci` y `npm run dist:mac -- --arm64` (o `--x64`).
+## Features
 
-La autorización manual de una app no verificada se realiza desde **Privacidad y
-seguridad → Abrir de todos modos**, cuando macOS ofrece esa opción; no requiere
-Developer ID. Consultá las instrucciones de instalación para DMG y ZIP.
-Existe además un [modo opcional de firma Developer ID](docs/FIRMA-MACOS.md),
-que requiere un certificado del desarrollador en los secrets de GitHub Actions.
+- **Visual editing:** edit rendered headings, paragraphs, lists, and tables with formatting tools, undo/redo, and find/replace.
+- **Three document modes:** visual editing, reading, and Markdown source with a preview.
+- **Local file explorer:** browse folders and drives, filter entries, and use Windows quick-access locations.
+- **Rich Markdown:** Mermaid diagrams, LaTeX math with KaTeX, syntax-highlighted code, task lists, tables, and local images.
+- **Document tools:** tabs, Save As, an outline, focus mode, zoom, SVG diagram export, and PDF export.
+- **Local recovery:** recover unsaved drafts and detect external changes before overwriting a file.
+- **Appearance:** light, dark, and system themes, applied before the window appears.
 
-Editor y lector Markdown para Windows 10/11 x64 con **Electron y Chromium incluidos**. No necesita WebView2, .NET ni Internet para leer, editar y dibujar documentos locales.
+Electron and Chromium are included. Reading, editing, and rendering local documents work without an internet connection, an account, WebView2, or .NET. Opening web links and downloading updates require internet access.
 
-## Abrir
+## Download and installation
 
-El instalador `Lecat-Markdown-3.2.2-Setup-x64.exe` ofrece licencia, carpeta de destino, accesos directos y desinstalador. Alternativamente, descomprimí el portable completo y ejecutá `Lecat - Markdown.exe`. Conservá todos los archivos y carpetas: el exe necesita los recursos de Electron. No requiere cuenta. El documento de bienvenida demuestra edición, gráficos, fórmulas e imágenes.
+The current stable version is **3.2.2**.
 
-## Funciones
+| Platform | Download | Installation |
+| --- | --- | --- |
+| Windows 10/11, x64 | `Setup-x64.exe` | Run the installer to choose the destination and create shortcuts. |
+| Windows 10/11, x64 | `Windows-x64.zip` | Extract the complete ZIP and open `Lecat - Markdown.exe`. Keep all bundled files together. |
+| macOS 13 or later, Apple Silicon | `macOS-arm64.dmg` or `.zip` | Move the app to Applications before opening it. |
+| macOS 13 or later, Intel | `macOS-x64.dmg` or `.zip` | Move the app to Applications before opening it. |
 
-- Edición visual por defecto: escribí directamente sobre títulos, párrafos, listas y tablas renderizadas.
-- Lectura y código Markdown con vista previa como opciones separadas.
-- Tiptap/ProseMirror: selección, formato, pegado enriquecido y tablas con filas/columnas editables.
-- Deshacer/rehacer y buscar/reemplazar en el documento visual. CodeMirror disponible en Código.
-- Formato: títulos, negrita, cursiva, enlaces, imágenes, listas, tareas, citas, código, tablas y Mermaid.
-- Pestañas, Nuevo, Guardar, Guardar como y protección al cerrar con cambios.
-- Borradores de recuperación locales y detección de conflictos externos.
-- Acceso rápido real de Windows, otros shortcuts del Shell y línea antes de los discos.
-- Explorador de carpetas, ruta editable, subir/actualizar y filtro.
-- Temas claro/oscuro, icono original, Lucide, índice, enfoque y zoom.
-- Mermaid, KaTeX, tablas, código e imágenes locales empaquetados sin CDN.
-- Ampliar gráficos e imágenes, exportar SVG y PDF de lectura.
+For **macOS 12 Monterey**, use the separate [3.2.1-macos12.1 release](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.1-macos12.1). It uses a different Electron version and is maintained on `developer-macos12`.
 
-Referencia de experiencia: MarkText. La edición principal ocurre sobre el documento visual. Mermaid y fórmulas se ven renderizados; hacer clic en la fórmula o en Editar diagrama abre su diálogo específico. Los bloques no modificados conservan su Markdown original; al editar un bloque se serializa su nuevo formato Markdown.
+macOS packages have ad-hoc integrity signatures; they are not Developer ID signed or notarized. See the [macOS installation notes](docs/RELEASE-MACOS.md) and [signing documentation](docs/FIRMA-MACOS.md) for details. Release assets include SHA256 checksums.
 
-## Atajos
+## Editing workflow
 
-| Acción | Atajo |
+Open a Markdown file or create a new document. **Visual editing** is the default: click a heading, paragraph, list, or table cell and type directly in the document. Switch to **Reading** to view it, or **Code** to work with Markdown source and its preview.
+
+Diagrams and equations are rendered in the document. Use **Edit diagram**, or click an equation, to change the corresponding source in a focused dialog. Unmodified blocks retain their original Markdown; edited blocks are serialized back to Markdown.
+
+Saving is explicit. The original file changes only when you save. If another application changes it, Lecat reports the conflict and lets you save a separate copy.
+
+## Keyboard shortcuts
+
+Use `Ctrl` on Windows and `⌘` on macOS.
+
+| Action | Shortcut |
 | --- | --- |
-| Nuevo / abrir / carpeta | Ctrl+N / Ctrl+O / Ctrl+Shift+O |
-| Guardar / guardar como | Ctrl+S / Ctrl+Shift+S |
-| Cerrar pestaña | Ctrl+W |
-| Lectura / edición visual / código | Ctrl+1 / Ctrl+2 / Ctrl+3 |
-| Buscar y reemplazar | Ctrl+F |
-| Negrita / cursiva | Ctrl+B / Ctrl+I |
-| Enfoque / tema | Ctrl+Shift+F / Ctrl+Shift+T |
-| Exportar PDF | Ctrl+Alt+P |
-| Zoom | Ctrl+Plus / Ctrl+Minus / Ctrl+0 |
+| New document / open file / open folder | Ctrl+N / Ctrl+O / Ctrl+Shift+O |
+| Save / Save As | Ctrl+S / Ctrl+Shift+S |
+| Close tab | Ctrl+W |
+| Reading / visual editing / source and preview | Ctrl+1 / Ctrl+2 / Ctrl+3 |
+| Find and replace | Ctrl+F |
+| Bold / italic | Ctrl+B / Ctrl+I |
+| Focus mode / toggle theme | Ctrl+Shift+F / Ctrl+Shift+T |
+| Export PDF | Ctrl+Alt+P |
+| Zoom in / zoom out / reset | Ctrl+Plus / Ctrl+Minus / Ctrl+0 |
 
-## Datos y límites
+Choose **Vista → Usar tema del sistema** (View → Use system theme) to restore automatic theme selection after choosing light or dark manually.
 
-Guardar es explícito. Borradores y preferencias se almacenan en `%APPDATA%/ClaroMD`; no hay sincronización ni telemetría. El original permanece intacto hasta guardar. Los conflictos externos evitan sobrescritura silenciosa y permiten guardar una copia.
+## Data and supported formats
 
-UTF-8, BOM y UTF-16 LE; CRLF conservado. Máximo 20 MB por documento. UTF-16 BE y bytes UTF-8 inválidos se rechazan para evitar corrupción. Imágenes remotas muestran aviso y no se descargan. Enlaces web sólo se abren al hacer clic. HTML/scripts del Markdown no se ejecutan. Directivas Mermaid rechazadas y errores aislados por bloque. PlantUML/Graphviz se muestran como código.
+Preferences and recovery drafts are stored locally in `%APPDATA%/ClaroMD` on Windows and `~/Library/Application Support/ClaroMD` on macOS. The legacy folder name is retained for compatibility. There is no cloud synchronization or telemetry.
 
-## Desarrollo y auditoría
+Lecat supports UTF-8, UTF-8 BOM, and UTF-16 LE, preserving CRLF line endings. Documents are limited to 20 MB. UTF-16 BE and invalid UTF-8 are rejected to prevent data corruption.
 
-Node.js 22+ y npm; Windows x64 para esta entrega.
+Remote images are not downloaded automatically. Web links open only when clicked. Markdown scripts do not execute. Mermaid errors are isolated to their blocks; PlantUML and Graphviz blocks are displayed as source code.
 
-```powershell
+## Development
+
+Requirements: Node.js **22.12 or later**, npm, and a supported desktop platform.
+
+```sh
 npm ci
-npm run build
+node scripts/prepare-electron.cjs
 npm test
-npm run audit
-npm run dist
-npm run installer
+npm start
 ```
 
-`npm start` abre desde el código. `dist/win-unpacked` es el portable. Auditoría en Electron real y capturas en `docs/previews/electron`, excluidas de Git por posibles rutas personales. Los lockfiles fijan dependencias.
+```sh
+npm run audit         # Real Electron integration audit
+npm run dist          # Windows portable distribution
+npm run installer     # Windows installer
+npm run dist:mac -- --arm64  # macOS Apple Silicon packages
+npm run dist:mac -- --x64    # macOS Intel packages
+```
 
-- [Investigación GSD](docs/INVESTIGACION-ELECTRON.md)
-- [Contrato UI](docs/UI-SPEC-ELECTRON.md)
-- [Auditoría y límites](docs/AUDITORIA-ELECTRON.md)
+The application entry point is `electron/`. The `src/` directory contains the historical WinForms/WebView2 implementation.
 
-`src` y los documentos de versión 2 conservan la implementación histórica WinForms/WebView2. El punto de entrada actual es `electron/`.
+Audit screenshots and results are generated in `docs/previews/electron` and excluded from Git because they may contain local paths. Dependencies are pinned in `package-lock.json`.
 
-## Licencias
+Further documentation (Spanish): [implementation research](docs/INVESTIGACION-ELECTRON.md), [UI design](docs/UI-SPEC-ELECTRON.md), and [audit findings and limitations](docs/AUDITORIA-ELECTRON.md).
 
-Electron, CodeMirror, markdown-it, DOMPurify, Mermaid, KaTeX, highlight.js y Lucide conservan sus licencias. El build genera las licencias del bundle dentro de `electron/ui`. El código del proyecto no recibe automáticamente una licencia pública por estar en un repositorio privado.
+## Licensing
+
+The distributed application's terms are in [LICENCIA.txt](build/LICENCIA.txt). Public repository access does not itself grant a license to the project source code.
+
+Third-party libraries retain their respective licenses. The build generates bundled notices in `electron/ui/THIRD-PARTY-LICENSES.txt`; distributed packages also include Electron and Chromium notices.
