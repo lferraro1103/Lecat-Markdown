@@ -1,0 +1,3 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),{windowChrome}=require('./window-chrome.cjs');
+test('macOS uses native inset traffic lights in a dark unified toolbar',()=>{const value=windowChrome('darwin','dark');assert.equal(value.titleBarStyle,'hiddenInset');assert.equal(value.backgroundColor,'#202020');assert.deepEqual(value.trafficLightPosition,{x:14,y:18});});
+test('Windows keeps native frame and window controls',()=>{const value=windowChrome('win32','light');assert.equal(value.backgroundColor,'#f6f7fa');assert.equal(value.titleBarStyle,undefined);assert.equal(value.frame,undefined);});

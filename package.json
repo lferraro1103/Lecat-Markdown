@@ -1,6 +1,6 @@
 {
   "name": "lecat-markdown",
-  "version": "3.2.4",
+  "version": "3.2.5",
   "description": "Editor y lector Markdown para Windows y macOS, con gráficos sin conexión",
   "main": "electron/main.cjs",
   "author": "Lecat",
@@ -8,13 +8,14 @@
   "scripts": {
     "build": "node electron/build.cjs",
     "start": "npm run build && electron .",
-    "test": "node --test electron/core.test.cjs electron/persistence.test.cjs scripts/prepare-electron.test.cjs electron/updater.test.cjs scripts/merge-update-metadata.test.cjs electron/session.test.cjs",
+    "test": "node --test electron/core.test.cjs electron/persistence.test.cjs scripts/prepare-electron.test.cjs electron/updater.test.cjs scripts/merge-update-metadata.test.cjs electron/session.test.cjs electron/window-chrome.test.cjs electron/window-state.test.cjs",
     "audit": "npm run build && electron . --audit",
     "dist": "npm run build && electron-builder --win dir",
     "installer": "npm run build && electron-builder --win nsis --x64 --publish never",
     "dist:mac": "npm run build && electron-builder --mac dmg zip --publish never",
     "dist:mac:signed": "npm run build && electron-builder --config electron-builder.developer-id.cjs --mac dmg zip --publish never",
-    "verify:session": "npm run build && node scripts/verify-session-restart.cjs"
+    "verify:session": "npm run build && node scripts/verify-session-restart.cjs",
+    "verify:window": "npm run build && node scripts/verify-window-restart.cjs"
   },
   "devDependencies": {
     "@codemirror/lang-markdown": "^6.3.4",
@@ -64,7 +65,11 @@
       "electron/updater.cjs",
       "electron/update-audit.cjs",
       "electron/session.cjs",
-      "electron/session-audit.cjs"
+      "electron/session-audit.cjs",
+      "electron/window-chrome.cjs",
+      "electron/toolbar-audit.cjs",
+      "electron/window-state.cjs",
+      "electron/window-state-audit.cjs"
     ],
     "win": {
       "icon": "branding/Lecat.ico",
