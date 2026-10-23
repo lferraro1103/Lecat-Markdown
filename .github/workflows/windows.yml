@@ -1,5 +1,8 @@
 name: Electron Windows build and audit
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches: [main, develop, developer]
+  workflow_dispatch:
 jobs:
   windows:
     runs-on: windows-latest
@@ -13,6 +16,7 @@ jobs:
       - name: Prepare verified Electron binary with retry
         run: node scripts/prepare-electron.cjs
       - run: npm test
+      - run: npm run verify:session
       - run: npm run audit
       - run: npm run dist
       - uses: actions/upload-artifact@v4

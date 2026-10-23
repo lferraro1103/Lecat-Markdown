@@ -1,7 +1,7 @@
 name: macOS alternative release
 on:
   push:
-    tags: ['v*-macos.*', 'v*-macos-signed.*']
+    tags: ['v*-macos.*', 'v*-macos-signed.*', 'v*-macos12.*']
   workflow_dispatch:
     inputs:
       signing:
@@ -88,6 +88,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           NOTES=docs/RELEASE-MACOS.md
+          if [[ "$GITHUB_REF_NAME" == *-macos12.* ]]; then
+            NOTES=docs/RELEASE-MACOS12.md
+          fi
           if [[ "$GITHUB_REF_NAME" == *-macos-signed.* ]]; then
             NOTES=docs/RELEASE-MACOS-SIGNED.md
           fi

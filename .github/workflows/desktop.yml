@@ -34,6 +34,9 @@ jobs:
       - name: Prepare verified Electron binary with retry
         run: node scripts/prepare-electron.cjs
       - run: npm test
+      - name: Verify document session across real application restarts
+        if: matrix.platform == 'Windows'
+        run: npm run verify:session
       - name: Build macOS
         if: matrix.platform == 'macOS'
         run: npm run dist:mac -- --${{ matrix.arch }}
@@ -45,6 +48,12 @@ jobs:
         run: |
           cd dist
           shasum -a 256 *.dmg *.zip > SHA256-macOS-${{ matrix.arch }}.txt
+      - name: Preserve architecture-specific update metadata
+        if: matrix.platform == 'macOS'
+        run: |
+          if [ -f dist/latest-mac.yml ]; then
+            mv dist/latest-mac.yml dist/latest-mac-${{ matrix.arch }}.yml
+          fi
       - name: Audit Windows application
         if: matrix.platform == 'Windows'
         run: npm run audit
@@ -69,6 +78,8 @@ jobs:
             dist/*.zip
             dist/*-Setup-x64.exe
             dist/SHA256-*.txt
+            dist/latest*.yml
+            dist/*.blockmap
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -81,11 +92,19 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
       - uses: actions/download-artifact@v4
         with:
           pattern: desktop-*
           merge-multiple: true
           path: release-assets
+      - name: Merge stable macOS update metadata
+        if: ${{ !contains(github.ref_name, '-') }}
+        run: node scripts/merge-update-metadata.cjs release-assets
       - name: Publish Windows and macOS alternative release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -100,3 +119,21 @@ jobs:
             --repo "$GITHUB_REPOSITORY" --verify-tag "${FLAGS[@]}" \
             --title "Lecat Markdown $GITHUB_REF_NAME — Windows y macOS" \
             --notes-file "$NOTES"
+      - name: Publish stable update assets to public repository
+        if: ${{ !contains(github.ref_name, '-') && github.repository != 'lferraro1103/Lecat-Markdown' }}
+        env:
+          GH_TOKEN: ${{ secrets.PUBLIC_RELEASE_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo '::error::Configure PUBLIC_RELEASE_TOKEN with contents:write access to lferraro1103/Lecat-Markdown to publish public updates from the private repository.'
+            exit 1
+          fi
+          # The public source/tag is synchronized separately using the existing
+          # selective publication process. Never export private source here.
+          if gh release view "$GITHUB_REF_NAME" --repo lferraro1103/Lecat-Markdown >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" release-assets/* --repo lferraro1103/Lecat-Markdown --clobber
+            gh release edit "$GITHUB_REF_NAME" --repo lferraro1103/Lecat-Markdown --latest --draft=false --prerelease=false --notes-file docs/RELEASE-STABLE.md
+          else
+            gh release create "$GITHUB_REF_NAME" release-assets/* --repo lferraro1103/Lecat-Markdown --verify-tag --latest \
+              --title "Lecat Markdown $GITHUB_REF_NAME — Windows y macOS" --notes-file docs/RELEASE-STABLE.md
+          fi
