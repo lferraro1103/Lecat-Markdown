@@ -1,0 +1,71 @@
+:root{--appbar-height:42px;--sidebar-width:260px}
+.appbar{height:var(--appbar-height);padding:0 12px;gap:12px}
+.toolbar-leading{display:flex;align-items:center;gap:8px;min-width:0}
+.brand{font-size:13px;letter-spacing:-.15px;gap:7px;white-space:nowrap}
+.brand img{width:20px;height:20px}
+.appbar button{min-height:28px;height:28px;padding:4px 7px;font-size:12px}
+.appbar svg.lucide{width:16px;height:16px}
+.appbar [hidden]{display:none}
+.app-actions{align-items:center;gap:4px}
+.toolbar-save{background:var(--selection);color:var(--accent)}
+.toolbar-save.is-dirty{background:#315fe8;color:white}
+.toolbar-title,.toolbar-modes,.mac-action,#toolbar-search{display:none}
+.workspace{height:calc(100vh - var(--appbar-height))}
+#sidebar{width:var(--sidebar-width);min-width:var(--sidebar-width)}
+#tabs{height:34px;flex-shrink:0}
+.tab{min-width:110px}
+.document-header{padding:10px 20px 8px}
+h1#doc-title{font-size:16px;line-height:22px;margin:0 0 2px}
+.document-controls{padding:0 16px 8px}
+.segmented button{min-height:28px;font-size:11px}
+#formatbar{padding:3px 16px}
+.visual-document p.is-editor-empty:first-child::before{content:none}
+html[data-sidebar=collapsed] #sidebar{display:none}
+::highlight(lecat-document-search){background:#f4c95d;color:#181818}
+
+html[data-platform=darwin]{--appbar-height:52px;--bg:#f5f5f5;--canvas:#fff;--panel:#ececec;--text:#242424;--muted:#6f6f73;--border:#ddd;--accent:#2768d0;--selection:#e4eaf5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+html[data-platform=darwin][data-theme=dark]{--bg:#202020;--canvas:#1e1e1e;--panel:#2b2b2b;--text:#e8e8e8;--muted:#aaa;--border:#393939;--accent:#70b3ed;--selection:#344d65}
+html[data-platform=darwin] body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+html[data-platform=darwin] .appbar{display:grid;grid-template-columns:calc(var(--sidebar-width) - 92px) minmax(100px,1fr) auto;gap:10px;padding:0 12px 0 82px;background:var(--panel);-webkit-app-region:drag;user-select:none}
+html[data-platform=darwin] .appbar button,html[data-platform=darwin] .appbar input,html[data-platform=darwin] .appbar form{-webkit-app-region:no-drag}
+html[data-platform=darwin] .toolbar-leading{gap:5px;height:100%;border-right:1px solid var(--border);padding-right:10px}
+html[data-platform=darwin] .brand,html[data-platform=darwin] .action-label{display:none}
+html[data-platform=darwin] .mac-action{display:inline-flex}
+html[data-platform=darwin] .appbar button{width:30px;height:30px;padding:6px;border-radius:7px;color:var(--muted)}
+html[data-platform=darwin] .appbar button:hover{color:var(--text);background:color-mix(in srgb,var(--text) 9%,transparent)}
+html[data-platform=darwin] .toolbar-title{display:flex;align-items:center;min-width:0;gap:8px;font-size:13px;font-weight:600;letter-spacing:-.1px;overflow:hidden}
+#toolbar-doc-name{white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+#toolbar-dirty{font-size:9px;color:var(--muted)}
+html[data-platform=darwin] .toolbar-modes{display:flex;padding:2px;border:1px solid var(--border);border-radius:8px;gap:1px;margin-right:4px}
+html[data-platform=darwin] .toolbar-modes button{height:26px;min-height:26px;width:28px;padding:5px}
+html[data-platform=darwin] .toolbar-modes button.active{background:color-mix(in srgb,var(--text) 12%,transparent);color:var(--text);box-shadow:0 1px 2px #0001}
+html[data-platform=darwin] .toolbar-save{background:transparent}
+html[data-platform=darwin] .toolbar-save.is-dirty{color:var(--accent);background:var(--selection)}
+html[data-platform=darwin] .document-header,html[data-platform=darwin] .document-controls{display:none}
+html[data-platform=darwin] #tabs[data-single=true]{display:none}
+html[data-platform=darwin] #sidebar{background:color-mix(in srgb,var(--panel) 75%,var(--bg))}
+html[data-platform=darwin] .side-header{font-size:10px;letter-spacing:.6px;padding-top:12px}
+html[data-platform=darwin] .section-label{letter-spacing:.6px}
+html[data-platform=darwin] .file,html[data-platform=darwin] .place{min-height:29px;border-radius:6px}
+html[data-platform=darwin] #formatbar{background:var(--canvas);border-top:0}
+html[data-platform=darwin] #toolbar-search{display:flex;align-items:center;gap:6px;border:1px solid var(--border);border-radius:8px;background:color-mix(in srgb,var(--text) 5%,transparent);height:30px;width:240px;padding:0 8px;margin:0 0 0 6px;color:var(--muted)}
+#toolbar-search:focus-within{outline:2px solid var(--accent);outline-offset:1px}
+#toolbar-find{width:100%;min-width:20px;font-size:12px;outline:none}
+#toolbar-find::-webkit-search-cancel-button{display:none}
+#toolbar-find-status{font-size:10px;white-space:nowrap;max-width:76px;text-overflow:ellipsis;overflow:hidden}
+html[data-platform=darwin] #toolbar-find-clear{width:16px;height:22px;min-height:22px;padding:0;flex-shrink:0}
+html[data-platform=darwin][data-sidebar=collapsed] .appbar{grid-template-columns:78px minmax(100px,1fr) auto}
+html[data-platform=darwin] body.focus .appbar{display:grid}
+html[data-platform=darwin] body.focus .workspace{height:calc(100vh - var(--appbar-height))}
+@media(max-width:1100px){
+ html[data-platform=darwin] .app-actions>button[data-command=new],html[data-platform=darwin] .app-actions>button[data-command=open]{display:none}
+ html[data-platform=darwin] #toolbar-search{width:200px}
+}
+@media(max-width:1050px){:root{--sidebar-width:235px}}
+@media(max-width:900px){
+ html[data-platform=darwin] #toolbar-search{width:175px}
+ html[data-platform=darwin] .appbar{gap:8px}
+ html[data-platform=darwin] .app-actions{gap:2px}
+ html[data-platform=darwin] .toolbar-modes{margin-right:0}
+}
+@media print{html[data-platform=darwin] .appbar{display:none!important}.workspace{height:auto}}

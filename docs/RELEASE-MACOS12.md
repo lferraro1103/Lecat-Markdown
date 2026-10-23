@@ -1,8 +1,10 @@
-# Lecat - Markdown 3.2.4-macos12.1 — macOS 12 Monterey
+# Lecat - Markdown 3.2.5-macos12.1 — macOS 12 Monterey
 
-Alternativa basada en 3.2.4 con Electron 43.7.7 y mínimo macOS 12.0.
+Alternativa basada en 3.2.5 con Electron 43.7.7 y mínimo macOS 12.0.
 Electron 44 requiere macOS 13; esta descarga conserva la rama de compatibilidad.
 
+- Barra compacta e integrada, búsqueda y textos de interfaz simplificados.
+- Restauración del tamaño y del estado de pantalla completa al reabrir documentos.
 - Apple Silicon: macOS-arm64.dmg o macOS-arm64.zip.
 - Intel: macOS-x64.dmg o macOS-x64.zip.
 - Restauración de pestañas de archivos, orden y última pestaña activa.

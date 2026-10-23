@@ -22,7 +22,7 @@ Electron y Chromium están incluidos. Leer, editar y renderizar documentos local
 
 ## Descarga e instalación
 
-La versión estable actual es **3.2.4**.
+La versión estable actual es **3.2.5**.
 
 | Plataforma | Descarga | Instalación |
 | --- | --- | --- |
@@ -31,7 +31,7 @@ La versión estable actual es **3.2.4**.
 | macOS 13 o posterior, Apple Silicon | `macOS-arm64.dmg` o `.zip` | Mové la aplicación a Aplicaciones antes de abrirla. |
 | macOS 13 o posterior, Intel | `macOS-x64.dmg` o `.zip` | Mové la aplicación a Aplicaciones antes de abrirla. |
 
-Para **macOS 12 Monterey**, usá la [release alternativa 3.2.4-macos12.1](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.4-macos12.1). Usa otra versión de Electron y se mantiene en `developer-macos12`.
+Para **macOS 12 Monterey**, usá la [release alternativa 3.2.5-macos12.1](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.2.5-macos12.1). Usa otra versión de Electron y se mantiene en `developer-macos12`.
 
 Los paquetes de macOS tienen firma ad-hoc de integridad, sin firma Developer ID ni notarización. Consultá las [instrucciones para macOS](docs/RELEASE-MACOS.md) y la [documentación de firma](docs/FIRMA-MACOS.md). Las descargas incluyen sumas SHA256.
 
