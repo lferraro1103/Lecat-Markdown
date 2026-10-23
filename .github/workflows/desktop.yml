@@ -105,6 +105,10 @@ jobs:
       - name: Merge stable macOS update metadata
         if: ${{ !contains(github.ref_name, '-') }}
         run: node scripts/merge-update-metadata.cjs release-assets
+      - name: Sign Mac update manifests
+        env:
+          LECAT_UPDATE_PRIVATE_KEY: ${{ secrets.LECAT_UPDATE_PRIVATE_KEY }}
+        run: node scripts/sign-mac-updates.cjs release-assets
       - name: Publish Windows and macOS alternative release
         env:
           GH_TOKEN: ${{ github.token }}

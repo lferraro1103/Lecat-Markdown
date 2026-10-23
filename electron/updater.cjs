@@ -15,7 +15,7 @@ function createUpdater({updater,currentVersion,supported=true,reason='',notify=(
  let checking=null,downloading=null,installing=false;
  const snapshot=()=>({...state});
  const set=value=>{state={...state,...value};notify(snapshot());return snapshot();};
- const fail=error=>set({status:'error',message:error?.code==='ERR_UPDATER_CHANNEL_FILE_NOT_FOUND'?'La release pública todavía no incluye los archivos de actualización. Podés revisar las descargas en Releases.':'No se pudo completar la actualización. Revisá tu conexión o intentá de nuevo más tarde.'});
+ const fail=error=>set({status:'error',message:updater.macSparkle&&supported&&error?.message?error.message:error?.code==='ERR_UPDATER_CHANNEL_FILE_NOT_FOUND'?'La release pública todavía no incluye los archivos de actualización. Podés revisar las descargas en Releases.':'No se pudo completar la actualización. Revisá tu conexión o intentá de nuevo más tarde.'});
  updater.autoDownload=false;updater.autoInstallOnAppQuit=false;
  updater.allowPrerelease=false;updater.allowDowngrade=false;
  updater.on('checking-for-update',()=>set({status:'checking',message:'Buscando una versión nueva…'}));
@@ -47,7 +47,7 @@ function createUpdater({updater,currentVersion,supported=true,reason='',notify=(
   if(installing)return false;
   if(!supported||state.status!=='downloaded')throw Error('La actualización todavía no está lista.');
   installing=true;
-  try{if(!await prepareInstall())return false;set({status:'installing',message:'Aplicando la actualización y reiniciando…'});updater.quitAndInstall(true,true);return state.status==='installing';}
+  try{if(!await prepareInstall())return false;set({status:'installing',message:'Aplicando la actualización y reiniciando…'});await updater.quitAndInstall(true,true);return state.status==='installing';}
   catch(error){fail(error);return false;}finally{installing=false;}
  }
  return {snapshot,check,download,install};

@@ -19,12 +19,27 @@ horas; solo resalta el botón cuando hay una actualización. No descarga ni
 reinicia automáticamente. Los fallos de conexión permiten reintentar y no
 interrumpen la edición sin conexión.
 
-El ZIP portable permite buscar versiones y abrir la descarga pública. Para
-actualizar desde el programa en Windows se usa la edición instalada NSIS. macOS
-ad-hoc conserva la búsqueda y descarga manual: Squirrel.Mac exige una identidad de
-firma estable para aplicar actualizaciones. El perfil Developer ID existente
-(`dist:mac:signed`) activa la instalación nativa, conservando la verificación de
-firma. No se cambia la firma de las distribuciones actuales.
+El ZIP portable de Windows permite buscar versiones y abrir la descarga pública.
+Para actualizar dentro de Windows se usa la edición instalada NSIS.
+
+Desde **3.2.6**, Mac usa Sparkle 2.10 con firmas Ed25519 propias. La primera
+instalación de esta edición es manual para quienes venían de 3.2.5 o anterior.
+Después se puede descargar y reiniciar desde Lecat. Mantener la app en una carpeta
+escribible (normalmente Aplicaciones); macOS puede pedir autorización si hace falta.
+No se necesita una cuenta Apple Developer para este mecanismo. Se mantienen los
+avisos de Gatekeeper propios de la distribución ad-hoc inicial.
+
+Electron verifica un manifiesto firmado y el tamaño, SHA256 y firma Ed25519 del
+ZIP. La descarga queda en el perfil y no se instala al cerrar normalmente. Solo
+tras confirmar Reiniciar y actualizar, y aprobar el guardado, se inicia el helper
+nativo. Un servidor temporal en 127.0.0.1 con ruta aleatoria entrega a Sparkle el
+paquete verificado; Sparkle valida la firma antes de extraer/reemplazar la app.
+Los documentos, preferencias y sesión permanecen en el perfil existente.
+
+La clave pública está en build/mac-update-key.json y SUPublicEDKey. La privada
+está exclusivamente en el secreto cifrado LECAT_UPDATE_PRIVATE_KEY de Actions;
+no se publica en fuentes ni artefactos. Nunca generar otra clave para una release
+existente: perderla requiere una migración manual de las instalaciones anteriores.
 
 ## Publicar una actualización
 
@@ -35,7 +50,7 @@ solo. Hay que incrementar `package.json` y el lock, generar los paquetes y
 publicar una **Release estable**, marcada Latest, con sus artefactos:
 
 - Windows: `Lecat-Markdown-VERSION-Setup-x64.exe`, su `.blockmap` y `latest.yml`.
-- macOS: ZIP y DMG de ambas arquitecturas, blockmaps y `latest-mac.yml` fusionado.
+- macOS: ZIP y DMG de ambas arquitecturas, blockmaps, latest-mac.yml fusionado y mac-update-arm64.json / mac-update-x64.json firmados.
 - Conservar las sumas SHA256 y los assets de versiones anteriores.
 
 El workflow `desktop.yml` conserva los manifiestos y blockmaps. Cada runner Mac
@@ -48,7 +63,7 @@ el secreto **PUBLIC_RELEASE_TOKEN** con permiso `contents:write` únicamente sob
 el repositorio público. El workflow publica los binarios sin exportar fuente
 privada; falla explícitamente si falta el secreto o el tag público. Al ejecutar
 el workflow directamente en el repositorio público usa su `GITHUB_TOKEN`.
-No se configuraron secretos ni se publicó una release durante esta implementación.
+La firma de actualizaciones de Mac usa LECAT_UPDATE_PRIVATE_KEY en el repositorio que publica los binarios.
 
 Windows sigue usando paquetes sin certificado Authenticode: la comprobación de
 editor firmado se desactiva explícitamente en el build actual. Se mantiene HTTPS

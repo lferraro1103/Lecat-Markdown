@@ -1,6 +1,6 @@
 {
   "name": "lecat-markdown",
-  "version": "3.2.5",
+  "version": "3.2.6",
   "description": "Editor y lector Markdown para Windows y macOS, con gráficos sin conexión",
   "main": "electron/main.cjs",
   "author": "Lecat",
@@ -69,7 +69,9 @@
       "electron/window-chrome.cjs",
       "electron/toolbar-audit.cjs",
       "electron/window-state.cjs",
-      "electron/window-state-audit.cjs"
+      "electron/window-state-audit.cjs",
+      "electron/mac-updater.cjs",
+      "build/mac-update-key.json"
     ],
     "win": {
       "icon": "branding/Lecat.ico",
@@ -118,7 +120,16 @@
       ],
       "identity": "-",
       "hardenedRuntime": false,
-      "artifactName": "Lecat-Markdown-${version}-macOS-${arch}.${ext}"
+      "artifactName": "Lecat-Markdown-${version}-macOS-${arch}.${ext}",
+      "extendInfo": {
+        "SUPublicEDKey": "e6l1qtfi8kf0u6NN5zBDWBDD7SIthfu5tqLe2XI9HXg=",
+        "SUEnableAutomaticChecks": false,
+        "SUAutomaticallyUpdate": false,
+        "SUVerifyUpdateBeforeExtraction": true,
+        "NSAppTransportSecurity": {
+          "NSAllowsLocalNetworking": true
+        }
+      }
     },
     "fileAssociations": [
       {
@@ -137,7 +148,8 @@
     },
     "releaseInfo": {
       "releaseNotesFile": "docs/RELEASE-STABLE.md"
-    }
+    },
+    "afterPack": "./scripts/pack-sparkle.cjs"
   },
   "dependencies": {
     "electron-updater": "6.8.3"

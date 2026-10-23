@@ -1,34 +1,24 @@
-# Lecat - Markdown 3.2.5
+# Lecat - Markdown 3.2.6
 
-## Interfaz
+## Actualización desde la aplicación en Mac
 
-- Barra superior más compacta en Windows.
-- Barra integrada en macOS con controles nativos, título del documento, modos de vista y búsqueda.
-- Explorador plegable y menos encabezados duplicados.
-- Eliminadas las ayudas redundantes sobre el documento para una interfaz más limpia.
+- La edición de Mac incorpora Sparkle y firmas propias Ed25519 para verificar e instalar actualizaciones sin Apple Developer.
+- Buscar actualizaciones muestra Descargar actualización y luego Reiniciar y actualizar.
+- La descarga se verifica antes de habilitar la instalación; Sparkle vuelve a verificar el paquete antes de reemplazar la aplicación.
+- Cerrar Lecat normalmente no instala una actualización descargada.
+- Antes de reiniciar se confirman los cambios sin guardar y se conserva el estado de ventana, la sesión y las preferencias.
+- Se selecciona el paquete del procesador y del canal correspondiente: Intel, Apple Silicon y alternativa macOS 12.
 
-## Estado de ventana
+## Migración desde versiones anteriores
 
-- Conserva tamaño, posición y estado normal, maximizado o pantalla completa.
-- Restaura el estado al iniciar y al abrir un documento desde el sistema.
-- Evita que la salida de pantalla completa al cerrar reemplace el estado guardado.
-- Conserva el estado al reiniciar para aplicar una actualización.
-- Ajusta la posición cuando cambian los monitores y evita cambios de tamaño por escala de Windows.
+Mac 3.2.5 y anteriores necesitan instalar esta edición manualmente una vez para incorporar el nuevo mecanismo. Mové Lecat a Aplicaciones antes de usarlo. Las siguientes versiones podrán aplicarse desde la aplicación.
 
-## Documentos y actualizaciones
-
-- Se conservan las pestañas abiertas, el último documento activo y los borradores.
-- La bienvenida se muestra solo en la primera apertura de un perfil nuevo.
-- Windows instalado: buscar, descargar y reiniciar desde la aplicación para actualizar desde 3.2.4.
-- Se mantienen documentos y preferencias, con confirmación de cambios sin guardar antes de reiniciar.
-- ZIP portable y macOS con firma ad-hoc: búsqueda de versiones y descarga pública; instalación manual.
+Windows conserva su actualizador NSIS y puede actualizar desde el programa.
 
 ## Descargas
 
-- Windows 10/11 x64: instalador Setup-x64.exe o ZIP portable completo.
-- macOS 13 o posterior: DMG o ZIP arm64 (Apple Silicon) o x64 (Intel).
-- macOS 12: release alternativa 3.2.5-macos12.1 para ambas arquitecturas.
+- Windows 10/11 x64: instalador o ZIP portable.
+- macOS 13 o posterior: DMG o ZIP Intel / Apple Silicon.
+- macOS 12: alternativa 3.2.6-macos12.1 para ambos procesadores.
 
-Los paquetes de macOS tienen firma ad-hoc, sin Developer ID ni notarización.
-Se incluyen sumas SHA256 y archivos de actualización. La restauración de ventana,
-la sesión de documentos y la interfaz se comprobaron en Windows y macOS 15 Intel/ARM64.
+Los paquetes Mac conservan firma ad-hoc, sin Developer ID ni notarización. Las actualizaciones utilizan firmas criptográficas propias y se distribuyen con sus manifiestos verificados.
