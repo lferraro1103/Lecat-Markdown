@@ -6,7 +6,7 @@ permissions:
   contents: read
 jobs:
   build:
-    if: ${{ !contains(github.ref_name, '-') || contains(github.ref_name, '-desktop.') }}
+    if: ${{ !contains(github.ref_name, '-macos12.') && (!contains(github.ref_name, '-') || contains(github.ref_name, '-desktop.') || contains(github.ref_name, '-beta.') || contains(github.ref_name, '-alpha.') || contains(github.ref_name, '-rc.')) }}
     timeout-minutes: 30
     strategy:
       fail-fast: false
@@ -51,9 +51,10 @@ jobs:
       - name: Preserve architecture-specific update metadata
         if: matrix.platform == 'macOS'
         run: |
-          if [ -f dist/latest-mac.yml ]; then
-            mv dist/latest-mac.yml dist/latest-mac-${{ matrix.arch }}.yml
-          fi
+          for manifest in dist/*-mac.yml; do
+            [ -f "$manifest" ] || continue
+            mv "$manifest" "${manifest%.yml}-${{ matrix.arch }}.yml"
+          done
       - name: Audit Windows application
         if: matrix.platform == 'Windows'
         run: npm run audit
@@ -79,6 +80,9 @@ jobs:
             dist/*-Setup-x64.exe
             dist/SHA256-*.txt
             dist/latest*.yml
+            dist/beta*.yml
+            dist/alpha*.yml
+            dist/rc*.yml
             dist/*.blockmap
       - uses: actions/upload-artifact@v4
         if: always()
@@ -102,9 +106,11 @@ jobs:
           pattern: desktop-*
           merge-multiple: true
           path: release-assets
-      - name: Merge stable macOS update metadata
-        if: ${{ !contains(github.ref_name, '-') }}
-        run: node scripts/merge-update-metadata.cjs release-assets
+      - name: Merge macOS update metadata
+        if: ${{ !contains(github.ref_name, '-desktop.') }}
+        run: |
+          CHANNEL=$(node -p "require('./electron/release-channel.cjs').versionInfo(require('./package.json').version).channel")
+          node scripts/merge-update-metadata.cjs release-assets "$CHANNEL"
       - name: Sign Mac update manifests
         env:
           LECAT_UPDATE_PRIVATE_KEY: ${{ secrets.LECAT_UPDATE_PRIVATE_KEY }}
@@ -114,7 +120,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           FLAGS=(--prerelease --latest=false)
-          NOTES=docs/RELEASE-DESKTOP.md
+          NOTES=docs/RELEASE-STABLE.md
           if [[ "$GITHUB_REF_NAME" != *-* ]]; then
             FLAGS=(--latest)
             NOTES=docs/RELEASE-STABLE.md

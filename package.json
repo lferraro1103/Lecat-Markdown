@@ -1,6 +1,6 @@
 {
   "name": "lecat-markdown",
-  "version": "3.2.6",
+  "version": "3.3.0",
   "description": "Editor y lector Markdown para Windows y macOS, con gráficos sin conexión",
   "main": "electron/main.cjs",
   "author": "Lecat",
@@ -71,7 +71,10 @@
       "electron/window-state.cjs",
       "electron/window-state-audit.cjs",
       "electron/mac-updater.cjs",
-      "build/mac-update-key.json"
+      "build/mac-update-key.json",
+      "electron/locale.cjs",
+      "electron/preferences.cjs",
+      "electron/release-channel.cjs"
     ],
     "win": {
       "icon": "branding/Lecat.ico",
@@ -143,8 +146,7 @@
     ],
     "publish": {
       "provider": "generic",
-      "url": "https://github.com/lferraro1103/Lecat-Markdown/releases/latest/download",
-      "channel": "latest"
+      "url": "https://github.com/lferraro1103/Lecat-Markdown/releases/latest/download"
     },
     "releaseInfo": {
       "releaseNotesFile": "docs/RELEASE-STABLE.md"
@@ -152,6 +154,7 @@
     "afterPack": "./scripts/pack-sparkle.cjs"
   },
   "dependencies": {
-    "electron-updater": "6.8.3"
+    "electron-updater": "6.8.3",
+    "semver": "7.8.5"
   }
 }

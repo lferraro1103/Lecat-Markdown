@@ -1,3 +1,4 @@
+import {t} from './i18n.js';
 import {SearchQuery,setSearchQuery,findNext,findPrevious} from '@codemirror/search';
 
 export function createDocumentSearch({getMode,getView,getVisual,getDocumentId}){
@@ -8,10 +9,10 @@ export function createDocumentSearch({getMode,getView,getVisual,getDocumentId}){
   CSS.highlights?.delete(highlight);
   if(!query){clear();getView()?.dispatch({effects:setSearchQuery.of(new SearchQuery())});return '';}
   const mode=getMode(),documentId=getDocumentId();
-  if(mode==='edit'){const count=getVisual().search(query,direction);return count?count+' coincidencias':'Sin coincidencias';}
+  if(mode==='edit'){const count=getVisual().search(query,direction);return count?t('{count} coincidencias',{count}):t('Sin coincidencias');}
   if(mode==='split'){
    const view=getView();view.dispatch({effects:setSearchQuery.of(new SearchQuery({search:query,caseSensitive:false}))});
-   const found=(direction<0?findPrevious:findNext)(view);return found?'Coincidencia encontrada':'Sin coincidencias';
+   const found=(direction<0?findPrevious:findNext)(view);return t(found?'Coincidencia encontrada':'Sin coincidencias');
   }
   const root=document.getElementById('preview'),nodes=[],walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:node=>{
    const parent=node.parentElement;
@@ -21,7 +22,7 @@ export function createDocumentSearch({getMode,getView,getVisual,getDocumentId}){
   let node,text='';while((node=walker.nextNode())){nodes.push({node,from:text.length,to:text.length+node.nodeValue.length});text+=node.nodeValue;}
   const lower=text.toLocaleLowerCase(),needle=query.toLocaleLowerCase(),matches=[];
   for(let from=0;matches.length<10000;){const at=lower.indexOf(needle,from);if(at<0)break;matches.push(at);from=at+needle.length;}
-  if(!matches.length){index=-1;return 'Sin coincidencias';}
+  if(!matches.length){index=-1;return t('Sin coincidencias');}
   if(queryBefore!==query||documentBefore!==documentId)index=direction<0?0:-1;
   index=(index+direction+matches.length)%matches.length;queryBefore=query;documentBefore=documentId;
   const from=matches[index],to=from+query.length,start=nodes.find(n=>n.from<=from&&n.to>from),end=nodes.find(n=>n.from<to&&n.to>=to);

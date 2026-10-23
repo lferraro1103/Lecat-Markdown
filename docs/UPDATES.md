@@ -71,3 +71,18 @@ y la verificación SHA512 de electron-updater. Al incorporar un certificado,
 reactivar `win.verifyUpdateCodeSignature` y configurar `publisherName`.
 
 Referencia oficial: [electron-builder 26: Auto Update](https://www.electron.build/v26/docs/features/auto-update/).
+
+## Canal beta (desde 3.3.0)
+
+Configuración → Recibir versiones beta habilita versiones alpha/beta/rc publicadas
+en GitHub. Está desactivado inicialmente y se conserva por perfil. Se compara
+SemVer entre las releases compatibles; las versiones estables también se incluyen
+al habilitar beta. Las descargas en curso deben terminar antes de cambiar de canal.
+Cambiar el canal invalida una descarga pendiente de instalar; nunca instala un
+downgrade automáticamente ni aplica una beta tras desactivar el canal.
+
+Publicar tags como v3.3.1-beta.1 con el workflow desktop.yml genera instaladores,
+ZIP/DMG, beta.yml, beta-mac.yml y los manifiestos Mac firmados. Se publica como
+prerelease sin reemplazar Latest. Para Monterey se usa, por ejemplo,
+v3.3.1-beta.1-macos12.1 en developer-macos12. Publicar solo código o una release
+sin los paquetes y manifiestos necesarios no ofrece una actualización instalable.

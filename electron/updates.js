@@ -1,10 +1,11 @@
+import {t} from './i18n.js';
 export function createUpdateDialog({api,syncDocuments}){
  const $=id=>document.getElementById(id),dialog=$('update-dialog');let state=null,requesting=false;
  function render(value){
   state=value;const busy=['checking','downloading','installing'].includes(value.status);
-  $('update-current').textContent=value.currentVersion;
-  $('update-version').textContent=value.version?'Nueva versión: '+value.version:'';
-  $('update-message').textContent=value.message||'Buscá nuevas versiones de Lecat - Markdown.';
+  $('update-current').textContent=value.currentVersion;document.getElementById('update-channel').textContent=t(value.channel==='beta'?'Canal beta':'Canal estable');
+  $('update-version').textContent=value.version?t('Nueva versión: {version}',{version:value.version}):'';
+  $('update-message').textContent=t(value.message||'Buscá nuevas versiones de Lecat - Markdown.');
   $('update-notes').textContent=value.notes||'';$('update-notes-section').hidden=!value.notes;
   $('update-progress').hidden=value.status!=='downloading';$('update-progress').value=value.progress;
   $('update-percent').textContent=value.status==='downloading'?Math.floor(value.progress)+'%':'';
@@ -14,7 +15,7 @@ export function createUpdateDialog({api,syncDocuments}){
   $('update-release').hidden=value.supported&&value.status!=='error';
   const button=document.querySelector('[data-command="updates"]');
   button.classList.toggle('update-available',['available','downloaded','manual-available'].includes(value.status));
-  button.title=['available','downloaded','manual-available'].includes(value.status)?'Actualización disponible':'Buscar actualizaciones';
+  button.title=['available','downloaded','manual-available'].includes(value.status)?t('Actualización disponible'):t('Buscar actualizaciones');
  }
  async function action(name){
   if(requesting)return;requesting=true;if(state)render(state);

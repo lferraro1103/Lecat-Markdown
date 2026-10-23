@@ -1,24 +1,32 @@
-# Lecat - Markdown 3.2.6
+# Lecat - Markdown 3.3.0
 
-## Actualización desde la aplicación en Mac
+## Configuración e idiomas
 
-- La edición de Mac incorpora Sparkle y firmas propias Ed25519 para verificar e instalar actualizaciones sin Apple Developer.
-- Buscar actualizaciones muestra Descargar actualización y luego Reiniciar y actualizar.
-- La descarga se verifica antes de habilitar la instalación; Sparkle vuelve a verificar el paquete antes de reemplazar la aplicación.
-- Cerrar Lecat normalmente no instala una actualización descargada.
-- Antes de reiniciar se confirman los cambios sin guardar y se conserva el estado de ventana, la sesión y las preferencias.
-- Se selecciona el paquete del procesador y del canal correspondiente: Intel, Apple Silicon y alternativa macOS 12.
+- Nuevo menú Configuración junto a Archivo, Editar, Vista y Ayuda; acceso desde el icono de configuración y Cmd/Ctrl + coma.
+- Idioma configurable: Español, English, Português, Français, Deutsch, 中文（简体）, 中文（繁體） y 日本語.
+- El idioma se aplica a menús, preferencias y controles de la aplicación, se conserva entre aperturas y no cambia los documentos.
 
-## Migración desde versiones anteriores
+## Actualizaciones beta
 
-Mac 3.2.5 y anteriores necesitan instalar esta edición manualmente una vez para incorporar el nuevo mecanismo. Mové Lecat a Aplicaciones antes de usarlo. Las siguientes versiones podrán aplicarse desde la aplicación.
+- Recibir versiones beta está desactivado inicialmente.
+- Al activarlo, se busca la versión compatible más reciente entre estables y preliminares publicadas en GitHub.
+- Cada plataforma conserva su arquitectura y canal macOS 12, con verificación de manifiestos y paquetes.
+- Desactivar beta no instala una versión anterior: se esperan versiones estables posteriores.
 
-Windows conserva su actualizador NSIS y puede actualizar desde el programa.
+## Exploración y edición
 
-## Descargas
+- Mac: búsqueda y selección de archivos con el diálogo nativo y acceso a la carpeta en Finder.
+- Windows: botón Atrás para regresar a la carpeta visitada anteriormente, separado de Subir a la carpeta padre.
+- Mac: pestañas integradas en la barra superior, sin segunda fila, y marca superior simplificada.
+- Windows: se conserva el icono y se retira el título de la marca en la barra.
+- Herramientas de edición flotantes y agrupadas: estilo de párrafo, negrita, cursiva, tachado, enlaces, listas e inserción.
+- Referencia de navegación: pluk-inc/markdown-preview, documentada en docs/REFERENCIAS-MACOS.md.
 
-- Windows 10/11 x64: instalador o ZIP portable.
-- macOS 13 o posterior: DMG o ZIP Intel / Apple Silicon.
-- macOS 12: alternativa 3.2.6-macos12.1 para ambos procesadores.
+## Migración y descargas
 
-Los paquetes Mac conservan firma ad-hoc, sin Developer ID ni notarización. Las actualizaciones utilizan firmas criptográficas propias y se distribuyen con sus manifiestos verificados.
+Windows instalado conserva el actualizador NSIS. Mac desde 3.2.6 incorpora Sparkle con firmas propias Ed25519.
+Mac 3.2.5 o anterior requiere instalar esta edición manualmente una vez; después podrá actualizarse desde Lecat.
+Los documentos, preferencias y pestañas abiertas se conservan.
+
+Paquetes: Windows x64; macOS 13+ Intel/Apple Silicon; alternativa 3.3.0-macos12.1 para Monterey.
+La distribución Mac mantiene firma ad-hoc y no incluye Developer ID ni notarización.

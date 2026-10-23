@@ -1,13 +1,12 @@
 const {EventEmitter}=require('node:events'),fs=require('node:fs/promises'),path=require('node:path'),crypto=require('node:crypto'),http=require('node:http'),{createReadStream}=require('node:fs'),{spawn}=require('node:child_process');
 const REPO='https://github.com/lferraro1103/Lecat-Markdown',API='https://api.github.com/repos/lferraro1103/Lecat-Markdown/releases/latest';
 function key(raw){return crypto.createPublicKey({key:Buffer.concat([Buffer.from('302a300506032b6570032100','hex'),Buffer.from(raw,'base64')]),format:'der',type:'spki'});}
-function version(value){const match=/^(\d+)\.(\d+)\.(\d+)(?:-macos12\.(\d+))?$/.exec(value);if(!match)throw Error('Versión de actualización inválida.');return match.slice(1).map(n=>Number(n||0));}
-function newer(next,current){const a=version(next),b=version(current);for(let i=0;i<a.length;i++)if(a[i]!==b[i])return a[i]>b[i];return false;}
-function verifyManifest(envelope,{publicKey,arch,currentVersion}){
+const {versionInfo,newer,selectRelease}=require('./release-channel.cjs');
+function verifyManifest(envelope,{publicKey,arch,currentVersion,allowPrerelease=false}){
  if(typeof envelope.payload!=='string'||envelope.payload.length>100000||typeof envelope.signature!=='string')throw Error('Manifiesto de actualización inválido.');
  const bytes=Buffer.from(envelope.payload,'base64');if(!crypto.verify(null,bytes,key(publicKey),Buffer.from(envelope.signature,'base64')))throw Error('La firma de la actualización no es válida.');
  const m=JSON.parse(bytes.toString('utf8')),legacy=currentVersion.includes('-macos12.');
- version(m.version);
+ const info=versionInfo(m.version);if(!info||(!allowPrerelease&&info.beta))throw Error('La versión no pertenece al canal seleccionado.');
  const expected=REPO+'/releases/download/v'+m.version+'/Lecat-Markdown-'+m.version+'-macOS-'+arch+'.zip';
  if(m.schema!==1||m.arch!==arch||m.url!==expected||legacy!==m.version.includes('-macos12.')||!Number.isSafeInteger(m.size)||m.size<=0||m.size>1024*1024*1024||!/^[a-f0-9]{64}$/.test(m.sha256)||Buffer.from(m.edSignature||'','base64').length!==64)throw Error('El paquete no corresponde a esta edición de Mac.');
  return m;
@@ -17,10 +16,9 @@ class MacUpdater extends EventEmitter{
  constructor({currentVersion,arch,publicKey,cacheDir,helper,fetch:fetcher=fetch,quit,spawnHelper=spawn}){super();Object.assign(this,{currentVersion,arch,publicKey,cacheDir,helper,fetcher,quit,spawnHelper});this.fetcher=async(...args)=>{try{return await fetcher(...args);}catch{throw Error('No se pudo conectar con el servidor de actualizaciones. Revisá tu conexión e intentá de nuevo.');}};this.manifest=null;this.packageFile=null;this.child=null;this.macSparkle=true;}
  async checkForUpdates(){
   this.emit('checking-for-update');
-  const response=await this.fetcher(API,{signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error('No se pudo consultar la versión pública.');const release=await response.json();
-  if(release.draft||release.prerelease||!/^v\d+\.\d+\.\d+$/.test(release.tag_name))throw Error('Release estable inválida.');
-  const next=release.tag_name.slice(1)+(this.currentVersion.includes('-macos12.')?'-macos12.1':'');
-  if(!newer(next,this.currentVersion)){this.manifest=null;this.emit('update-not-available',{});return {};}
+  const release=await selectRelease(this.fetcher,{currentVersion:this.currentVersion,arch:this.arch,platform:'darwin',allowBeta:this.allowPrerelease});
+  if(!release||!newer(release.tag_name,this.currentVersion)){this.manifest=null;this.emit('update-not-available',{});return {};}
+  const next=release.tag_name.replace(/^v/,'');
   const result=await this.fetcher(REPO+'/releases/download/v'+next+'/mac-update-'+this.arch+'.json',{signal:AbortSignal.timeout(20000)});
   if(!result.ok)throw Error('La versión compatible con este Mac todavía no está disponible.');
   const text=await result.text();if(text.length>140000)throw Error('Manifiesto demasiado grande.');
