@@ -31,3 +31,5 @@ docs/UI-REVIEW.md
 docs/UI-SPEC-ELECTRON.md
 docs/UI-SPEC.md
 docs/UI-STATE-COVERAGE.json
+
+.cache/

@@ -78,11 +78,18 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - uses: actions/download-artifact@v4
         with:
           pattern: macOS-*
           merge-multiple: true
           path: release-assets
+      - name: Sign Mac update manifests
+        env:
+          LECAT_UPDATE_PRIVATE_KEY: ${{ secrets.LECAT_UPDATE_PRIVATE_KEY }}
+        run: node scripts/sign-mac-updates.cjs release-assets
       - name: Publish alternative prerelease
         env:
           GH_TOKEN: ${{ github.token }}
