@@ -1,7 +1,6 @@
 name: macOS alternative release
 on:
   push:
-    branches: [developer, developer-macos12]
     tags: ['v*-macos.*', 'v*-macos-signed.*', 'v*-macos12.*']
   workflow_dispatch:
     inputs:
@@ -34,6 +33,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Prepare verified Electron binary with retry
+        run: node scripts/prepare-electron.cjs
       - run: npm test
       - name: Build ad-hoc package
         if: env.SIGNING_MODE == 'adhoc'

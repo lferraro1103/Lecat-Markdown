@@ -1,6 +1,6 @@
 {
   "name": "lecat-markdown",
-  "version": "3.2.1-macos12.1",
+  "version": "3.2.4-macos12.1",
   "description": "Editor y lector Markdown para Windows y macOS, con gráficos sin conexión",
   "main": "electron/main.cjs",
   "author": "Lecat",
@@ -8,12 +8,13 @@
   "scripts": {
     "build": "node electron/build.cjs",
     "start": "npm run build && electron .",
-    "test": "node --test electron/core.test.cjs electron/persistence.test.cjs",
+    "test": "node --test electron/core.test.cjs electron/persistence.test.cjs scripts/prepare-electron.test.cjs electron/updater.test.cjs scripts/merge-update-metadata.test.cjs electron/session.test.cjs",
     "audit": "npm run build && electron . --audit",
     "dist": "npm run build && electron-builder --win dir",
     "installer": "npm run build && electron-builder --win nsis --x64 --publish never",
     "dist:mac": "npm run build && electron-builder --mac dmg zip --publish never",
-    "dist:mac:signed": "npm run build && electron-builder --config electron-builder.developer-id.cjs --mac dmg zip --publish never"
+    "dist:mac:signed": "npm run build && electron-builder --config electron-builder.developer-id.cjs --mac dmg zip --publish never",
+    "verify:session": "npm run build && node scripts/verify-session-restart.cjs"
   },
   "devDependencies": {
     "@codemirror/lang-markdown": "^6.3.4",
@@ -59,12 +60,17 @@
       "src/Assets/audit.md",
       "electron/persistence.cjs",
       "electron/regressions.cjs",
-      "electron/visual-audit.cjs"
+      "electron/visual-audit.cjs",
+      "electron/updater.cjs",
+      "electron/update-audit.cjs",
+      "electron/session.cjs",
+      "electron/session-audit.cjs"
     ],
     "win": {
       "icon": "branding/Lecat.ico",
       "signAndEditExecutable": true,
-      "target": "dir"
+      "target": "dir",
+      "verifyUpdateCodeSignature": false
     },
     "asar": true,
     "extraResources": [
@@ -99,7 +105,6 @@
       "artifactName": "Lecat-Markdown-${version}-Setup-x64.exe"
     },
     "mac": {
-      "minimumSystemVersion": "12.0",
       "icon": "branding/Lecat.png",
       "category": "public.app-category.productivity",
       "target": [
@@ -108,7 +113,8 @@
       ],
       "identity": "-",
       "hardenedRuntime": false,
-      "artifactName": "Lecat-Markdown-${version}-macOS-${arch}.${ext}"
+      "artifactName": "Lecat-Markdown-${version}-macOS-${arch}.${ext}",
+      "minimumSystemVersion": "12.0"
     },
     "fileAssociations": [
       {
@@ -119,6 +125,17 @@
         "name": "Markdown document",
         "role": "Editor"
       }
-    ]
+    ],
+    "publish": {
+      "provider": "generic",
+      "url": "https://github.com/lferraro1103/Lecat-Markdown/releases/latest/download",
+      "channel": "latest"
+    },
+    "releaseInfo": {
+      "releaseNotesFile": "docs/RELEASE-MACOS12.md"
+    }
+  },
+  "dependencies": {
+    "electron-updater": "6.8.3"
   }
 }

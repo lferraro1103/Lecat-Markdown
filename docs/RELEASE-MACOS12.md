@@ -1,22 +1,23 @@
-# Lecat - Markdown 3.2.1-macos12.1 — macOS 12 Monterey
+# Lecat - Markdown 3.2.4-macos12.1 — macOS 12 Monterey
 
-Alternativa desde la rama `developer-macos12`, basada en 3.2.1 con Electron
-43.7.7 y mínimo de macOS 12.0. Electron 44 requiere macOS 13.
+Alternativa basada en 3.2.4 con Electron 43.7.7 y mínimo macOS 12.0.
+Electron 44 requiere macOS 13; esta descarga conserva la rama de compatibilidad.
 
-- Intel: archivos `macOS-x64.dmg` o `macOS-x64.zip`.
-- Apple Silicon: archivos `macOS-arm64.dmg` o `macOS-arm64.zip`.
-- Abrí el DMG y arrastrá la app a Aplicaciones. Para ZIP, extraelo desde Finder
-  y mové la app a Aplicaciones antes de abrirla.
-- Tema del sistema en la primera apertura; preferencias manuales conservadas.
-- Carpeta personal como inicio, discos sin backups/recovery ni duplicados.
-- Título y subtítulo YAML renderizados en el documento.
+- Apple Silicon: macOS-arm64.dmg o macOS-arm64.zip.
+- Intel: macOS-x64.dmg o macOS-x64.zip.
+- Restauración de pestañas de archivos, orden y última pestaña activa.
+- Bienvenida solo la primera vez; recuperación de borradores sin duplicados.
+- Búsqueda de versiones y acceso a Releases; la instalación de actualizaciones en esta edición es manual.
+- Tema claro, oscuro y del sistema; edición visual y gráficos sin conexión.
 
-Firma ad-hoc sin Developer ID ni notarización. En Monterey, tras intentar abrir
-la app, revisá Preferencias del Sistema → Seguridad y privacidad → General y
-usá Abrir igualmente si macOS ofrece esa opción.
+Abrí el DMG y mové la aplicación a Aplicaciones; con ZIP, extraelo en Finder
+y mové la aplicación a Aplicaciones antes de abrirla.
 
-Compilación y comprobaciones de firma e integridad en runners macOS 15 para
-Intel y Apple Silicon. La apertura y autorización en Monterey real siguen
-pendientes; no se confirma resuelto el aviso de aplicación dañada del usuario.
+Firma ad-hoc, sin Developer ID ni notarización. Si macOS bloquea la aplicación,
+intentá abrirla y revisá Preferencias del Sistema → Seguridad y privacidad →
+General → Abrir igualmente, cuando esa opción esté disponible.
 
-Fuente de compatibilidad: https://www.electronjs.org/blog/electron-44-0
+Los paquetes se compilan y auditan en macOS 15 para ambas arquitecturas.
+La apertura y autorización en Monterey real no se verificaron en estos runners.
+
+Compatibilidad: https://www.electronjs.org/blog/electron-44-0

@@ -1,6 +1,10 @@
 const {app,BrowserWindow,ipcMain,dialog,Menu,shell,protocol,net,nativeTheme}=require('electron');
 const fs=require('node:fs/promises'),path=require('node:path'),crypto=require('node:crypto'),{pathToFileURL}=require('node:url'),{execFile}=require('node:child_process');
 const core=require('./core.cjs'),persistence=require('./persistence.cjs');
+const sessionStore=require('./session.cjs');
+let activeDocumentId=null,sessionQueue=Promise.resolve(),previouslyUsed=false;
+const {createUpdater,RELEASES,RELEASE_API}=require('./updater.cjs');
+let updates,updateStartupTimer,updateInterval;
 protocol.registerSchemesAsPrivileged([{scheme:'claro-media',privileges:{standard:true,secure:true,supportFetchAPI:true}}]);
 const isMac=process.platform==='darwin';let pendingFiles=[],rendererReady=false,quitting=false;
 const defaultFolder=()=>app.getPath(isMac?'home':'documents');
@@ -11,9 +15,11 @@ if(!auditing&&!app.requestSingleInstanceLock())app.exit(0);
 if(process.platform==='win32')app.setAppUserModelId('com.lecat.markdown');
 app.on('open-file',(event,file)=>{event.preventDefault();if(!rendererReady){pendingFiles.push(file);return;}openDoc(file).then(d=>{win.show();win.focus();command({openDoc:d});}).catch(e=>dialog.showMessageBox(win,{type:'error',message:e.message}));});
 app.on('before-quit',event=>{if(!isMac||closing||auditing||!win)return;event.preventDefault();quitting=true;win.close();});
-app.on('activate',()=>{if(win&&!win.isDestroyed()){win.show();win.focus();}});
-app.on('second-instance',async(_event,argv)=>{if(!win)return;if(win.isMinimized())win.restore();win.show();win.focus();const file=argv.find(a=>/\.(md|markdown)$/i.test(a)&&path.isAbsolute(a));if(file)try{command({openDoc:await openDoc(file)});}catch(e){dialog.showMessageBox(win,{type:'error',message:e.message});}});
+app.on('activate',()=>{if(win&&!win.isDestroyed()&&rendererReady){win.show();win.focus();}});
+app.on('second-instance',async(_event,argv)=>{if(!win)return;if(!rendererReady){const initial=argv.find(a=>/\.(md|markdown)$/i.test(a)&&path.isAbsolute(a));if(initial)pendingFiles.push(initial);return;}if(win.isMinimized())win.restore();win.show();win.focus();const file=argv.find(a=>/\.(md|markdown)$/i.test(a)&&path.isAbsolute(a));if(file)try{command({openDoc:await openDoc(file)});}catch(e){dialog.showMessageBox(win,{type:'error',message:e.message});}});
 const settingsFile=()=>path.join(app.getPath('userData'),'settings.json');const draftFile=()=>path.join(app.getPath('userData'),'drafts.json');
+const sessionFile=()=>path.join(app.getPath('userData'),'session.json');
+async function persistSession(selection=[...docs.values()],activeId=activeDocumentId){const snapshot=sessionStore.snapshotSession(selection,activeId);sessionQueue=sessionQueue.catch(()=>{}).then(()=>persistence.writeJson(sessionFile(),snapshot));await sessionQueue;return snapshot;}
 const saveJobs=new Map();
 const mediaCache=new Map();
 function releaseMedia(id){const cache=mediaCache.get(id);if(cache)for(const token of cache.values())mediaRoots.delete(token);mediaCache.delete(id);}
@@ -24,16 +30,21 @@ async function openDoc(file){const existing=[...docs.values()].find(d=>d.path&&s
 async function persistSettings(value){const snapshot={theme:['system','light','dark'].includes(value.theme)?value.theme:'system',mode:['read','edit','split'].includes(value.mode)?value.mode:'edit',zoom:Math.min(1.5,Math.max(.8,Number(value.zoom)||1))};settings=snapshot;nativeTheme.themeSource=snapshot.theme;settingsQueue=settingsQueue.catch(()=>{}).then(()=>persistence.writeJson(settingsFile(),snapshot));await settingsQueue;return snapshot;}
 async function loadInitialFile(file,warnings){try{return await openDoc(file);}catch(error){warnings.push('No se pudo abrir '+file+': '+error.message);return null;}}
 async function saveDrafts(selection=[...docs.values()]){const snapshot=selection.filter(d=>d.dirty).map(d=>({...d}));draftQueue=draftQueue.catch(()=>{}).then(()=>persistence.writeJson(draftFile(),snapshot));await draftQueue;}
-async function updateDrafts(){clearTimeout(draftTimer);draftTimer=setTimeout(()=>saveDrafts().catch(()=>{}),350);}
+async function closeSessionDocument(id,document){
+ const previousIds=[...docs.keys()],previousActive=activeDocumentId;docs.delete(id);
+ if(activeDocumentId===id)activeDocumentId=[...docs.keys()].at(-1)||null;
+ try{await persistSession();}catch(error){const current=new Map(docs);docs.clear();for(const key of previousIds){const value=key===id?document:current.get(key);if(value)docs.set(key,value);}for(const [key,value] of current)if(!docs.has(key))docs.set(key,value);if(previousActive&&docs.has(previousActive))activeDocumentId=previousActive;await saveDrafts();throw error;}
+}
+async function updateDrafts(){clearTimeout(draftTimer);draftTimer=setTimeout(()=>saveDrafts().then(()=>persistSession()).catch(()=>{}),350);}
 async function saveDoc(id,as=false){const previous=saveJobs.get(id)||Promise.resolve();const job=previous.catch(()=>{}).then(()=>performSaveDoc(id,as));saveJobs.set(id,job);try{return await job;}finally{if(saveJobs.get(id)===job)saveJobs.delete(id);}}
 async function performSaveDoc(id,as=false){const doc=docs.get(id);if(!doc)throw Error('Documento no abierto.');let target=doc.path;
  if(as||!target){const result=await dialog.showSaveDialog(win,{title:'Guardar Markdown',defaultPath:target||path.join(defaultFolder(),doc.name),filters:[{name:'Markdown',extensions:['md','markdown']}]});if(result.canceled)return null;target=result.filePath;if(!/\.(md|markdown)$/i.test(target))target+='.md';}
  let output={...doc,path:target};
  if(target!==doc.path){if([...docs.values()].some(d=>d.id!==id&&d.path&&samePath(d.path,target)))throw Error('Ese archivo ya está abierto en otra pestaña.');output={...output,hash:null,encoding:'utf8',bom:false};}
- const snapshot=doc.content;const saved=await core.atomicSave(output,snapshot,{allowOverwrite:target!==doc.path||!doc.path});const currentContent=doc.content;Object.assign(doc,saved,{content:currentContent,dirty:currentContent!==snapshot,savedContent:snapshot,name:path.basename(target)});folders.add(path.dirname(target));await saveDrafts();return publicDoc(doc);
+ const snapshot=doc.content;const saved=await core.atomicSave(output,snapshot,{allowOverwrite:target!==doc.path||!doc.path});const currentContent=doc.content;Object.assign(doc,saved,{content:currentContent,dirty:currentContent!==snapshot,savedContent:snapshot,name:path.basename(target)});folders.add(path.dirname(target));await saveDrafts();await persistSession();return publicDoc(doc);
 }
-async function confirmClose(id,remove=true){if(saveJobs.has(id))await saveJobs.get(id);const d=docs.get(id);if(!d)return true;if(d.dirty){const choice=await dialog.showMessageBox(win,{type:'warning',title:'Cambios sin guardar',message:`¿Guardar los cambios de ${d.name}?`,buttons:['Guardar','Descartar','Cancelar'],defaultId:0,cancelId:2,noLink:true});if(choice.response===2)return false;if(choice.response===0){const saved=await saveDoc(id);if(!saved||d.dirty)return false;}}if(remove){const approved=d.content;await saveDrafts([...docs.values()].filter(other=>other.id!==id));if(d.content!==approved){await saveDrafts();return false;}docs.delete(id);releaseMedia(id);}return true;}
-async function approveWindowClose(){const approved=new Map();for(const id of [...docs.keys()]){if(!await confirmClose(id,false)){command({documentStates:[...docs.values()].map(publicDoc)});return false;}approved.set(id,docs.get(id)?.content);}await saveDrafts([]);if(docs.size!==approved.size||[...docs.values()].some(d=>d.content!==approved.get(d.id))){await saveDrafts();command({documentStates:[...docs.values()].map(publicDoc)});return false;}return true;}
+async function confirmClose(id,remove=true){if(saveJobs.has(id))await saveJobs.get(id);const d=docs.get(id);if(!d)return true;if(d.dirty){const choice=await dialog.showMessageBox(win,{type:'warning',title:'Cambios sin guardar',message:`¿Guardar los cambios de ${d.name}?`,buttons:['Guardar','Descartar','Cancelar'],defaultId:0,cancelId:2,noLink:true});if(choice.response===2)return false;if(choice.response===0){const saved=await saveDoc(id);if(!saved||d.dirty)return false;}}if(remove){const approved=d.content;await saveDrafts([...docs.values()].filter(other=>other.id!==id));if(d.content!==approved){await saveDrafts();return false;}await closeSessionDocument(id,d);releaseMedia(id);}return true;}
+async function approveWindowClose(){const approved=new Map();for(const id of [...docs.keys()]){if(!await confirmClose(id,false)){command({documentStates:[...docs.values()].map(publicDoc)});return false;}approved.set(id,docs.get(id)?.content);}await persistSession();await saveDrafts([]);if(docs.size!==approved.size||[...docs.values()].some(d=>d.content!==approved.get(d.id))){await saveDrafts();command({documentStates:[...docs.values()].map(publicDoc)});return false;}return true;}
 function command(cmd){win.webContents.send('command',cmd);}
 nativeTheme.on('updated',()=>{if(win&&!win.isDestroyed()&&rendererReady&&nativeTheme.themeSource==='system')command({systemTheme:nativeTheme.shouldUseDarkColors?'dark':'light'});});
 function setMenu(){const item=(label,accelerator,cmd)=>({label,accelerator:accelerator.replace('Ctrl','CommandOrControl'),click:()=>command(cmd)});Menu.setApplicationMenu(Menu.buildFromTemplate([
@@ -41,7 +52,7 @@ function setMenu(){const item=(label,accelerator,cmd)=>({label,accelerator:accel
  {label:'Archivo',submenu:[item('Nuevo','Ctrl+N','new'),item('Abrir documento…','Ctrl+O','open'),item('Abrir carpeta…','Ctrl+Shift+O','folder'),{type:'separator'},item('Guardar','Ctrl+S','save'),item('Guardar como…','Ctrl+Shift+S','saveAs'),item('Exportar PDF…','Ctrl+Alt+P','pdf'),{type:'separator'},item('Cerrar pestaña','Ctrl+W','close'),{label:'Salir',click:()=>{quitting=true;win.close();}}]},
  {label:'Editar',submenu:[item('Deshacer','Ctrl+Z','undo'),item('Rehacer',isMac?'Ctrl+Shift+Z':'Ctrl+Y','redo'),{type:'separator'},{role:'cut',label:'Cortar'},{role:'copy',label:'Copiar'},{role:'paste',label:'Pegar'},{role:'selectAll',label:'Seleccionar todo'},item('Buscar / reemplazar','Ctrl+F','search'),item('Negrita','Ctrl+B','bold'),item('Cursiva','Ctrl+I','italic')]},
  {label:'Vista',submenu:[item('Lectura','Ctrl+1','read'),item('Edición','Ctrl+2','edit'),item('Código y vista previa','Ctrl+3','split'),item('Modo enfoque','Ctrl+Shift+F','focus'),item('Cambiar tema','Ctrl+Shift+T','theme'),{label:'Usar tema del sistema',click:()=>command('systemTheme')},{role:'togglefullscreen',label:'Pantalla completa'},item('Acercar','Ctrl+=','zoomIn'),item('Alejar','Ctrl+-','zoomOut'),item('Restablecer zoom','Ctrl+0','zoomReset')]},
- {label:'Ayuda',submenu:[{label:'Acerca de Lecat - Markdown',click:()=>dialog.showMessageBox(win,{title:'Lecat - Markdown',message:'Lecat - Markdown · Electron',detail:'Editor y lector Markdown sin conexión. Chromium incluido. Ctrl+1 Lectura · Ctrl+2 Edición visual · Ctrl+3 Código y vista previa. Guardado explícito con Ctrl+S y recuperación de borradores.'})}]}]));}
+ {label:'Ayuda',submenu:[{label:'Buscar actualizaciones…',click:()=>command('updates')},{type:'separator'},{label:'Acerca de Lecat - Markdown',click:()=>dialog.showMessageBox(win,{title:'Lecat - Markdown',message:'Lecat - Markdown '+app.getVersion(),detail:'Editor y lector Markdown sin conexión. Chromium incluido. Ctrl+1 Lectura · Ctrl+2 Edición visual · Ctrl+3 Código y vista previa. Guardado explícito con Ctrl+S y recuperación de borradores.'})}]}]));}
 async function places(){const names=[['desktop','Escritorio'],['downloads','Descargas'],['documents','Documentos'],['pictures','Imágenes'],['music','Música'],['videos','Vídeos']];const quick=names.map(([id,name])=>({name,path:app.getPath(id),directory:true}));let drives=[],extra=[];
  if(process.platform==='win32'){
  const script="[Console]::OutputEncoding=[Text.UTF8Encoding]::new(); $q=(New-Object -ComObject Shell.Application).NameSpace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | Where-Object {$_.IsFolder -and [IO.Directory]::Exists($_.Path)} | ForEach-Object { @{name=$_.Name;path=$_.Path;directory=$true} }; $d=Get-CimInstance Win32_LogicalDisk | ForEach-Object { @{name=($_.DeviceID+' '+$_.VolumeName).Trim();path=($_.DeviceID+'\\');directory=$true} }; @{quick=@($q);drives=@($d)} | ConvertTo-Json -Depth 4 -Compress";
@@ -51,17 +62,39 @@ async function places(){const names=[['desktop','Escritorio'],['downloads','Desc
 }
 function register(name,handler){ipcMain.handle('claro:'+name,async(e,...args)=>{if(e.sender!==win.webContents||e.senderFrame!==win.webContents.mainFrame||e.senderFrame.url!==pathToFileURL(path.join(__dirname,'ui/index.html')).href)throw Error('Origen no autorizado.');try{return {ok:true,value:await handler(...args)};}catch(error){return {ok:false,error:error.message};}});}
 app.whenReady().then(async()=>{
+ previouslyUsed=await fs.stat(settingsFile()).then(()=>true,()=>false);
  try{settings=JSON.parse(await fs.readFile(settingsFile(),'utf8'));}catch{}
+ if(!previouslyUsed)previouslyUsed=await fs.stat(draftFile()).then(()=>true,()=>false);
  settings.theme=['system','light','dark'].includes(settings.theme)?settings.theme:'system';
+ if(auditing&&['system','light','dark'].includes(process.env.CLARO_AUDIT_THEME))settings.theme=process.env.CLARO_AUDIT_THEME;
  nativeTheme.themeSource=settings.theme;
+ const startupTheme=nativeTheme.shouldUseDarkColors?'dark':'light';
  protocol.handle('claro-media',async request=>{try{const u=new URL(request.url),file=mediaRoots.get(u.hostname);if(!file||decodeURIComponent(u.pathname)!=='/'+path.basename(file))return new Response('',{status:403});if((await fs.stat(file)).size>core.MAX)return new Response('',{status:413});return net.fetch(pathToFileURL(file).href);}catch{return new Response('',{status:404});}});
- win=new BrowserWindow({width:1320,height:860,minWidth:820,minHeight:560,show:false,backgroundColor:'#f7f8fa',title:'Lecat - Markdown',icon:path.join(__dirname,isMac?'../branding/Lecat.png':'../branding/Lecat.ico'),autoHideMenuBar:false,webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,spellcheck:false}});
+ win=new BrowserWindow({width:1320,height:860,minWidth:820,minHeight:560,show:false,backgroundColor:startupTheme==='dark'?'#141923':'#f6f7fa',title:'Lecat - Markdown',icon:path.join(__dirname,isMac?'../branding/Lecat.png':'../branding/Lecat.ico'),autoHideMenuBar:false,webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,spellcheck:false,additionalArguments:['--lecat-theme='+startupTheme]}});
  win.webContents.setWindowOpenHandler(()=>({action:'deny'}));win.webContents.on('will-navigate',e=>e.preventDefault());win.webContents.session.setPermissionRequestHandler((_wc,_p,cb)=>cb(false));
+ const installedWindows=process.platform==='win32'&&require('node:fs').existsSync(path.join(path.dirname(process.execPath),'Uninstall Lecat - Markdown.exe'));
+ const signedMac=isMac&&require('../package.json').updaterMacSigned===true;
+ const supported=app.isPackaged&&(installedWindows||signedMac)&&!auditing;
+ const reason=!app.isPackaged||auditing?'La actualización se instala desde la versión instalada del programa.':isMac&&!signedMac?'Esta edición de macOS usa firma ad-hoc; descargá la nueva versión desde Releases.':!installedWindows&&!isMac?'Esta edición portable requiere descargar la nueva versión; el instalador de Windows permite actualizar desde la aplicación.':'';
+ updates=createUpdater({updater:require('electron-updater').autoUpdater,currentVersion:app.getVersion(),supported,reason,
+  notify:value=>{if(value.status==='error'&&closing){closing=false;quitting=false;saveDrafts().catch(()=>{});}if(rendererReady&&!win.isDestroyed())command({updateState:value});},
+  fetchRelease:async()=>{const response=await net.fetch(RELEASE_API,{headers:{Accept:'application/vnd.github+json','User-Agent':'Lecat-Markdown'},signal:AbortSignal.timeout(15000)});if(response.status===404)return {tag_name:app.getVersion(),body:''};if(!response.ok)throw Error('Release unavailable');return response.json();},
+  prepareInstall:async()=>{if(closeInProgress)return false;closeInProgress=true;try{await settingsQueue;if(!await approveWindowClose())return false;clearTimeout(draftTimer);closing=true;quitting=true;return true;}finally{closeInProgress=false;}}
+ });
+ register('updateStatus',()=>updates.snapshot());register('updateCheck',()=>updates.check());
+ register('updateDownload',()=>updates.download());register('updateInstall',()=>updates.install());
+ register('updateRelease',()=>shell.openExternal(RELEASES));
  win.on('close',e=>{if(closing||auditing)return;e.preventDefault();if(isMac&&!quitting){win.hide();return;}if(closeInProgress)return;closeInProgress=true;(async()=>{if(!await approveWindowClose()){quitting=false;win.show();return;}docs.clear();mediaRoots.clear();mediaCache.clear();clearTimeout(draftTimer);closing=true;win.close();if(isMac)app.quit();})().catch(error=>dialog.showMessageBox(win,{type:'error',message:error.message})).finally(()=>{closeInProgress=false;});});
- register('bootstrap',async()=>{const locations=await places(),warnings=[];let recovered=[];if(!auditing){const recovery=await persistence.readRecovery(draftFile());recovered=recovery.documents.map(d=>addDoc({...d,dirty:true}));warnings.push(...recovery.warnings);}
- const initial=process.argv.find(a=>/\.(md|markdown)$/i.test(a)&&path.isAbsolute(a));if(initial){const opened=await loadInitialFile(initial,warnings);if(opened)recovered.push(opened);}
- if(!recovered.length){const example=await core.read(path.join(__dirname,'../examples/Bienvenido.md'));recovered.push(addDoc({...example,path:null,hash:null,assetBase:path.dirname(example.path)}));}for(const file of pendingFiles.splice(0)){const opened=await loadInitialFile(file,warnings);if(opened&&!recovered.some(d=>d.id===opened.id))recovered.push(opened);}return {places:locations,defaultFolder:defaultFolder(),settings,docs:recovered,auditing,warnings,platform:process.platform,theme:nativeTheme.shouldUseDarkColors?'dark':'light'};});
- register('ready',async()=>{rendererReady=true;for(const file of pendingFiles.splice(0))try{command({openDoc:await openDoc(file)});}catch(e){dialog.showMessageBox(win,{type:'error',message:e.message});}return true;});
+ register('bootstrap',async()=>{const locations=await places(),warnings=[];let recovered=[],saved={session:null,existed:false,warnings:[]};if(!auditing){saved=await sessionStore.readSession(sessionFile());const recovery=await persistence.readRecovery(draftFile());recovered=recovery.documents.map(d=>({...addDoc({...d,dirty:true}),recoveryId:d.id}));warnings.push(...saved.warnings,...recovery.warnings);}
+ const restored=await sessionStore.restoreSession(saved.session,recovered,openDoc,warnings);recovered=restored.documents;activeDocumentId=restored.activeId;
+ const launchFiles=[process.argv.find(a=>/\.(md|markdown)$/i.test(a)&&path.isAbsolute(a)),...pendingFiles.splice(0)].filter(Boolean);
+ for(const file of launchFiles){const opened=await loadInitialFile(file,warnings);if(opened){if(!recovered.some(d=>d.id===opened.id))recovered.push(opened);activeDocumentId=opened.id;}}
+ if(!recovered.length){if(!previouslyUsed&&!saved.existed){const example=await core.read(path.join(__dirname,'../examples/Bienvenido.md'));recovered.push(addDoc({...example,path:null,hash:null,assetBase:path.dirname(example.path)}));}else recovered.push(addDoc({name:'Sin título.md',content:'',encoding:'utf8',bom:false,eol:'LF',hash:null,path:null}));}
+ const ordered=recovered.map(d=>docs.get(d.id));docs.clear();for(const document of ordered)docs.set(document.id,document);
+ activeDocumentId=activeDocumentId||recovered[0].id;await persistSession(recovered,activeDocumentId);previouslyUsed=true;
+ return {places:locations,defaultFolder:defaultFolder(),settings,docs:recovered,activeId:activeDocumentId,auditing,warnings,platform:process.platform,theme:nativeTheme.shouldUseDarkColors?'dark':'light'};});
+ register('active',async id=>{if(!docs.has(id))throw Error('Documento no abierto.');activeDocumentId=id;await persistSession();return true;});
+ register('ready',async()=>{rendererReady=true;if(!auditing){win.show();if(!updateInterval){updateStartupTimer=setTimeout(()=>updates.check(),15000);updateInterval=setInterval(()=>updates.check(),4*60*60*1000);updateStartupTimer.unref();updateInterval.unref();}}for(const file of pendingFiles.splice(0))try{command({openDoc:await openDoc(file)});}catch(e){dialog.showMessageBox(win,{type:'error',message:e.message});}return true;});
  register('list',async folder=>{if(typeof folder!=='string'||!path.isAbsolute(folder))throw Error('Ruta no válida.');const result=await core.list(folder);folders.add(folder);for(const e of result)if(e.directory)folders.add(e.path);return result;});
  register('open',async file=>{if(typeof file!=='string'||!path.isAbsolute(file))throw Error('Ruta no válida.');return openDoc(file);});
  register('new',()=>addDoc({name:'Sin título.md',content:'',encoding:'utf8',bom:false,eol:'LF',hash:null,path:null}));
@@ -78,6 +111,7 @@ app.whenReady().then(async()=>{
  register('window',action=>{if(action==='minimize')win.minimize();else if(action==='maximize')win.isMaximized()?win.unmaximize():win.maximize();else if(action==='close')win.close();});
  register('audit',async()=>{if(!auditing)throw Error('Auditoría desactivada.');return true;});
  if(auditing)win.webContents.session.webRequest.onBeforeRequest({urls:['http://*/*','https://*/*']},(_details,cb)=>cb({cancel:true}));
- setMenu();await win.loadFile(path.join(__dirname,'ui/index.html'));if(!auditing)win.show();else await require('./audit.cjs').run({win,docs,openDoc,saveDoc,confirmClose,saveDrafts,draftFile,dialog,core,app,approveWindowClose,persistSettings,settingsFile,loadInitialFile});
+ setMenu();await win.loadFile(path.join(__dirname,'ui/index.html'));if(auditing)await require('./audit.cjs').run({win,docs,openDoc,saveDoc,confirmClose,saveDrafts,draftFile,dialog,core,app,approveWindowClose,persistSettings,settingsFile,loadInitialFile,sessionFile,persistSession});
 }).catch(e=>{console.error(e);app.exit(1);});
 app.on('window-all-closed',()=>{if(!isMac||quitting)app.quit();});
+app.on('will-quit',()=>{clearTimeout(updateStartupTimer);clearInterval(updateInterval);});

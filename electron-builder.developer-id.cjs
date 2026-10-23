@@ -6,6 +6,7 @@ const {identity: _adHocIdentity,...mac}=build.mac;
 module.exports={
  ...build,
  forceCodeSigning:true,
+ extraMetadata:{updaterMacSigned:true},
  mac:{
   ...mac,
   type:'distribution',
