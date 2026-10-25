@@ -49,11 +49,9 @@ brew tap lferraro1103/lecat-markdown https://github.com/lferraro1103/Lecat-Markd
 brew install --cask lferraro1103/lecat-markdown/lecat-markdown
 ```
 
-El cask del repositorio apunta a la última versión estable ya publicada,
-3.4.1. Al publicar 3.4.0, el flujo genera los SHA256 de sus DMG,
-actualiza el archivo del cask y agrega el enlace del comando `lecat`.
-La publicación estable actualiza el cask con sus propios paquetes y hashes.
-El cask estable requiere macOS 13 o posterior. macOS 12 mantiene su canal de
+El cask del repositorio apunta a la versión estable **3.4.1**, con los SHA256 de
+sus DMG y el enlace del comando `lecat`. Fue actualizado automáticamente al
+publicar la release. El cask estable requiere macOS 13 o posterior. macOS 12 mantiene su canal de
 descarga/actualización separado.
 
 ## Límites comprobables
