@@ -1,51 +1,47 @@
-# Lecat Markdown 3.4.1
+# Lecat Markdown 3.5.0
 
-- Corrección de guardado al cambiar de pestaña mientras se ejecuta la acción.
+## Barra flotante configurable
 
-## Interfaz y lectura
+- Botón junto a la lupa para desplegar u ocultar las herramientas de formato.
+- Clic derecho en el botón o en la barra: horizontal al centro, izquierda o derecha; vertical a la izquierda o derecha.
+- Las dos posiciones verticales quedan ancladas arriba, cerca de la barra superior.
+- Se conservan la posición y la visibilidad entre aperturas; la barra empieza plegada si no hay una preferencia previa.
+- Menús y controles disponibles en los ocho idiomas de interfaz.
 
-- Herramientas de formato centradas y con espacio propio, sin tapar el documento.
-- Menús de estilo, listas e inserción con presentación uniforme, navegación por teclado y posición ajustada a la ventana.
-- Foco y selección de pestañas de Mac corregidos.
-- Filtro editable de archivos en Mac, separado del selector nativo y Finder.
-- Restauración del modo de lectura, edición o código usado al cerrar.
+## Compartir nativo de Windows
 
-## Archivos y herramientas
+- Compartir abre el panel del sistema con los destinos registrados para ese contenido.
+- Se prepara una copia Markdown del documento actual, incluidos cambios sin guardar, y su texto fuente.
+- Copiar Markdown sigue disponible como acción independiente.
+- Cancelar no envía el documento ni lo copia silenciosamente al portapapeles.
 
-- Crear documentos, carpetas y documentos desde el texto del portapapeles en el explorador.
-- Vista Recientes con historial persistente y opción de limpieza.
-- Inspector con estadísticas, ruta, fechas, tamaño y formato del archivo.
-- Zoom del documento con pellizco y opción Siempre encima.
-
-## Exportar, imprimir y compartir
-
-- Exportación HTML autónoma, EPUB 3 y PNG, además de PDF y SVG de diagramas.
-- Impresión con opciones de fuente y escala antes del diálogo nativo.
-- Compartir nativo de Mac para texto Markdown o una copia del archivo actual; Copiar Markdown disponible en ambas plataformas.
-
-## Integración con el sistema
-
-- Extensión Quick Look de Mac para previsualizar Markdown sin conexión.
-- Comando `lecat` y protocolo `lecat://file/…` para abrir documentos.
-- Cask de Homebrew propio con paquetes de Intel y Apple Silicon.
-- Confirmación Cancelar, Permitir o Siempre permitir para enlaces de otras aplicaciones; permisos revocables en Configuración.
-
-Se mantienen los ocho idiomas, el canal beta opcional, la restauración de
-documentos y las actualizaciones firmadas. Mac 3.2.5 o anterior necesita
-instalar manualmente una edición con el actualizador nuevo una vez.
+Se mantienen las funciones de la 3.4.1: Quick Look, compartir en Mac, exportación
+PDF/HTML/EPUB/PNG, inspector, Recientes y actualizaciones firmadas.
 
 ## English
 
-Offline Markdown editor and viewer for Windows and macOS: centered formatting tools, consistent menus, editable file filtering, recent documents, file inspector and clipboard-based creation. New HTML, EPUB and PNG exports, native printing and Mac sharing, Quick Look previews, `lecat` CLI, URL links, trackpad zoom and always-on-top. Custom application links request permission. Eight interface languages and signed in-app updates remain available.
+The formatting toolbar now floats and collapses using a button beside Search.
+Right-click to choose horizontal center/left/right or vertical left/right;
+vertical layouts sit near the top. Visibility and position are remembered.
+Windows Share opens the native system panel with the current Markdown file
+and source text. Copy Markdown remains a separate action. Windows determines
+the available sharing apps; nothing is sent automatically.
 
 ## 简体中文
 
-离线 Markdown 编辑器与阅读器：改进格式工具、菜单及文件筛选，新增最近文档、文件信息面板、剪贴板创建、HTML / EPUB / PNG 导出和原生打印。macOS 提供 Quick Look 快速预览与系统分享，另支持 lecat 命令、URL 链接、触控板缩放和窗口置顶。打开外部应用链接前确认授权。支持简体中文、繁体中文、日语等八种界面语言。
+格式工具栏可通过搜索旁的按钮展开或收起。右键选择水平居中、靠左、靠右，或左侧、右侧垂直排列；垂直工具栏位于上方，并记住位置与显示状态。Windows 分享按钮打开系统原生面板，提供当前 Markdown 文件副本及原始文本，显示系统注册的分享目标。复制 Markdown 保留为独立操作，不会自动发送文档。
 
 ## 繁體中文
 
-離線 Markdown 編輯器與閱讀器：改善格式工具、選單與檔案篩選，新增最近文件、資訊面板、剪貼簿建立、HTML / EPUB / PNG 輸出及原生列印。macOS 提供 Quick Look 與系統分享，另支援 lecat 指令、URL 連結、觸控板縮放及視窗置頂。開啟外部應用程式連結前確認授權，提供八種介面語言。
+格式工具列可透過搜尋旁的按鈕展開或收起。按右鍵可選水平置中、靠左、靠右，或左側、右側垂直排列；垂直工具列位於上方，並記住位置與顯示狀態。Windows 分享按鈕開啟原生面板，提供目前 Markdown 檔案副本與原始文字，由系統顯示可用的分享目標。複製 Markdown 仍為獨立操作，不會自動傳送文件。
 
 ## 日本語
 
-オフライン Markdown エディタ・ビューア。書式メニューとファイルフィルタを改善し、最近の書類、インスペクタ、クリップボードからの作成、HTML / EPUB / PNG 書き出し、標準プリントを追加しました。Mac の Quick Look と共有、lecat コマンド、URL リンク、ピンチ操作、最前面表示に対応。外部アプリへのリンクは許可を確認します。日本語を含む8言語に対応しています。
+検索の横のボタンで書式ツールバーを開閉できます。右クリックで横方向の中央・左・右、または縦方向の左・右を選べます。縦のツールバーは上部に配置され、位置と表示状態を保存します。Windows の共有ボタンは、現在の Markdown ファイルのコピーと原文を標準の共有パネルに渡します。コピー操作は別に残り、自動送信は行いません。
+
+## Português
+
+A barra flutuante pode ser aberta ou recolhida pelo botão ao lado da busca.
+O clique direito oferece cinco posições; as opções verticais ficam no topo.
+No Windows, Compartilhar abre o painel nativo com uma cópia Markdown e o texto
+atual. Copiar Markdown continua separado e nada é enviado automaticamente.

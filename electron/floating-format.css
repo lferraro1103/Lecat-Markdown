@@ -1,0 +1,16 @@
+#panes>#formatbar[data-floating]{position:absolute;inset:auto;top:12px;left:50%;right:auto;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);max-height:calc(100% - 24px);margin:0;padding:4px;gap:7px;z-index:8;justify-content:center;align-items:center;overflow:visible;pointer-events:none}
+body[data-mode=read] #formatbar[data-floating]{display:flex}
+body #formatbar[data-floating][hidden]{display:none!important}
+#panes>#formatbar[data-position=top-left]{left:12px;transform:none;justify-content:flex-start}
+#panes>#formatbar[data-position=top-right]{left:auto;right:12px;transform:none;justify-content:flex-end}
+#panes>#formatbar[data-position=left],#panes>#formatbar[data-position=right]{top:12px;left:12px;right:auto;transform:none;flex-direction:column;flex-wrap:nowrap;overflow-y:auto;scrollbar-width:thin;align-items:stretch;max-width:min(160px,calc(100% - 24px));pointer-events:auto}
+#panes>#formatbar[data-position=right]{left:auto;right:12px}
+#formatbar[data-position=left]>.format-cluster,#formatbar[data-position=right]>.format-cluster{justify-content:center}
+#formatbar[data-position=left]>.format-cluster:has([data-command=bold]),#formatbar[data-position=right]>.format-cluster:has([data-command=bold]){flex-direction:column;align-self:center}
+#formatbar[data-position=left]>.format-menu>summary,#formatbar[data-position=right]>.format-menu>summary{justify-content:center}
+#formatbar[data-position=left] .style-menu>summary,#formatbar[data-position=right] .style-menu>summary{min-width:100px;justify-content:space-between}
+.format-toggle-header{display:none}
+.format-toggle[aria-expanded=true]{background:var(--selection);color:var(--accent)}
+html[data-platform=darwin] .format-toggle-header{display:inline-flex}
+html[data-platform=darwin] .format-toggle-document{display:none}
+@media print{#formatbar[data-floating],.format-toggle{display:none!important}}

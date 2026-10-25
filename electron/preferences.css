@@ -32,7 +32,7 @@
 .style-menu>summary{min-width:110px;justify-content:space-between;font-size:12px;font-weight:600}
 #table-tools[hidden]{display:none!important}
 #table-tools{justify-content:center;flex-wrap:wrap}
-body[data-mode=read] #formatbar{display:none!important}
+body[data-mode=read] #formatbar:not([data-floating]){display:none!important}
 html[data-platform=darwin] .toolbar-leading .mac-action,html[data-platform=darwin] .brand{display:none}
 html[data-platform=darwin] .toolbar-leading{border-right:0;padding-right:0}
 html[data-platform=darwin] .appbar,html[data-platform=darwin][data-sidebar=collapsed] .appbar{grid-template-columns:38px minmax(90px,1fr) auto}

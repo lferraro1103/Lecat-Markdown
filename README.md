@@ -8,6 +8,7 @@ An offline Markdown editor and reader for Windows and macOS. Write directly in t
 
 ## Features
 
+- **Floating formatting toolbar:** toggle beside Search; right-click for five positions, with vertical layouts near the top. Native Windows Share offers the registered sharing destinations.
 - **Visual editing:** edit rendered headings, paragraphs, lists, and tables with formatting tools, undo/redo, and find/replace.
 - **Three document modes:** visual editing, reading, and Markdown source with a preview.
 - **Local file explorer:** browse folders and drives, filter entries, and use Windows quick-access locations.
@@ -34,9 +35,9 @@ brew install --cask lferraro1103/lecat-markdown/lecat-markdown
 
 ## Download and installation
 
-The current stable version is **3.4.1**.
+The current stable version is **3.5.0**.
 
-The working branch prepares **3.4.1**, including Quick Look, native sharing,
+The working branch prepares **3.5.0**, including Quick Look, native sharing,
 exports, printing, and the interface fixes documented in
 [Desktop integrations 3.4](docs/INTEGRACIONES-3.4.md). This is not a public release yet.
 
@@ -47,7 +48,7 @@ exports, printing, and the interface fixes documented in
 | macOS 13 or later, Apple Silicon | `macOS-arm64.dmg` or `.zip` | Move the app to Applications before opening it. |
 | macOS 13 or later, Intel | `macOS-x64.dmg` or `.zip` | Move the app to Applications before opening it. |
 
-For **macOS 12 Monterey**, use the separate [3.4.1-macos12.1 release](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.4.1-macos12.1). It uses a different Electron version and is maintained on `developer-macos12`.
+For **macOS 12 Monterey**, use the separate [3.5.0-macos12.1 release](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.5.0-macos12.1). It uses a different Electron version and is maintained on `developer-macos12`.
 
 macOS packages have ad-hoc integrity signatures; they are not Developer ID signed or notarized. See the [macOS installation notes](docs/RELEASE-MACOS.md) and [signing documentation](docs/FIRMA-MACOS.md) for details. Release assets include SHA256 checksums.
 
