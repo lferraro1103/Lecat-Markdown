@@ -33,3 +33,13 @@ compatibilidad de Lecat para macOS 12 y macOS 13 o posterior.
 
 Esta adaptación aplica patrones de interacción con implementación propia;
 no se incorporó código Swift del repositorio de referencia.
+
+La implementación posterior agrega una extensión Quick Look propia en Objective-C,
+con el renderizador offline compartido de Lecat. No se copió el código de la
+extensión del proyecto de referencia. Alcance y correcciones de las capturas:
+[Integraciones 3.4](INTEGRACIONES-3.4.md).
+
+La revisión posterior de Quick Look, exportaciones, CLI, compartir y otras
+integraciones está en [Revisión de integraciones de escritorio](REVISION-INTEGRACIONES-ESCRITORIO.md).
+Incluye el estado real de cada función en Lecat y la corrección de la barra
+para que los controles de formato no cubran texto al desplazarse.

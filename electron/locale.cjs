@@ -415,6 +415,7 @@ Object.assign(rows,{
  ]
 });
 Object.assign(rows,{"Servicios":["Services","Serviços","Services","Dienste","服务","服務","サービス"],"Ocultar Lecat - Markdown":["Hide Lecat - Markdown","Ocultar Lecat - Markdown","Masquer Lecat - Markdown","Lecat - Markdown ausblenden","隐藏 Lecat - Markdown","隱藏 Lecat - Markdown","Lecat - Markdownを隠す"],"Ocultar otras":["Hide others","Ocultar outros","Masquer les autres","Andere ausblenden","隐藏其他应用","隱藏其他應用程式","ほかを隠す"],"Mostrar todo":["Show all","Mostrar tudo","Tout afficher","Alle einblenden","显示全部","全部顯示","すべてを表示"]});
+Object.assign(rows,require('./locale-desktop.cjs'));
 function translate(source,language='es',values={}){
  const index=LANGUAGES.findIndex(([id])=>id===language)-1;
  if(source.endsWith('…')&&rows[source.slice(0,-1)])return translate(source.slice(0,-1),language,values)+'…';

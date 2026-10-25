@@ -6,5 +6,6 @@ fs.copyFileSync(path.join(__dirname,'index.html'),path.join(__dirname,'ui/index.
 fs.copyFileSync(path.join(__dirname,'style.css'),path.join(__dirname,'ui/style.css'));
 fs.copyFileSync(path.join(__dirname,'chrome.css'),path.join(__dirname,'ui/chrome.css'));
 fs.copyFileSync(path.join(__dirname,'preferences.css'),path.join(__dirname,'ui/preferences.css'));
+fs.copyFileSync(path.join(__dirname,'desktop.css'),path.join(__dirname,'ui/desktop.css'));
 const packages=new Set();for(const input of Object.keys(result.metafile.inputs)){let folder=path.dirname(path.resolve(input));while(folder!==path.dirname(folder)){if(fs.existsSync(path.join(folder,'package.json'))){packages.add(folder);break;}folder=path.dirname(folder);}}
 let licenses='Lecat - Markdown · third-party bundled resources\n\n';for(const folder of [...packages].sort()){const pkg=JSON.parse(fs.readFileSync(path.join(folder,'package.json'),'utf8'));licenses+=`\n=== ${pkg.name} ${pkg.version} · ${pkg.license||'see notice'} ===\n`;for(const entry of fs.readdirSync(folder))if(/^(license|copying|notice)(\.|$)/i.test(entry)&&fs.statSync(path.join(folder,entry)).isFile())licenses+=fs.readFileSync(path.join(folder,entry),'utf8')+'\n';}fs.writeFileSync(path.join(__dirname,'ui/THIRD-PARTY-LICENSES.txt'),licenses);

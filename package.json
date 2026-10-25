@@ -1,6 +1,6 @@
 {
   "name": "lecat-markdown",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "Editor y lector Markdown para Windows y macOS, con gráficos sin conexión",
   "main": "electron/main.cjs",
   "author": "Lecat",
@@ -74,7 +74,14 @@
       "build/mac-update-key.json",
       "electron/locale.cjs",
       "electron/preferences.cjs",
-      "electron/release-channel.cjs"
+      "electron/release-channel.cjs",
+      "electron/desktop.cjs",
+      "electron/link-policy.cjs",
+      "electron/launch-arguments.cjs",
+      "electron/export.cjs",
+      "electron/epub.cjs",
+      "electron/cli.cjs",
+      "electron/locale-desktop.cjs"
     ],
     "win": {
       "icon": "branding/Lecat.ico",
@@ -91,6 +98,10 @@
       {
         "from": "electron/ui/THIRD-PARTY-LICENSES.txt",
         "to": "THIRD-PARTY-LICENSES.txt"
+      },
+      {
+        "from": "resources/bin",
+        "to": "bin"
       }
     ],
     "nsis": {
@@ -131,8 +142,29 @@
         "SUVerifyUpdateBeforeExtraction": true,
         "NSAppTransportSecurity": {
           "NSAllowsLocalNetworking": true
-        }
-      }
+        },
+        "UTImportedTypeDeclarations": [
+          {
+            "UTTypeIdentifier": "net.daringfireball.markdown",
+            "UTTypeDescription": "Markdown document",
+            "UTTypeConformsTo": [
+              "public.plain-text"
+            ],
+            "UTTypeTagSpecification": {
+              "public.filename-extension": [
+                "md",
+                "markdown"
+              ],
+              "public.mime-type": [
+                "text/markdown"
+              ]
+            }
+          }
+        ]
+      },
+      "signIgnore": [
+        "LecatQuickLook.appex"
+      ]
     },
     "fileAssociations": [
       {
@@ -149,9 +181,17 @@
       "url": "https://github.com/lferraro1103/Lecat-Markdown/releases/latest/download"
     },
     "releaseInfo": {
-      "releaseNotesFile": "docs/RELEASE-STABLE.md"
+      "releaseNotesFile": "docs/RELEASE-3.4.0.md"
     },
-    "afterPack": "./scripts/pack-sparkle.cjs"
+    "afterPack": "./scripts/pack-sparkle.cjs",
+    "protocols": [
+      {
+        "name": "Lecat Markdown document",
+        "schemes": [
+          "lecat"
+        ]
+      }
+    ]
   },
   "dependencies": {
     "electron-updater": "6.8.3",
