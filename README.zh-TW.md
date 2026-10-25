@@ -4,7 +4,7 @@
 
 適用於 **Windows 與 macOS** 的桌面 Markdown 編輯器。支援所見即所得編輯、原始碼與預覽分欄、Mermaid 流程圖和 KaTeX / LaTeX 數學公式。編輯與繪製本機文件不需要帳號或網路連線。
 
-**目前穩定版：3.4.0。** [下載最新版](https://github.com/lferraro1103/Lecat-Markdown/releases/latest) · [版本紀錄](https://github.com/lferraro1103/Lecat-Markdown/releases)
+**目前穩定版：3.4.1。** [下載最新版](https://github.com/lferraro1103/Lecat-Markdown/releases/latest) · [版本紀錄](https://github.com/lferraro1103/Lecat-Markdown/releases)
 
 ## 主要功能
 
@@ -20,7 +20,7 @@
 
 - **Windows 10/11 x64：** 執行 `Setup-x64.exe`，或解壓縮可攜版 ZIP。
 - **macOS 13+：** 依 Apple Silicon（arm64）或 Intel（x64）下載 DMG，將應用程式拖入「應用程式」。
-- **macOS 12 Monterey：** 使用[獨立相容版本](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.4.0-macos12.1)。
+- **macOS 12 Monterey：** 使用[獨立相容版本](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.4.1-macos12.1)。
 
 Homebrew 使用本專案的 tap：
 

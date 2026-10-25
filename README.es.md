@@ -34,9 +34,9 @@ brew install --cask lferraro1103/lecat-markdown/lecat-markdown
 
 ## Descarga e instalación
 
-La versión estable actual es **3.4.0**.
+La versión estable actual es **3.4.1**.
 
-La rama de trabajo prepara **3.4.0**, con Quick Look, compartir nativo,
+La rama de trabajo prepara **3.4.1**, con Quick Look, compartir nativo,
 exportaciones, impresión y las correcciones de interfaz documentadas en
 [Integraciones 3.4](docs/INTEGRACIONES-3.4.md). Aún no es una release pública.
 
@@ -47,7 +47,7 @@ exportaciones, impresión y las correcciones de interfaz documentadas en
 | macOS 13 o posterior, Apple Silicon | `macOS-arm64.dmg` o `.zip` | Mové la aplicación a Aplicaciones antes de abrirla. |
 | macOS 13 o posterior, Intel | `macOS-x64.dmg` o `.zip` | Mové la aplicación a Aplicaciones antes de abrirla. |
 
-Para **macOS 12 Monterey**, usá la [release alternativa 3.4.0-macos12.1](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.4.0-macos12.1). Usa otra versión de Electron y se mantiene en `developer-macos12`.
+Para **macOS 12 Monterey**, usá la [release alternativa 3.4.1-macos12.1](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.4.1-macos12.1). Usa otra versión de Electron y se mantiene en `developer-macos12`.
 
 Los paquetes de macOS tienen firma ad-hoc de integridad, sin firma Developer ID ni notarización. Consultá las [instrucciones para macOS](docs/RELEASE-MACOS.md) y la [documentación de firma](docs/FIRMA-MACOS.md). Las descargas incluyen sumas SHA256.
 

@@ -4,7 +4,7 @@
 
 Editor e leitor Markdown offline para **Windows e macOS**, com edição visual, código e pré-visualização, diagramas Mermaid e fórmulas LaTeX com KaTeX. Não exige conta nem conexão para editar e renderizar documentos locais.
 
-**Versão estável: 3.4.0.** [Baixar](https://github.com/lferraro1103/Lecat-Markdown/releases/latest) · [Releases](https://github.com/lferraro1103/Lecat-Markdown/releases)
+**Versão estável: 3.4.1.** [Baixar](https://github.com/lferraro1103/Lecat-Markdown/releases/latest) · [Releases](https://github.com/lferraro1103/Lecat-Markdown/releases)
 
 ## Recursos
 
@@ -17,7 +17,7 @@ Editor e leitor Markdown offline para **Windows e macOS**, com edição visual, 
 
 ## Instalação
 
-Windows 10/11 x64: instalador `Setup-x64.exe` ou ZIP portátil. Mac: DMG para Apple Silicon ou Intel, macOS 13+. Para Monterey, use a [edição macOS 12](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.4.0-macos12.1).
+Windows 10/11 x64: instalador `Setup-x64.exe` ou ZIP portátil. Mac: DMG para Apple Silicon ou Intel, macOS 13+. Para Monterey, use a [edição macOS 12](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.4.1-macos12.1).
 
 ```sh
 brew tap lferraro1103/lecat-markdown https://github.com/lferraro1103/Lecat-Markdown

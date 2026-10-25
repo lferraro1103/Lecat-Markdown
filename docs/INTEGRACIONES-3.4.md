@@ -1,6 +1,6 @@
 # Integraciones de escritorio 3.4
 
-Disponible desde 3.4.0 para Windows y macOS.
+Disponible desde 3.4.1 para Windows y macOS.
 
 ## Correcciones de interfaz
 
@@ -50,7 +50,7 @@ brew install --cask lferraro1103/lecat-markdown/lecat-markdown
 ```
 
 El cask del repositorio apunta a la última versión estable ya publicada,
-3.4.0. Al publicar 3.4.0, el flujo genera los SHA256 de sus DMG,
+3.4.1. Al publicar 3.4.0, el flujo genera los SHA256 de sus DMG,
 actualiza el archivo del cask y agrega el enlace del comando `lecat`.
 La publicación estable actualiza el cask con sus propios paquetes y hashes.
 El cask estable requiere macOS 13 o posterior. macOS 12 mantiene su canal de
