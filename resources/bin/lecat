@@ -1,0 +1,11 @@
+#!/bin/sh
+# Resolve the bundle even when Homebrew installed this launcher as a symlink.
+SELF="$0"
+while [ -L "$SELF" ]; do
+  BASE=$(CDPATH= cd -- "$(dirname -- "$SELF")" && pwd)
+  TARGET=$(readlink "$SELF")
+  case "$TARGET" in /*) SELF="$TARGET" ;; *) SELF="$BASE/$TARGET" ;; esac
+done
+APP=$(CDPATH= cd -- "$(dirname -- "$SELF")/../../.." && pwd)
+if [ "$#" -eq 0 ]; then exec /usr/bin/open -a "$APP"; fi
+exec /usr/bin/open -a "$APP" -- "$@"

@@ -120,15 +120,22 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           FLAGS=(--prerelease --latest=false)
-          NOTES=docs/RELEASE-STABLE.md
+          NOTES=$(node -p "require('./package.json').build.releaseInfo.releaseNotesFile")
           if [[ "$GITHUB_REF_NAME" != *-* ]]; then
             FLAGS=(--latest)
-            NOTES=docs/RELEASE-STABLE.md
+            NOTES=$(node -p "require('./package.json').build.releaseInfo.releaseNotesFile")
           fi
           gh release create "$GITHUB_REF_NAME" release-assets/* \
             --repo "$GITHUB_REPOSITORY" --verify-tag "${FLAGS[@]}" \
             --title "Lecat Markdown $GITHUB_REF_NAME — Windows y macOS" \
             --notes-file "$NOTES"
+      - name: Update Homebrew cask after stable public release
+        if: ${{ !contains(github.ref_name, '-') && github.repository == 'lferraro1103/Lecat-Markdown' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/generate-cask.cjs "${GITHUB_REF_NAME#v}" release-assets
+          node scripts/publish-cask.cjs
       - name: Publish stable update assets to public repository
         if: ${{ !contains(github.ref_name, '-') && github.repository != 'lferraro1103/Lecat-Markdown' }}
         env:

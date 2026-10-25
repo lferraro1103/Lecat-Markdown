@@ -1,6 +1,6 @@
 # Lecat — Markdown
 
-[English](README.md) · **Español**
+[English](README.md) · [Español](README.es.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [Português](README.pt.md)
 
 Editor y lector Markdown sin conexión para Windows y macOS. Escribí directamente sobre el documento renderizado, explorá carpetas locales y trabajá con diagramas, fórmulas, tablas e imágenes en una sola aplicación de escritorio.
 
@@ -12,19 +12,33 @@ Editor y lector Markdown sin conexión para Windows y macOS. Escribí directamen
 - **Tres modos:** edición visual, lectura y código Markdown con vista previa.
 - **Explorador local:** navegá carpetas y discos, filtrá archivos y usá las ubicaciones de acceso rápido de Windows.
 - **Markdown enriquecido:** diagramas Mermaid, fórmulas LaTeX con KaTeX, código resaltado, tareas, tablas e imágenes locales.
-- **Herramientas de documentos:** pestañas, Guardar como, índice, enfoque, zoom, exportación de diagramas SVG y exportación PDF.
+- **Herramientas de documentos:** pestañas, Guardar como, índice, enfoque, zoom, exportación de diagramas SVG, PDF/HTML/EPUB/PNG e impresión nativa.
 - **Sesión de documentos:** restaurá los archivos abiertos y la última pestaña activa; la bienvenida aparece solo la primera vez.
 - **Configuración:** ocho idiomas de interfaz y un canal beta opcional.
-- **Navegación:** selector nativo Mac, historial de carpetas Windows, pestañas Mac integradas y formato flotante.
+- **Navegación:** filtro editable en ambas plataformas, selector nativo Mac, historial de carpetas Windows, pestañas Mac integradas y formato centrado.
+- **Integración de escritorio:** Quick Look y compartir nativo en Mac, Recientes, inspector, creación desde portapapeles, pellizco, siempre encima, comando `lecat` y enlaces `lecat://file/…`.
+- **Enlaces de aplicaciones:** autorización antes de abrir enlaces personalizados y permisos revocables en Configuración.
 - **Actualizaciones:** buscá versiones públicas, descargá y reiniciá para actualizar la edición instalada de Windows.
 - **Recuperación local:** recuperá borradores y detectá cambios externos antes de sobrescribir un archivo.
 - **Apariencia:** temas claro, oscuro y del sistema, aplicados antes de mostrar la ventana.
 
 Electron y Chromium están incluidos. Leer, editar y renderizar documentos locales no requiere internet, una cuenta, WebView2 ni .NET. Abrir enlaces web y descargar actualizaciones requiere conexión.
 
+
+## Homebrew
+
+```sh
+brew tap lferraro1103/lecat-markdown https://github.com/lferraro1103/Lecat-Markdown
+brew install --cask lferraro1103/lecat-markdown/lecat-markdown
+```
+
 ## Descarga e instalación
 
-La versión estable actual es **3.3.0**.
+La versión estable actual es **3.4.0**.
+
+La rama de trabajo prepara **3.4.0**, con Quick Look, compartir nativo,
+exportaciones, impresión y las correcciones de interfaz documentadas en
+[Integraciones 3.4](docs/INTEGRACIONES-3.4.md). Aún no es una release pública.
 
 | Plataforma | Descarga | Instalación |
 | --- | --- | --- |
@@ -33,7 +47,7 @@ La versión estable actual es **3.3.0**.
 | macOS 13 o posterior, Apple Silicon | `macOS-arm64.dmg` o `.zip` | Mové la aplicación a Aplicaciones antes de abrirla. |
 | macOS 13 o posterior, Intel | `macOS-x64.dmg` o `.zip` | Mové la aplicación a Aplicaciones antes de abrirla. |
 
-Para **macOS 12 Monterey**, usá la [release alternativa 3.3.0-macos12.1](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.3.0-macos12.1). Usa otra versión de Electron y se mantiene en `developer-macos12`.
+Para **macOS 12 Monterey**, usá la [release alternativa 3.4.0-macos12.1](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.4.0-macos12.1). Usa otra versión de Electron y se mantiene en `developer-macos12`.
 
 Los paquetes de macOS tienen firma ad-hoc de integridad, sin firma Developer ID ni notarización. Consultá las [instrucciones para macOS](docs/RELEASE-MACOS.md) y la [documentación de firma](docs/FIRMA-MACOS.md). Las descargas incluyen sumas SHA256.
 

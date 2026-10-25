@@ -1,4 +1,7 @@
 **/bin/
+!resources/bin/
+!resources/bin/lecat
+!resources/bin/lecat.cmd
 **/obj/
 dist/
 *.pdb
@@ -7,29 +10,5 @@ docs/previews/
 
 electron/ui/
 electron/refine.cjs
-
-# Local planning, research and generated audit artifacts
-.planning/
-.planing/
-.claude/
-.codex/
-work/
-*.log
-.github/workflows/macos-gatekeeper.yml
-docs/AUDIT-RESULTS.txt
-docs/AUDITORIA-ELECTRON.md
-docs/AUDITORIA-GSD-3.1.1.md
-docs/AUDITORIA-LECTURA.md
-docs/EDICION-VISUAL-3.2.0.md
-docs/ELECTRON-AUDIT-RESULTS.txt
-docs/GSD-PLAN.md
-docs/GSD-SUMMARY.md
-docs/INVESTIGACION-ELECTRON.md
-docs/INVESTIGACION-VISUAL.md
-docs/LECAT-IDENTIDAD.md
-docs/UI-REVIEW.md
-docs/UI-SPEC-ELECTRON.md
-docs/UI-SPEC.md
-docs/UI-STATE-COVERAGE.json
 
 .cache/
