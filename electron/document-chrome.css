@@ -1,0 +1,13 @@
+.document-header{display:none!important}
+.document-controls{padding-top:8px}
+#save-state{display:inline-flex;align-items:center;gap:6px;flex:none;background:transparent;border:0;padding:4px 8px;font-size:11px;line-height:18px;color:var(--muted);white-space:nowrap}
+#save-state::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.55}
+#save-state.dirty{color:var(--accent);background:transparent}
+.tab .tab-details{flex:0 0 24px;width:24px;min-width:24px;padding:3px;display:flex;align-items:center;justify-content:center;background:transparent;border:0;color:inherit;opacity:.65;-webkit-app-region:no-drag}
+.tab .tab-details:hover,.tab .tab-details[aria-expanded=true]{opacity:1;background:var(--selection)}
+.tab .tab-details svg{width:13px;height:13px}
+.tab .tab-details[aria-expanded=true] svg{transform:rotate(180deg)}
+#document-info{position:fixed;inset:auto;margin:0;width:min(480px,calc(100vw - 24px));max-height:calc(100vh - 24px);overflow:auto;padding:16px 18px;border:1px solid var(--border);border-radius:12px;background:var(--panel);color:var(--text);box-shadow:0 12px 36px #0004;-webkit-app-region:no-drag;user-select:text}
+#document-info #doc-title{margin:0;font-size:14px;line-height:1.5;overflow-wrap:anywhere;white-space:normal}
+#document-info #doc-path{margin:6px 0 0;font-size:12px;line-height:1.6;color:var(--muted);overflow-wrap:anywhere;white-space:normal}
+@media print{#save-state,#document-info{display:none!important}}

@@ -1,6 +1,6 @@
 {
   "name": "lecat-markdown",
-  "version": "3.5.0-macos12.1",
+  "version": "3.6.0-macos12.1",
   "description": "Editor y lector Markdown para Windows y macOS, con gráficos sin conexión",
   "main": "electron/main.cjs",
   "author": "Lecat",
@@ -15,7 +15,8 @@
     "dist:mac": "npm run build && electron-builder --mac dmg zip --publish never",
     "dist:mac:signed": "npm run build && electron-builder --config electron-builder.developer-id.cjs --mac dmg zip --publish never",
     "verify:session": "npm run build && node scripts/verify-session-restart.cjs",
-    "verify:window": "npm run build && node scripts/verify-window-restart.cjs"
+    "verify:window": "npm run build && node scripts/verify-window-restart.cjs",
+    "dist:linux": "npm run build && electron-builder --linux AppImage deb --x64 --publish never"
   },
   "devDependencies": {
     "@codemirror/lang-markdown": "^6.3.4",
@@ -193,10 +194,26 @@
           "lecat"
         ]
       }
-    ]
+    ],
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "branding/Lecat.png",
+      "category": "Office",
+      "maintainer": "Lecat",
+      "executableName": "lecat-markdown",
+      "artifactName": "Lecat-Markdown-${version}-Linux-${arch}.${ext}",
+      "mimeTypes": [
+        "text/markdown",
+        "text/x-markdown"
+      ]
+    }
   },
   "dependencies": {
     "electron-updater": "6.8.3",
     "semver": "7.8.5"
-  }
+  },
+  "homepage": "https://github.com/lferraro1103/Lecat-Markdown"
 }

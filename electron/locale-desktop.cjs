@@ -1,4 +1,10 @@
 module.exports={
+ 'Ajustar documentos':['Resize documents','Ajustar documentos','Redimensionner les documents','Dokumentgrößen anpassen','调整文档宽度','調整文件寬度','書類の幅を調整'],
+ 'Abrir a la izquierda':['Open to the left','Abrir à esquerda','Ouvrir à gauche','Links öffnen','在左侧打开','在左側開啟','左側に開く'],
+ 'Abrir a la derecha':['Open to the right','Abrir à direita','Ouvrir à droite','Rechts öffnen','在右侧打开','在右側開啟','右側に開く'],
+ 'Volver a un solo panel':['Return to a single pane','Voltar a um único painel','Revenir à un seul panneau','Zu einem Bereich zurückkehren','返回单窗格','返回單一窗格','単一ペインに戻す'],
+ 'Abrí otro documento para usar dos paneles.':['Open another document to use two panes.','Abra outro documento para usar dois painéis.','Ouvrez un autre document pour utiliser deux panneaux.','Öffne ein weiteres Dokument für zwei Bereiche.','打开另一个文档以使用双窗格。','開啟另一份文件以使用雙窗格。','別の書類を開くと2つのペインを使用できます。'],
+ 'Información del documento':['Document information','Informações do documento','Informations du document','Dokumentinformationen','文档信息','文件資訊','書類情報'],
  'Herramientas de formato':['Formatting tools','Ferramentas de formatação','Outils de mise en forme','Formatierungswerkzeuge','格式工具','格式工具','書式ツール'],
  'Mostrar herramientas de formato':['Show formatting tools','Mostrar ferramentas de formatação','Afficher les outils de mise en forme','Formatierungswerkzeuge anzeigen','显示格式工具','顯示格式工具','書式ツールを表示'],
  'Horizontal: centro':['Horizontal: center','Horizontal: centro','Horizontal : centre','Horizontal: Mitte','水平：居中','水平：置中','横：中央'],

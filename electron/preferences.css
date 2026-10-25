@@ -11,7 +11,7 @@
 .preference-toggle{display:flex;align-items:center;gap:10px;cursor:pointer}
 .preference-toggle input{width:17px;height:17px;accent-color:var(--accent)}
 #preference-status{font-size:12px;min-height:18px;color:var(--muted)}
-#panes{position:relative}
+:is(#panes,[data-pane-part="panes"]){position:relative}
 #formatbar{position:relative;flex:0 0 auto;z-index:6;display:flex;align-items:center;gap:8px;padding:8px 18px;background:transparent!important;border:0;min-width:0;flex-wrap:wrap;justify-content:center;pointer-events:none}
 #formatbar>*{pointer-events:auto}
 .format-cluster,.format-menu>summary{display:flex;align-items:center;gap:2px;padding:3px 6px;border:1px solid color-mix(in srgb,var(--text) 12%,var(--border));border-radius:22px;background:color-mix(in srgb,var(--panel) 94%,transparent);box-shadow:0 3px 12px #0002;backdrop-filter:blur(18px)}
@@ -30,8 +30,8 @@
 .format-popover [aria-checked=true]{background:var(--selection);color:var(--accent);font-weight:600}
 .style-source{display:none!important}
 .style-menu>summary{min-width:110px;justify-content:space-between;font-size:12px;font-weight:600}
-#table-tools[hidden]{display:none!important}
-#table-tools{justify-content:center;flex-wrap:wrap}
+:is(#table-tools,[data-pane-part="table-tools"])[hidden]{display:none!important}
+:is(#table-tools,[data-pane-part="table-tools"]){justify-content:center;flex-wrap:wrap}
 body[data-mode=read] #formatbar:not([data-floating]){display:none!important}
 html[data-platform=darwin] .toolbar-leading .mac-action,html[data-platform=darwin] .brand{display:none}
 html[data-platform=darwin] .toolbar-leading{border-right:0;padding-right:0}
@@ -55,4 +55,4 @@ html[data-platform=darwin] #tabs .tab:has(:focus-visible){outline:2px solid var(
 html[data-platform=darwin] #tabs .tab>button:focus-visible{outline:0}
 html[data-platform=darwin] #tabs .tab>button:first-child{border-radius:0}
 @media(max-width:900px){#formatbar{padding:6px 12px;gap:5px}.format-cluster{padding:2px 4px}.format-menu>summary{padding:5px 9px}#formatbar button{padding:5px 6px}}
-@media print{#formatbar,#preferences-dialog,.finder-actions{display:none!important}#visual-scroll{padding-top:0!important}}
+@media print{#formatbar,#preferences-dialog,.finder-actions{display:none!important}:is(#visual-scroll,[data-pane-part="visual-scroll"]){padding-top:0!important}}

@@ -4,10 +4,13 @@
 
 適用於 **Windows 與 macOS** 的桌面 Markdown 編輯器。支援所見即所得編輯、原始碼與預覽分欄、Mermaid 流程圖和 KaTeX / LaTeX 數學公式。編輯與繪製本機文件不需要帳號或網路連線。
 
-**目前穩定版：3.5.0。** [下載最新版](https://github.com/lferraro1103/Lecat-Markdown/releases/latest) · [版本紀錄](https://github.com/lferraro1103/Lecat-Markdown/releases)
+**目前穩定版：3.6.0。** [下載最新版](https://github.com/lferraro1103/Lecat-Markdown/releases/latest) · [版本紀錄](https://github.com/lferraro1103/Lecat-Markdown/releases)
 
 ## 主要功能
 
+- 拖曳分頁或使用右鍵選單並排開啟兩份文件；獨立編輯與捲動，可調整分隔線並還原已儲存檔案的配置。
+- 精簡頂部區域：從分頁展開檔案資訊，儲存狀態位於搜尋旁。
+- Linux x64 提供 AppImage 與 Debian/Ubuntu `.deb` 套件，需手動更新。
 - 浮動格式工具列可展開或收起，按右鍵選擇五種位置，垂直排列位於上方。Windows 分享使用系統原生面板。
 - 視覺編輯、閱讀模式與 Markdown 原始碼預覽，支援表格、待辦清單、圖片及程式碼醒目提示。
 - 離線 Mermaid 圖表與 LaTeX 公式；輸出 PDF、HTML、EPUB、PNG 及圖表 SVG。
@@ -21,7 +24,7 @@
 
 - **Windows 10/11 x64：** 執行 `Setup-x64.exe`，或解壓縮可攜版 ZIP。
 - **macOS 13+：** 依 Apple Silicon（arm64）或 Intel（x64）下載 DMG，將應用程式拖入「應用程式」。
-- **macOS 12 Monterey：** 使用[獨立相容版本](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.5.0-macos12.1)。
+- **macOS 12 Monterey：** 使用[獨立相容版本](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.6.0-macos12.1)。
 
 Homebrew 使用本專案的 tap：
 
