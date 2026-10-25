@@ -1,8 +1,10 @@
-# Lecat Markdown 3.4.0-macos12.1 — Monterey
+# Lecat Markdown 3.4.1-macos12.1 — Monterey
 
 Edición alternativa para macOS 12, Intel y Apple Silicon. Conserva su canal de actualización firmado y no reemplaza la release estable de macOS 13+. El cask de Homebrew estable requiere macOS 13; en Monterey usá los DMG o ZIP de esta release.
 
-# Lecat Markdown 3.4.0
+# Lecat Markdown 3.4.1
+
+- Corrección de guardado al cambiar de pestaña mientras se ejecuta la acción.
 
 ## Interfaz y lectura
 

@@ -1,4 +1,6 @@
-# Lecat Markdown 3.4.0
+# Lecat Markdown 3.4.1
+
+- Corrección de guardado al cambiar de pestaña mientras se ejecuta la acción.
 
 ## Interfaz y lectura
 
