@@ -1,9 +1,9 @@
 cask "lecat-markdown" do
   arch arm: "arm64", intel: "x64"
 
-  version "3.3.0"
-  sha256 arm: "6a0552f4ac70288a1b3e493dc6f0ae083dcef5674c71457d1b5658be6a86360a",
-         intel: "cc199441ba8072b082a56b30feca4753e218018c61fc92c82a5e946734ffaaa6"
+  version "3.4.1"
+  sha256 arm: "da9ddcce8a65c28ead92cd733c1c3298841a1fd6377be89ef46160dea372fcc4",
+         intel: "762d22a30f01390374ad5849c75ac865968626905aeea5f1bb781de241889697"
 
   url "https://github.com/lferraro1103/Lecat-Markdown/releases/download/v#{version}/Lecat-Markdown-#{version}-macOS-#{arch}.dmg"
   name "Lecat Markdown"
@@ -13,6 +13,7 @@ cask "lecat-markdown" do
   depends_on macos: ">= :ventura"
 
   app "Lecat - Markdown.app"
+  binary "#{appdir}/Lecat - Markdown.app/Contents/Resources/bin/lecat"
 
   # User documents and the application profile are preserved on uninstall.
 end
