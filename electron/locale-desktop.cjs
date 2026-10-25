@@ -1,4 +1,12 @@
 module.exports={
+ 'Herramientas de formato':['Formatting tools','Ferramentas de formatação','Outils de mise en forme','Formatierungswerkzeuge','格式工具','格式工具','書式ツール'],
+ 'Mostrar herramientas de formato':['Show formatting tools','Mostrar ferramentas de formatação','Afficher les outils de mise en forme','Formatierungswerkzeuge anzeigen','显示格式工具','顯示格式工具','書式ツールを表示'],
+ 'Horizontal: centro':['Horizontal: center','Horizontal: centro','Horizontal : centre','Horizontal: Mitte','水平：居中','水平：置中','横：中央'],
+ 'Horizontal: izquierda':['Horizontal: left','Horizontal: esquerda','Horizontal : gauche','Horizontal: links','水平：左侧','水平：左側','横：左'],
+ 'Horizontal: derecha':['Horizontal: right','Horizontal: direita','Horizontal : droite','Horizontal: rechts','水平：右侧','水平：右側','横：右'],
+ 'Vertical: izquierda':['Vertical: left','Vertical: esquerda','Vertical : gauche','Vertikal: links','垂直：左侧','垂直：左側','縦：左'],
+ 'Vertical: derecha':['Vertical: right','Vertical: direita','Vertical : droite','Vertikal: rechts','垂直：右侧','垂直：右側','縦：右'],
+
  'Seleccionar archivos…':['Select files…','Selecionar arquivos…','Sélectionner des fichiers…','Dateien auswählen…','选择文件…','選擇檔案…','ファイルを選択…'],
  'Compartir':['Share','Compartilhar','Partager','Teilen','分享','分享','共有'],
  'Compartir texto':['Share text','Compartilhar texto','Partager le texte','Text teilen','分享文本','分享文字','テキストを共有'],

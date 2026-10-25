@@ -1,5 +1,6 @@
 const path=require('node:path'),fs=require('node:fs/promises'),{execFileSync}=require('node:child_process');
 module.exports=async context=>{
+ if(context.electronPlatformName==='win32'){const helper=await require('./prepare-windows-share.cjs').prepare(),folder=path.join(context.appOutDir,'resources','native');await fs.mkdir(folder,{recursive:true});await fs.copyFile(helper,path.join(folder,'LecatShare.exe'));return;}
  if(context.electronPlatformName!=='darwin')return;
  const {root,helper}=await require('./prepare-sparkle.cjs').prepare(),contents=path.join(context.appOutDir,context.packager.appInfo.productFilename+'.app','Contents');
  await fs.mkdir(path.join(contents,'Frameworks'),{recursive:true});

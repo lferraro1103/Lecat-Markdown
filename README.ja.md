@@ -4,10 +4,11 @@
 
 **Windows / macOS** 向けのデスクトップ Markdown エディタです。見たまま編集できるビジュアル編集、ソースとプレビューの分割表示、Mermaid 図表、KaTeX / LaTeX 数式に対応。ローカル文書の編集と描画にアカウントやネット接続は必要ありません。
 
-**安定版：3.4.1。** [最新版をダウンロード](https://github.com/lferraro1103/Lecat-Markdown/releases/latest) · [リリース一覧](https://github.com/lferraro1103/Lecat-Markdown/releases)
+**安定版：3.5.0。** [最新版をダウンロード](https://github.com/lferraro1103/Lecat-Markdown/releases/latest) · [リリース一覧](https://github.com/lferraro1103/Lecat-Markdown/releases)
 
 ## 主な機能
 
+- 書式ツールバーを開閉でき、右クリックで5つの位置を選べます。縦方向は上部に配置。Windows 標準の共有パネルにも対応。
 - ビジュアル編集、読み取り、Markdown ソース表示。表、タスクリスト、画像、コードの強調表示。
 - オフラインの Mermaid 図表と LaTeX 数式。PDF・HTML・EPUB・PNG、図表の SVG 書き出し。
 - ファイルのサイドバー、名前フィルタ、最近の書類、ファイル情報インスペクタ。
@@ -21,7 +22,7 @@
 
 - **Windows 10/11 x64：** `Setup-x64.exe`、またはポータブル ZIP。
 - **macOS 13 以降：** Apple Silicon（arm64）/ Intel（x64）の DMG を選び、アプリケーションフォルダに移動。
-- **macOS 12 Monterey：** [互換リリース](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.4.1-macos12.1)を利用してください。
+- **macOS 12 Monterey：** [互換リリース](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.5.0-macos12.1)を利用してください。
 
 Homebrew 用の独自 tap：
 
