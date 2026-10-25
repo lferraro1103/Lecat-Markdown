@@ -2,12 +2,15 @@
 
 [English](README.md) · [Español](README.es.md) · **简体中文** · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [Português](README.pt.md)
 
-适用于 **Windows 和 macOS** 的桌面 Markdown 编辑器。支持所见即所得编辑、源码与预览分栏、Mermaid 流程图和 KaTeX / LaTeX 数学公式，无需账号，文档编辑与渲染无需联网。
+适用于 **Windows、macOS 和 Linux** 的桌面 Markdown 编辑器。支持所见即所得编辑、源码与预览分栏、Mermaid 流程图和 KaTeX / LaTeX 数学公式，无需账号，文档编辑与渲染无需联网。
 
-**当前稳定版：3.5.0。** [下载最新版](https://github.com/lferraro1103/Lecat-Markdown/releases/latest) · [版本记录](https://github.com/lferraro1103/Lecat-Markdown/releases)
+**当前稳定版：3.6.0。** [下载最新版](https://github.com/lferraro1103/Lecat-Markdown/releases/latest) · [版本记录](https://github.com/lferraro1103/Lecat-Markdown/releases)
 
 ## 主要功能
 
+- 拖动标签页或使用右键菜单并排打开两个文档；独立编辑和滚动，可调整分隔线，并恢复已保存文件的布局。
+- 精简顶部区域：在标签页展开文件信息，保存状态位于搜索旁。
+- Linux x64 提供 AppImage 和 Debian/Ubuntu `.deb` 安装包，需手动更新。
 - 浮动格式工具栏可展开或收起，右键选择五种位置，垂直排列位于上方。Windows 分享使用系统原生面板。
 - 可视化编辑、阅读模式和 Markdown 源码预览；支持表格、任务列表、图片和代码高亮。
 - 离线 Mermaid 图表及 LaTeX 公式；导出 PDF、HTML、EPUB、PNG 和图表 SVG。
@@ -21,7 +24,7 @@
 
 - **Windows 10/11 x64：** 下载 `Setup-x64.exe` 安装，或解压便携版 ZIP。
 - **macOS 13+：** 按 Apple Silicon（arm64）或 Intel（x64）下载 DMG，将应用拖到“应用程序”。
-- **macOS 12 Monterey：** 使用[独立兼容版本](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.5.0-macos12.1)。
+- **macOS 12 Monterey：** 使用[独立兼容版本](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.6.0-macos12.1)。
 
 Homebrew 使用本项目自己的 tap：
 

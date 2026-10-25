@@ -18,6 +18,9 @@ jobs:
           - runner: macos-15
             platform: macOS
             arch: arm64
+          - runner: ubuntu-24.04
+            platform: Linux
+            arch: x64
           - runner: macos-15-intel
             platform: macOS
             arch: x64
@@ -70,11 +73,21 @@ jobs:
           Get-ChildItem dist -File | Where-Object { $_.Extension -in '.exe', '.zip' } |
             ForEach-Object { "$( (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant() )  $($_.Name)" } |
             Set-Content -LiteralPath dist/SHA256-Windows-x64.txt -Encoding utf8
+      - name: Build Linux AppImage and Debian package
+        if: matrix.platform == 'Linux'
+        run: npm run dist:linux
+      - name: Linux checksums
+        if: matrix.platform == 'Linux'
+        run: |
+          cd dist
+          sha256sum *.AppImage *.deb > SHA256-Linux-x64.txt
       - uses: actions/upload-artifact@v4
         with:
           name: desktop-${{ matrix.platform }}-${{ matrix.arch }}
           if-no-files-found: error
           path: |
+            dist/*.AppImage
+            dist/*.deb
             dist/*.dmg
             dist/*.zip
             dist/*-Setup-x64.exe
@@ -115,7 +128,7 @@ jobs:
         env:
           LECAT_UPDATE_PRIVATE_KEY: ${{ secrets.LECAT_UPDATE_PRIVATE_KEY }}
         run: node scripts/sign-mac-updates.cjs release-assets
-      - name: Publish Windows and macOS alternative release
+      - name: Publish Windows, macOS and Linux release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -127,7 +140,7 @@ jobs:
           fi
           gh release create "$GITHUB_REF_NAME" release-assets/* \
             --repo "$GITHUB_REPOSITORY" --verify-tag "${FLAGS[@]}" \
-            --title "Lecat Markdown $GITHUB_REF_NAME — Windows y macOS" \
+            --title "Lecat Markdown $GITHUB_REF_NAME — Windows, macOS y Linux" \
             --notes-file "$NOTES"
       - name: Update Homebrew cask after stable public release
         if: ${{ !contains(github.ref_name, '-') && github.repository == 'lferraro1103/Lecat-Markdown' }}
@@ -152,5 +165,5 @@ jobs:
             gh release edit "$GITHUB_REF_NAME" --repo lferraro1103/Lecat-Markdown --latest --draft=false --prerelease=false --notes-file docs/RELEASE-STABLE.md
           else
             gh release create "$GITHUB_REF_NAME" release-assets/* --repo lferraro1103/Lecat-Markdown --verify-tag --latest \
-              --title "Lecat Markdown $GITHUB_REF_NAME — Windows y macOS" --notes-file docs/RELEASE-STABLE.md
+              --title "Lecat Markdown $GITHUB_REF_NAME — Windows, macOS y Linux" --notes-file docs/RELEASE-STABLE.md
           fi

@@ -2,12 +2,15 @@
 
 [English](README.md) · [Español](README.es.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [Português](README.pt.md)
 
-Editor y lector Markdown sin conexión para Windows y macOS. Escribí directamente sobre el documento renderizado, explorá carpetas locales y trabajá con diagramas, fórmulas, tablas e imágenes en una sola aplicación de escritorio.
+Editor y lector Markdown sin conexión para Windows, macOS y Linux. Escribí directamente sobre el documento renderizado, explorá carpetas locales y trabajá con diagramas, fórmulas, tablas e imágenes en una sola aplicación de escritorio.
 
 [Descargar la última versión](https://github.com/lferraro1103/Lecat-Markdown/releases/latest) · [Notas de versiones](https://github.com/lferraro1103/Lecat-Markdown/releases)
 
 ## Funciones
 
+- **Dos documentos en paralelo:** arrastrá pestañas a izquierda/derecha o usá su menú contextual. Edición y desplazamiento independientes, separador ajustable y restauración de la disposición de archivos guardados.
+- **Cabecera compacta:** nombre y ubicación desplegables desde la pestaña, y estado de guardado junto a búsqueda.
+- **Linux x64:** paquetes AppImage y `.deb` para Debian/Ubuntu; actualización manual en Linux.
 - **Barra flotante:** botón junto a la lupa y clic derecho para elegir cinco posiciones; las verticales quedan arriba. Compartir en Windows abre el panel nativo de destinos disponibles.
 - **Edición visual:** modificá títulos, párrafos, listas y tablas renderizadas, con formato, deshacer/rehacer y buscar/reemplazar.
 - **Tres modos:** edición visual, lectura y código Markdown con vista previa.
@@ -35,20 +38,17 @@ brew install --cask lferraro1103/lecat-markdown/lecat-markdown
 
 ## Descarga e instalación
 
-La versión estable actual es **3.5.0**.
-
-La rama de trabajo prepara **3.5.0**, con Quick Look, compartir nativo,
-exportaciones, impresión y las correcciones de interfaz documentadas en
-[Integraciones 3.4](docs/INTEGRACIONES-3.4.md). Aún no es una release pública.
+La versión estable actual es **3.6.0**.
 
 | Plataforma | Descarga | Instalación |
 | --- | --- | --- |
 | Windows 10/11, x64 | `Setup-x64.exe` | Ejecutá el instalador para elegir la carpeta y crear accesos directos. |
 | Windows 10/11, x64 | `Windows-x64.zip` | Extraé el ZIP completo y abrí `Lecat - Markdown.exe`. Conservá todos los archivos juntos. |
 | macOS 13 o posterior, Apple Silicon | `macOS-arm64.dmg` o `.zip` | Mové la aplicación a Aplicaciones antes de abrirla. |
+| Linux x64 | `Linux-x64.AppImage` / `Linux-x64.deb` | Otorgá permiso de ejecución al AppImage o instalá el `.deb` con tu gestor de paquetes. |
 | macOS 13 o posterior, Intel | `macOS-x64.dmg` o `.zip` | Mové la aplicación a Aplicaciones antes de abrirla. |
 
-Para **macOS 12 Monterey**, usá la [release alternativa 3.5.0-macos12.1](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.5.0-macos12.1). Usa otra versión de Electron y se mantiene en `developer-macos12`.
+Para **macOS 12 Monterey**, usá la [release alternativa 3.6.0-macos12.1](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.6.0-macos12.1). Usa otra versión de Electron y se mantiene en `developer-macos12`.
 
 Los paquetes de macOS tienen firma ad-hoc de integridad, sin firma Developer ID ni notarización. Consultá las [instrucciones para macOS](docs/RELEASE-MACOS.md) y la [documentación de firma](docs/FIRMA-MACOS.md). Las descargas incluyen sumas SHA256.
 

@@ -2,12 +2,15 @@
 
 [English](README.md) · [Español](README.es.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · **Português**
 
-Editor e leitor Markdown offline para **Windows e macOS**, com edição visual, código e pré-visualização, diagramas Mermaid e fórmulas LaTeX com KaTeX. Não exige conta nem conexão para editar e renderizar documentos locais.
+Editor e leitor Markdown offline para **Windows, macOS e Linux**, com edição visual, código e pré-visualização, diagramas Mermaid e fórmulas LaTeX com KaTeX. Não exige conta nem conexão para editar e renderizar documentos locais.
 
-**Versão estável: 3.5.0.** [Baixar](https://github.com/lferraro1103/Lecat-Markdown/releases/latest) · [Releases](https://github.com/lferraro1103/Lecat-Markdown/releases)
+**Versão estável: 3.6.0.** [Baixar](https://github.com/lferraro1103/Lecat-Markdown/releases/latest) · [Releases](https://github.com/lferraro1103/Lecat-Markdown/releases)
 
 ## Recursos
 
+- **Dois documentos lado a lado:** arraste abas ou use o menu de contexto; edição e rolagem independentes, divisor ajustável e restauração do layout de arquivos salvos.
+- Cabeçalho compacto, informações na aba e estado de salvamento ao lado da busca.
+- Linux x64 com AppImage e `.deb` para Debian/Ubuntu; atualização manual no Linux.
 - Barra flutuante com cinco posições e botão ao lado da busca; layouts verticais no topo. Compartilhamento nativo do Windows.
 - Tabelas, tarefas, imagens locais, código destacado e três modos de documento.
 - Exportação PDF, HTML, EPUB e PNG; SVG para diagramas; impressão com fonte e escala.
@@ -18,7 +21,7 @@ Editor e leitor Markdown offline para **Windows e macOS**, com edição visual, 
 
 ## Instalação
 
-Windows 10/11 x64: instalador `Setup-x64.exe` ou ZIP portátil. Mac: DMG para Apple Silicon ou Intel, macOS 13+. Para Monterey, use a [edição macOS 12](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.5.0-macos12.1).
+Windows 10/11 x64: instalador `Setup-x64.exe` ou ZIP portátil. Mac: DMG para Apple Silicon ou Intel, macOS 13+. Para Monterey, use a [edição macOS 12](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.6.0-macos12.1).
 
 ```sh
 brew tap lferraro1103/lecat-markdown https://github.com/lferraro1103/Lecat-Markdown

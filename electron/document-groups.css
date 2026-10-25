@@ -1,0 +1,37 @@
+#document-groups{display:flex;position:relative;flex:1;min-width:0;min-height:0;overflow:hidden}
+.document-slot{display:flex;flex:1;min-width:0;min-height:0;flex-direction:column;position:relative;overflow:hidden}
+.document-slot[hidden],.document-divider[hidden],.document-drop-overlay[hidden]{display:none!important}
+.document-slot-header{display:none;align-items:center;gap:4px;min-height:32px;padding:0 8px;border-bottom:1px solid var(--border);color:var(--muted);background:var(--bg)}
+#document-groups[data-split=true] .document-slot-header{display:flex}
+#document-groups[data-split=true] .document-slot[data-active=true] .document-slot-header{box-shadow:inset 0 2px var(--accent);color:var(--text)}
+.document-slot-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;text-align:left;justify-content:flex-start;font-size:11px;min-height:30px}
+.document-slot-header>button:last-child{padding:4px;min-height:26px}
+.document-slot-header svg{width:13px;height:13px}
+#document-groups[data-split=true]>.document-slot:first-child{flex:0 0 calc(var(--document-left-width,50%) - 3px)}
+#document-groups[data-secondary-side=left]>.document-slot:first-child{order:2;flex:1}
+#document-groups[data-secondary-side=left]>.document-slot[data-slot=secondary]{order:0;flex:0 0 calc(var(--document-left-width,50%) - 3px)}
+.document-divider{order:1;flex:0 0 6px;cursor:col-resize;background:var(--border);touch-action:none}
+.document-slot[data-slot=secondary]{order:2}
+.document-divider:hover,.document-divider:focus-visible{background:var(--accent);outline:0}
+[data-document-pane]{min-width:0;overflow:hidden}
+#document-groups [data-document-pane][data-mode=edit]>[data-pane-part=visual-pane]{display:flex!important}
+#document-groups [data-document-pane][data-mode=edit]>:is([data-pane-part=editor-pane],[data-pane-part=preview-pane],[data-pane-part=splitter]){display:none!important}
+#document-groups [data-document-pane][data-mode=read]>[data-pane-part=preview-pane]{display:flex!important}
+#document-groups [data-document-pane][data-mode=read]>:is([data-pane-part=visual-pane],[data-pane-part=editor-pane],[data-pane-part=splitter]){display:none!important}
+#document-groups [data-document-pane][data-mode=split]>:is([data-pane-part=preview-pane],[data-pane-part=editor-pane]){display:flex!important}
+#document-groups [data-document-pane][data-mode=split]>[data-pane-part=visual-pane]{display:none!important}
+#document-groups [data-document-pane][data-mode=split]>[data-pane-part=splitter]{display:block!important}
+#document-groups[data-split=true] [data-pane-part=preview],#document-groups[data-split=true] .visual-document{padding:20px 24px 90px}
+#document-groups[data-split=true] [data-pane-part=visual-search]{flex-wrap:wrap;gap:4px}
+#document-groups[data-split=true] [data-pane-part=visual-search] input{flex:1 1 100px;min-width:60px}
+#document-groups[data-split=true] [data-pane-part=outline]{position:absolute;right:0;top:0;bottom:0;z-index:5;background:var(--canvas);box-shadow:var(--shadow)}
+#document-groups[data-split=true] .inspector{position:absolute;right:0;top:0;bottom:0;z-index:6;box-shadow:var(--shadow)}
+.tab.visible-in-group:not(.active){border-bottom:2px solid var(--border)}
+.tab[draggable=true]{-webkit-app-region:no-drag}
+.document-tab-menu{position:fixed;inset:auto;margin:0;padding:5px;min-width:210px;max-width:calc(100vw - 16px);border:1px solid var(--border);border-radius:10px;background:var(--panel);color:var(--text);box-shadow:var(--shadow)}
+.document-tab-menu button{width:100%;justify-content:flex-start;font-size:12px}
+.document-drop-overlay{position:absolute;inset:8px auto 8px 8px;width:calc(50% - 12px);display:flex;align-items:center;justify-content:center;z-index:20;border:2px solid var(--accent);border-radius:12px;background:color-mix(in srgb,var(--accent) 12%,transparent);pointer-events:none}
+.document-drop-overlay[data-side=right]{left:auto;right:8px}
+.document-drop-overlay span{padding:9px 14px;border-radius:8px;background:var(--panel);color:var(--text);box-shadow:var(--shadow);font-size:12px}
+@media print{#document-groups,.document-slot{display:block!important;overflow:visible}.document-slot[data-active=false],.document-slot-header,.document-divider,.document-drop-overlay,.document-tab-menu{display:none!important}.document-slot [data-document-pane]{overflow:visible}}
+@media print{#document-groups .document-slot [data-document-pane][data-mode],#document-groups .document-slot [data-document-pane][data-mode]>[data-pane-part=preview-pane],#document-groups .document-slot [data-pane-part=preview-scroll]{display:block!important;height:auto;overflow:visible}}
