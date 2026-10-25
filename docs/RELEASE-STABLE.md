@@ -21,7 +21,7 @@ Windows instalado y macOS mantienen sus canales de actualización. En Linux,
 la actualización se instala descargando el paquete nuevo. macOS 12 utiliza
 la release separada **3.6.0-macos12.1**. Se conserva la firma ad-hoc de Mac.
 
-Más detalles: [documentos en paralelo](DOCUMENTOS-EN-PARALELO.md) y [Linux](LINUX.md).
+Más detalles: [documentos en paralelo](https://github.com/lferraro1103/Lecat-Markdown/blob/main/docs/DOCUMENTOS-EN-PARALELO.md) y [Linux](https://github.com/lferraro1103/Lecat-Markdown/blob/main/docs/LINUX.md).
 
 ## English
 

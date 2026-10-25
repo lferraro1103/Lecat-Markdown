@@ -45,7 +45,7 @@ The current stable version is **3.6.0**.
 | Windows 10/11, x64 | `Setup-x64.exe` | Run the installer to choose the destination and create shortcuts. |
 | Windows 10/11, x64 | `Windows-x64.zip` | Extract the complete ZIP and open `Lecat - Markdown.exe`. Keep all bundled files together. |
 | macOS 13 or later, Apple Silicon | `macOS-arm64.dmg` or `.zip` | Move the app to Applications before opening it. |
-| Linux x64 | `Linux-x64.AppImage` / `Linux-x64.deb` | Make the AppImage executable, or install the `.deb` with your package manager. |
+| Linux x64 | `Linux-x86_64.AppImage` / `Linux-amd64.deb` | Make the AppImage executable, or install the `.deb` with your package manager. |
 | macOS 13 or later, Intel | `macOS-x64.dmg` or `.zip` | Move the app to Applications before opening it. |
 
 For **macOS 12 Monterey**, use the separate [3.6.0-macos12.1 release](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.6.0-macos12.1). It uses a different Electron version and is maintained on `developer-macos12`.

@@ -2,8 +2,8 @@
 
 Linux x64 se compila en GitHub Actions sobre Ubuntu 24.04. Se generan:
 
-- `Lecat-Markdown-VERSION-Linux-x64.AppImage`.
-- `Lecat-Markdown-VERSION-Linux-x64.deb`.
+- `Lecat-Markdown-VERSION-Linux-x86_64.AppImage`.
+- `Lecat-Markdown-VERSION-Linux-amd64.deb`.
 - `SHA256-Linux-x64.txt`.
 
 Los workflows de integración conservan los paquetes como artefactos. El workflow
