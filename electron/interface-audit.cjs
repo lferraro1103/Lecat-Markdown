@@ -12,8 +12,12 @@ exports.run=async({execute,check,win,out,temp,openDoc})=>{
    const label=`interface ${platform} ${width} ${theme} ${mode}`;
    await execute(`window.__claroTest.setTheme(${JSON.stringify(theme)});window.__claroTest.setMode(${JSON.stringify(mode)});`);await settle();
    check(label+' tabs contain centered action buttons',await execute(`Array.from(document.querySelectorAll('#tabs .tab')).every(tab=>{const t=tab.getBoundingClientRect();return Array.from(tab.querySelectorAll('.tab-details,.close-tab')).every(button=>{const b=button.getBoundingClientRect(),svg=button.querySelector('svg')?.getBoundingClientRect();return b.top>=t.top+2&&b.bottom<=t.bottom-2&&Math.abs((b.top+b.bottom-t.top-t.bottom)/2)<1&&(!svg||Math.abs((svg.top+svg.bottom-b.top-b.bottom)/2)<1);});})`));
-   const hover=await execute(`(()=>{const r=document.querySelector('#tabs .tab.active>button:first-child').getBoundingClientRect();return {x:Math.round(r.left+r.width/2),y:Math.round(r.top+r.height/2)};})()`);
-   win.webContents.sendInputEvent({type:'mouseMove',...hover});await settle();
+   // Rendering may replace the tab button after a mode change; target the current node again if needed.
+   for(let attempt=0;attempt<3;attempt++){
+    const hover=await execute(`(()=>{const r=document.querySelector('#tabs .tab.active>button:first-child').getBoundingClientRect();return {x:Math.round(r.left+r.width/2),y:Math.round(r.top+r.height/2)};})()`);
+    win.webContents.sendInputEvent({type:'mouseMove',...hover});await settle();
+    if(await execute(`document.querySelector('#tabs .tab.active>button:first-child').matches(':hover')`))break;
+   }
    check(label+' title hover stays inset from tab borders',await execute(`(()=>{const button=document.querySelector('#tabs .tab.active>button:first-child'),b=button.getBoundingClientRect(),tab=button.parentElement,t=tab.getBoundingClientRect();return button.matches(':hover')&&b.top>=t.top+3&&b.bottom<=t.bottom-3&&Math.abs((b.top+b.bottom-t.top-t.bottom)/2)<1&&getComputedStyle(tab).overflow==='hidden';})()`));
    if(width===1440&&mode==='edit')await capture('interface-'+platform+'-title-hover-'+theme);
    win.webContents.sendInputEvent({type:'mouseMove',x:1,y:1});

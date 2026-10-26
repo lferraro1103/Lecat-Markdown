@@ -8,6 +8,7 @@ fs.copyFileSync(path.join(__dirname,'chrome.css'),path.join(__dirname,'ui/chrome
 fs.copyFileSync(path.join(__dirname,'preferences.css'),path.join(__dirname,'ui/preferences.css'));
 fs.copyFileSync(path.join(__dirname,'desktop.css'),path.join(__dirname,'ui/desktop.css'));
 fs.copyFileSync(path.join(__dirname,'floating-format.css'),path.join(__dirname,'ui/floating-format.css'));
+fs.copyFileSync(path.join(__dirname,'mac-explorer.css'),path.join(__dirname,'ui/mac-explorer.css'));
 fs.copyFileSync(path.join(__dirname,'document-chrome.css'),path.join(__dirname,'ui/document-chrome.css'));
 fs.copyFileSync(path.join(__dirname,'document-groups.css'),path.join(__dirname,'ui/document-groups.css'));fs.copyFileSync(path.join(__dirname,'interface.css'),path.join(__dirname,'ui/interface.css'));
 const packages=new Set();for(const input of Object.keys(result.metafile.inputs)){let folder=path.dirname(path.resolve(input));while(folder!==path.dirname(folder)){if(fs.existsSync(path.join(folder,'package.json'))){packages.add(folder);break;}folder=path.dirname(folder);}}

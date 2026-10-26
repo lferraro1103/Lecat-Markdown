@@ -1,4 +1,13 @@
 module.exports={
+ 'Apariencia':['Appearance','Aparência','Apparence','Darstellung','外观','外觀','外観'],
+ 'Tema':['Theme','Tema','Thème','Design','主题','佈景主題','テーマ'],
+ 'Claro':['Light','Claro','Clair','Hell','浅色','淺色','ライト'],
+ 'Oscuro':['Dark','Escuro','Sombre','Dunkel','深色','深色','ダーク'],
+ 'Sistema':['System','Sistema','Système','System','系统','系統','システム'],
+ 'Vista de carpeta':['Folder view','Vista de pasta','Vue du dossier','Ordneransicht','文件夹视图','資料夾檢視','フォルダ表示'],
+ 'Crear o abrir':['Create or open','Criar ou abrir','Créer ou ouvrir','Erstellen oder öffnen','新建或打开','新增或開啟','作成または開く'],
+ 'Filtrar':['Filter','Filtrar','Filtrer','Filtern','筛选','篩選','絞り込み'],
+ 'Abrir archivos':['Open files','Abrir arquivos','Ouvrir des fichiers','Dateien öffnen','打开文件','開啟檔案','ファイルを開く'],
  'Ajustar documentos':['Resize documents','Ajustar documentos','Redimensionner les documents','Dokumentgrößen anpassen','调整文档宽度','調整文件寬度','書類の幅を調整'],
  'Abrir a la izquierda':['Open to the left','Abrir à esquerda','Ouvrir à gauche','Links öffnen','在左侧打开','在左側開啟','左側に開く'],
  'Abrir a la derecha':['Open to the right','Abrir à direita','Ouvrir à droite','Rechts öffnen','在右侧打开','在右側開啟','右側に開く'],
