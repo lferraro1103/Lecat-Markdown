@@ -16,9 +16,11 @@ async function atomicSave(doc,content,{allowOverwrite=false}={}){
  if(!allowOverwrite&&((current&&digest(current)!==doc.hash)||(!current&&doc.hash)))throw Error('El archivo cambió fuera de Lecat - Markdown. Guardá una copia con Guardar como para conservar ambas versiones.');
  const buffer=encode(content,doc),temp=doc.path+'.claro-'+crypto.randomUUID()+'.tmp';if(buffer.length>MAX)throw Error('Documento codificado mayor que 20 MB.');
  try{await fs.writeFile(temp,buffer,{flag:'wx'});const h=await fs.open(temp,'r+');try{await h.sync();}finally{await h.close();}
+ for(let attempt=0;;attempt++){
  let latest;try{latest=await fs.readFile(doc.path);}catch(e){if(e.code!=='ENOENT')throw e;}
  if((latest?digest(latest):null)!==(current?digest(current):null))throw Error('El archivo cambió fuera de Lecat - Markdown durante el guardado. Guardá una copia.');
- await fs.rename(temp,doc.path);}finally{await fs.unlink(temp).catch(()=>{});}
+ try{await fs.rename(temp,doc.path);break;}catch(error){if(process.platform!=='win32'||!['EPERM','EACCES','EBUSY'].includes(error.code)||attempt>=5)throw error;await new Promise(resolve=>setTimeout(resolve,25*2**attempt));}
+ }}finally{await fs.unlink(temp).catch(()=>{});}
  return {...doc,content,hash:digest(buffer)};
 }
 async function list(folder){const entries=await fs.readdir(folder,{withFileTypes:true});return entries.filter(e=>e.isDirectory()||e.isFile()&&/\.(md|markdown)$/i.test(e.name)).map(e=>({name:e.name,path:path.join(folder,e.name),directory:e.isDirectory()})).sort((a,b)=>Number(b.directory)-Number(a.directory)||a.name.localeCompare(b.name));}
