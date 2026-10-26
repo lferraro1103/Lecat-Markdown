@@ -1,6 +1,6 @@
 {
   "name": "lecat-markdown",
-  "version": "3.6.0-macos12.1",
+  "version": "3.7.0-macos12.1",
   "description": "Editor y lector Markdown para Windows y macOS, con gráficos sin conexión",
   "main": "electron/main.cjs",
   "author": "Lecat",
@@ -8,7 +8,7 @@
   "scripts": {
     "build": "node electron/build.cjs",
     "start": "npm run build && electron .",
-    "test": "node --test electron/core.test.cjs electron/persistence.test.cjs scripts/prepare-electron.test.cjs electron/updater.test.cjs scripts/merge-update-metadata.test.cjs electron/session.test.cjs electron/window-chrome.test.cjs electron/window-state.test.cjs",
+    "test": "node --test electron/core.test.cjs electron/persistence.test.cjs scripts/prepare-electron.test.cjs electron/updater.test.cjs scripts/merge-update-metadata.test.cjs electron/session.test.cjs electron/window-chrome.test.cjs electron/window-state.test.cjs electron/macos-locations.test.cjs",
     "audit": "npm run build && electron . --audit",
     "dist": "npm run build && electron-builder --win dir",
     "installer": "npm run build && electron-builder --win nsis --x64 --publish never",

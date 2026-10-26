@@ -14,8 +14,10 @@ export function createUpdateDialog({api,syncDocuments}){
   $('update-install').hidden=value.status!=='downloaded';$('update-install').disabled=requesting;
   $('update-release').hidden=value.supported&&value.status!=='error';
   const button=document.querySelector('[data-command="updates"]');
-  button.classList.toggle('update-available',['available','downloaded','manual-available'].includes(value.status));
-  button.title=['available','downloaded','manual-available'].includes(value.status)?t('Actualización disponible'):t('Buscar actualizaciones');
+  // The toolbar only surfaces updates; checking manually lives in Configuración and the Ayuda menu.
+  const available=['available','downloaded','manual-available'].includes(value.status);
+  button.hidden=!available;button.classList.toggle('update-available',available);
+  button.title=available?t('Actualización disponible'):t('Buscar actualizaciones');
  }
  async function action(name){
   if(requesting)return;requesting=true;if(state)render(state);
