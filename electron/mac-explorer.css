@@ -35,8 +35,12 @@ html[data-platform=darwin] .mac-explorer-footer>.filter{display:flex;flex:1;min-
 @media print{.mac-explorer-footer,.explorer-create-menu{display:none!important}}
 
 /* Compact Windows filter: search and actions share one row. */
-html[data-platform=win32] #places{max-height:clamp(120px,25vh,220px);flex:0 1 auto}
+html[data-platform=win32] #places{min-height:80px;height:var(--explorer-places-height,auto);max-height:var(--explorer-places-height,clamp(120px,25vh,220px));flex:0 0 var(--explorer-places-height,auto);border-bottom:0}
 html[data-platform=win32] #files{min-height:160px}
+html[data-platform=win32] .recent-files{min-height:160px}
+.explorer-resizer{position:relative;flex:none;height:7px;min-height:7px;margin:0 10px;cursor:row-resize;touch-action:none;outline:none}
+.explorer-resizer::after{content:'';position:absolute;left:0;right:0;top:3px;height:1px;background:var(--border)}
+.explorer-resizer:hover::after,.explorer-resizer:focus-visible::after,.explorer-resizer[data-resizing]::after{background:var(--accent);height:2px}
 html[data-platform=win32] .compact-filter{display:flex;align-items:center;gap:4px;min-height:40px;padding:4px 10px 8px;border-bottom:1px solid var(--border)}
 html[data-platform=win32] .compact-filter>button{flex:none;width:30px;height:28px;min-height:28px;padding:5px;color:var(--muted)}
 html[data-platform=win32] .compact-filter>button svg{width:16px;height:16px}
