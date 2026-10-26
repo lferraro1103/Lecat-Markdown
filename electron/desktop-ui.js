@@ -1,6 +1,7 @@
 import {t,translateUI,getLanguage} from './i18n.js';
 import {createMacExplorer} from './mac-explorer.js';
 import {createWindowsExplorer} from './windows-explorer.js';
+import {createWindowsExplorerSplit} from './windows-explorer-split.js';
 const $=selector=>document.querySelector(selector);
 function element(tag,text,className){const node=document.createElement(tag);if(text){node.textContent=t(text);node.dataset.i18n=text;}if(className)node.className=className;return node;}
 function button(label,icon,action){const node=element('button');node.type='button';node.title=t(label);node.setAttribute('aria-label',t(label));node.dataset.i18nTitle=label;node.dataset.i18nAriaLabel=label;if(icon){const i=element('i');i.dataset.lucide=icon;node.append(i);}else node.append(element('span',label));node.onclick=action;return node;}
@@ -17,6 +18,7 @@ export function createDesktopUI({api,run,doc,sync,render,toast,accept,loadFolder
  const tools=element('div',null,'sidebar-tools');tools.append(button('Nuevo archivo','file-plus',()=>create('file').catch(e=>toast(e.message))),button('Nueva carpeta','folder-plus',()=>create('folder').catch(e=>toast(e.message))),button('Crear desde portapapeles','clipboard-paste',()=>create('clipboard').catch(e=>toast(e.message))),button('Recientes','history',()=>showRecents().catch(e=>toast(e.message))));$('.filter').after(tools);
  createMacExplorer({sidebar:$('#sidebar'),filter:$('.filter'),create,openFiles:()=>$('#native-browse').click(),openFolder:()=>run('folder'),recents:showRecents,icons,getFolder,onError:error=>toast(error.message)});
  createWindowsExplorer({filter:$('.filter'),tools,create,recents:showRecents,icons,onError:error=>toast(error.message)});
+ createWindowsExplorerSplit($('#sidebar'));
  const share=button('Compartir','share',()=>run('share')),inspect=button('Inspector','info',()=>run('inspector'));share.className='desktop-action native-share-button';inspect.className='desktop-action';$('.app-actions').insertBefore(share,$('[data-command=updates]'));share.after(inspect);
  const preferences=element('section',null,'preference-section'),pinLabel=element('label',null,'preference-toggle'),pin=element('input');pin.type='checkbox';pin.id='preference-pinned';pinLabel.append(pin,element('span','Siempre encima'));preferences.append(element('h2','Ventana y enlaces'),pinLabel,button('Restablecer permisos de enlaces',null,()=>api('resetLinks').then(()=>toast('Permisos restablecidos.')).catch(e=>toast(e.message))),button('Instalar comando lecat',null,()=>api('installCLI').then(value=>toast(value)).catch(e=>toast(e.message))));$('#preference-status').before(preferences);
  pin.onchange=()=>api('alwaysOnTop',pin.checked).then(value=>{pinned=value;pin.checked=value;}).catch(error=>{pin.checked=pinned;toast(error.message);});api('desktopState').then(state=>{pinned=state.alwaysOnTop;pin.checked=pinned;}).catch(e=>toast(e.message));

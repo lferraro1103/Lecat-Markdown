@@ -1,4 +1,5 @@
 module.exports={
+ 'Ajustar altura del explorador':['Resize explorer panels','Ajustar altura do explorador','Redimensionner les panneaux','Explorer-Bereiche anpassen','调整资源管理器面板','調整檔案總管面板','エクスプローラーパネルの高さを調整'],
  'Más acciones':['More actions','Mais ações','Plus d’actions','Weitere Aktionen','更多操作','更多操作','その他の操作'],
  'Apariencia':['Appearance','Aparência','Apparence','Darstellung','外观','外觀','外観'],
  'Tema':['Theme','Tema','Thème','Design','主题','佈景主題','テーマ'],
