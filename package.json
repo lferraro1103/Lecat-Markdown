@@ -71,6 +71,7 @@
       "electron/toolbar-audit.cjs",
       "electron/interface-audit.cjs",
       "electron/explorer-audit.cjs",
+      "electron/windows-explorer-audit.cjs",
       "electron/window-state.cjs",
       "electron/window-state-audit.cjs",
       "electron/mac-updater.cjs",

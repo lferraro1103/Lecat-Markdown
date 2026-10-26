@@ -45,6 +45,14 @@ exports.run=async({execute,check,wait,win,out,temp,dialog})=>{
  check('create menu writes inside selected folder without replacing tree root',(await fs.readFile(created,'utf8'))===''&&await execute(`document.querySelector('#path').value===${JSON.stringify(folder)}`));
  await openMenu();await execute(`${item('Nueva carpeta')}.click()`);await wait(`document.querySelector('#edit-dialog').open`);await execute(`document.querySelector('#edit-value').value='Material nuevo';document.querySelector('#edit-dialog button[value=apply]').click()`);await wait(`${row(path.join(branch,'Material nuevo'))}!==undefined`);
  check('create menu can add a nested folder',(await fs.stat(path.join(branch,'Material nuevo'))).isDirectory());
+ try{
+  await execute(`window.__savedEnrich=window.__claroTest.finderPanel.enrich;window.__treeEnrichEntered=false;window.__claroTest.finderPanel.enrich=items=>{if(!window.__treeEnrichEntered){window.__treeEnrichEntered=true;return new Promise(resolve=>window.__releaseTreeEnrich=()=>resolve(false));}return window.__savedEnrich(items);};window.__firstTreeRefresh=window.__claroTest.fileTree.reload(${JSON.stringify(branch)});void 0`);
+  await wait(`window.__treeEnrichEntered`);const added=path.join(branch,'Material actualizado');await fs.mkdir(added);
+  await execute(`window.__secondTreeRefresh=window.__claroTest.fileTree.reload(${JSON.stringify(branch)});void 0`);await wait(`${row(added)}!==undefined`);
+  check('tree refresh reads new entries while previous metadata is still pending',true);
+  await execute(`window.__releaseTreeEnrich();Promise.all([window.__firstTreeRefresh,window.__secondTreeRefresh]).then(()=>true)`);
+  check('late metadata cannot remove newly created folders',await execute(`${row(added)}!==undefined`));
+ }finally{await execute(`window.__releaseTreeEnrich?.();if(window.__savedEnrich)window.__claroTest.finderPanel.enrich=window.__savedEnrich;true`);}
  const original=dialog.showOpenDialog;try{let requested;
   dialog.showOpenDialog=async(_win,options)=>{requested=options;return {canceled:false,filePaths:[path.join(folder,names.at(-1))]};};
   await openMenu();await execute(`${item('Abrir archivos…')}.click()`);await wait(`window.__claroTest.doc().path===${JSON.stringify(path.join(folder,names.at(-1)))}`);

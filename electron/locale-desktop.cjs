@@ -1,4 +1,5 @@
 module.exports={
+ 'Más acciones':['More actions','Mais ações','Plus d’actions','Weitere Aktionen','更多操作','更多操作','その他の操作'],
  'Apariencia':['Appearance','Aparência','Apparence','Darstellung','外观','外觀','外観'],
  'Tema':['Theme','Tema','Thème','Design','主题','佈景主題','テーマ'],
  'Claro':['Light','Claro','Clair','Hell','浅色','淺色','ライト'],
