@@ -1,0 +1,33 @@
+const fs=require('node:fs/promises'),path=require('node:path');
+exports.run=async({execute,check,wait,win,out,temp})=>{
+ if(await execute(`document.documentElement.dataset.platform!=='win32'`))return;
+ const settle=()=>execute('new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))');
+ const menuItem=label=>`Array.from(document.querySelectorAll('#sidebar-action-menu [role=menuitem]')).find(b=>b.textContent===${JSON.stringify(label)})`;
+ const open=async()=>{await execute(`document.querySelector('#sidebar-create').click()`);await wait(`document.querySelector('#sidebar-action-menu').matches(':popover-open')`);};
+ const folder=path.join(temp,'Explorador Windows');await fs.mkdir(folder);await fs.writeFile(path.join(folder,'Apuntes.md'),'# Apuntes\n\nMaterial de estudio.');
+ await execute(`window.__claroTest.loadFolder(${JSON.stringify(folder)})`);await settle();
+ check('Windows sidebar shows search and plus without an extra action row',await execute(`document.querySelector('#filter').hidden&&!document.querySelector('.sidebar-tools')&&document.querySelectorAll('.compact-filter>button').length===2`));
+ await execute(`document.querySelector('#explorer-filter-toggle').click()`);await settle();
+ check('search icon reveals and focuses the filter',await execute(`!document.querySelector('#filter').hidden&&document.activeElement===document.querySelector('#filter')`));
+ await execute(`document.querySelector('#filter').value='no-coincide-con-nada';document.querySelector('#filter').dispatchEvent(new Event('input'))`);
+ check('compact filter still filters the file list',await execute(`document.querySelectorAll('#files .file').length===0`));
+ await execute(`document.querySelector('#filter').dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}))`);await settle();
+ check('Escape clears and collapses the filter and restores files',await execute(`document.querySelector('#filter').hidden&&document.querySelector('#filter').value===''&&document.querySelectorAll('#files .file').length>0`));
+ await open();check('plus menu contains the four original actions',await execute(`JSON.stringify(Array.from(document.querySelectorAll('#sidebar-action-menu [role=menuitem]'),b=>b.textContent))===JSON.stringify(['Nuevo archivo','Nueva carpeta','Crear desde portapapeles','Recientes'])`));
+ await execute(`${menuItem('Nuevo archivo')}.click()`);await wait(`document.querySelector('#edit-dialog').open`);await execute(`document.querySelector('#edit-value').value='Nueva nota.md';document.querySelector('#edit-dialog button[value=apply]').click()`);
+ const created=path.join(folder,'Nueva nota.md');await wait(`window.__claroTest.doc().path===${JSON.stringify(created)}&&document.querySelector('#files').textContent.includes('Nueva nota.md')`);
+ check('compact plus menu creates a file in the current folder',(await fs.readFile(created,'utf8'))==='');
+ await open();await execute(`${menuItem('Nueva carpeta')}.click()`);await wait(`document.querySelector('#edit-dialog').open`);await execute(`document.querySelector('#edit-value').value='Material';document.querySelector('#edit-dialog button[value=apply]').click()`);await wait(`document.querySelector('#files').textContent.includes('Material')`);
+ check('compact plus menu creates a folder',(await fs.stat(path.join(folder,'Material'))).isDirectory());
+ await open();await execute(`${menuItem('Recientes')}.click()`);await wait(`!document.querySelector('.recent-files').hidden`);
+ check('compact menu opens recent documents',await execute(`document.querySelector('#files').hidden`));
+ await open();await execute(`${menuItem('Recientes')}.click()`);await wait(`document.querySelector('.recent-files').hidden`);
+ win.setSize(1100,850);await settle();
+ check('Windows file list gets more height than quick access',await execute(`(()=>{const files=document.querySelector('#files').getBoundingClientRect(),places=document.querySelector('#places').getBoundingClientRect();return files.height>places.height&&places.height<=220;})()`));
+ for(const theme of ['dark','light']){await execute(`window.__claroTest.setTheme(${JSON.stringify(theme)});document.querySelector('#toast').hidden=true`);await settle();
+  const crop=await execute(`(()=>{const r=document.querySelector('.compact-filter').getBoundingClientRect();return {x:0,y:Math.floor(r.top-8),width:350,height:Math.min(240,innerHeight-Math.floor(r.top-8))};})()`);
+  await fs.writeFile(path.join(out,'windows-explorer-'+theme+'.png'),(await win.webContents.capturePage(crop)).toPNG());
+  await open();check('Windows action menu fits within viewport',await execute(`(()=>{const r=document.querySelector('#sidebar-action-menu').getBoundingClientRect();return r.left>=0&&r.top>=0&&r.right<=innerWidth&&r.bottom<=innerHeight;})()`));
+  await fs.writeFile(path.join(out,'windows-explorer-'+theme+'-menu.png'),(await win.webContents.capturePage(crop)).toPNG());await execute(`document.querySelector('#sidebar-action-menu').hidePopover()`);
+ }
+};

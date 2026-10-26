@@ -2,7 +2,7 @@ import {t} from './i18n.js';
 
 export function createFileTree({api,finder,container,icons,activePath,onOpen,onError}){
  let root='',selected='',revision=0,query='';
- const cache=new Map(),expanded=new Set(),pending=new Map();
+ const cache=new Map(),expanded=new Set(),pending=new Map(),loads=new Map();
  const enabled=()=>finder.enabled();
  const name=path=>path.replace(/[\\/]+$/,'').split(/[\\/]/).at(-1)||path;
  const icon=value=>{const i=document.createElement('i');i.dataset.lucide=value;return i;};
@@ -31,9 +31,11 @@ export function createFileTree({api,finder,container,icons,activePath,onOpen,onE
   const rows=[...container.querySelectorAll('[role=treeitem]')],target=rows.find(row=>row.dataset.path===focus)||rows.find(row=>row.classList.contains('active'))||rows[0];
   if(target){target.tabIndex=0;if(focus)target.focus({preventScroll:true});}
  }
- async function read(folder){
-  if(pending.has(folder))return pending.get(folder);
-  const ticket=revision,job=api('list',folder).then(async items=>{if(ticket!==revision)return;cache.set(folder,items);render();await finder.enrich(items);if(ticket===revision)render();}).finally(()=>{if(pending.get(folder)===job)pending.delete(folder);});pending.set(folder,job);return job;
+ async function read(folder,{fresh=false}={}){
+  if(!fresh&&pending.has(folder))return pending.get(folder);
+  const ticket=revision,load=(loads.get(folder)||0)+1;loads.set(folder,load);
+  const current=()=>ticket===revision&&loads.get(folder)===load;
+  const job=api('list',folder).then(async items=>{if(!current())return;cache.set(folder,items);render();await finder.enrich(items);if(current())render();}).finally(()=>{if(pending.get(folder)===job)pending.delete(folder);});pending.set(folder,job);return job;
  }
  async function toggle(folder,force){
   const open=force??!expanded.has(folder);if(open)expanded.add(folder);else expanded.delete(folder);render();if(open&&!cache.has(folder))await read(folder);
@@ -51,7 +53,7 @@ export function createFileTree({api,finder,container,icons,activePath,onOpen,onE
  });
  const contains=target=>{if(!root)return false;const clean=value=>value.replaceAll('\\','/').replace(/\/+$/,'');return clean(target).startsWith(clean(root)+'/');};
  return {enabled,render,contains,get folder(){return selected||root;},async setRoot(folder,items){
-  if(root!==folder){revision++;root=folder;selected=folder;cache.clear();pending.clear();expanded.clear();expanded.add(folder);}
-  cache.set(folder,items);render();const ticket=revision;await finder.enrich([{path:folder,name:name(folder),directory:true},...items]);if(ticket===revision)render();
- },async reload(folder=root){cache.delete(folder);await read(folder);},selectionChanged(){if(enabled())for(const row of container.querySelectorAll('[role=treeitem]')){const active=row.dataset.path===activePath();row.classList.toggle('active',active);row.setAttribute('aria-selected',String(active));}}};
+  if(root!==folder){revision++;root=folder;selected=folder;cache.clear();pending.clear();loads.clear();expanded.clear();expanded.add(folder);}
+  loads.set(folder,(loads.get(folder)||0)+1);pending.delete(folder);cache.set(folder,items);render();const ticket=revision;await finder.enrich([{path:folder,name:name(folder),directory:true},...items]);if(ticket===revision)render();
+ },async reload(folder=root){await read(folder,{fresh:true});},selectionChanged(){if(enabled())for(const row of container.querySelectorAll('[role=treeitem]')){const active=row.dataset.path===activePath();row.classList.toggle('active',active);row.setAttribute('aria-selected',String(active));}}};
 }

@@ -33,3 +33,13 @@ html[data-platform=darwin] .mac-explorer-footer>.filter{display:flex;flex:1;min-
 .explorer-create-menu hr{border:0;border-top:1px solid var(--border);margin:6px 8px}
 .explorer-menu-context{padding:4px 10px 6px;font-size:11px;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 @media print{.mac-explorer-footer,.explorer-create-menu{display:none!important}}
+
+/* Compact Windows filter: search and actions share one row. */
+html[data-platform=win32] #places{max-height:clamp(120px,25vh,220px);flex:0 1 auto}
+html[data-platform=win32] #files{min-height:160px}
+html[data-platform=win32] .compact-filter{display:flex;align-items:center;gap:4px;min-height:40px;padding:4px 10px 8px;border-bottom:1px solid var(--border)}
+html[data-platform=win32] .compact-filter>button{flex:none;width:30px;height:28px;min-height:28px;padding:5px;color:var(--muted)}
+html[data-platform=win32] .compact-filter>button svg{width:16px;height:16px}
+html[data-platform=win32] .compact-filter>button[aria-expanded=true]{background:var(--selection);color:var(--accent)}
+html[data-platform=win32] .compact-filter input{flex:1;min-width:0;width:0;height:28px;padding:4px 7px;background:var(--canvas);border:1px solid var(--border);border-radius:6px;font-size:12px}
+html[data-platform=win32] .compact-filter input[hidden]{display:none}
