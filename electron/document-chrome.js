@@ -10,7 +10,8 @@ export function createDocumentChrome(){
  const status=document.querySelector('#save-state');
  status.setAttribute('role','status');status.setAttribute('aria-live','polite');
  const mac=document.querySelector('.toolbar-title #tabs');
- (mac?document.querySelector('.format-toggle-header'):document.querySelector('.view-actions [data-command=search]')).before(status);
+ if(mac)document.querySelector('.document>footer').append(status);
+ else document.querySelector('.view-actions [data-command=search]').before(status);
  let activeId=null;
  const isOpen=()=>popup.matches(':popover-open');
  const anchor=()=>document.querySelector('#tabs .tab.active .tab-details');

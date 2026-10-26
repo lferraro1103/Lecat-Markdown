@@ -1,0 +1,35 @@
+/* Finder-like folder tree and a single bottom action area on macOS. */
+html[data-platform=darwin]{--sidebar-width:285px}
+html[data-platform=darwin] .app-actions>button[data-command=new],html[data-platform=darwin] .app-actions>button[data-command=open],html[data-platform=darwin] .sidebar-tools,html[data-platform=darwin] .finder-actions{display:none!important}
+html[data-platform=darwin] .side-header{height:46px;min-height:46px;padding:7px 12px;letter-spacing:normal}
+.explorer-switch{display:flex;gap:2px;padding:3px;border-radius:11px;background:color-mix(in srgb,var(--text) 6%,transparent)}
+.explorer-switch button{width:34px;height:28px;min-height:28px;padding:5px;border-radius:8px;color:var(--muted)}
+.explorer-switch button[aria-pressed=true]{background:color-mix(in srgb,var(--text) 12%,transparent);color:var(--text);box-shadow:0 1px 3px #0002}
+html[data-platform=darwin] #sidebar[data-explorer-view=tree] #places{display:none}
+html[data-platform=darwin] #sidebar[data-explorer-view=locations] #files{display:none}
+html[data-platform=darwin] #sidebar[data-explorer-view=locations] #places{display:block;flex:1;max-height:none;border:0}
+html[data-platform=darwin] #files{padding:5px 10px;min-height:0}
+html[data-platform=darwin] .tree-row{min-height:30px;gap:6px;padding:4px 9px 4px calc(4px + var(--tree-depth)*16px);border-radius:7px;font-size:13px;color:var(--text)}
+.tree-row>.tree-name{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.tree-caret{display:flex;align-items:center;justify-content:center;width:12px;min-width:12px;height:18px;overflow:visible!important;color:var(--muted)}
+.tree-caret svg{width:12px;height:12px;stroke-width:2;transition:transform .12s}
+.tree-row[aria-expanded=true]>.tree-caret svg{transform:rotate(90deg)}
+.tree-row>.finder-icon,.tree-row>svg{width:18px;height:18px;flex:none}
+.tree-folder>svg{color:#63c9ed;fill:#439dc4;stroke-width:1.3}
+.tree-folder>.tree-name{font-weight:500}
+html[data-platform=darwin] .tree-row.active{background:color-mix(in srgb,var(--text) 14%,transparent);color:var(--text)}
+html[data-platform=darwin] .tree-target:not(.active){background:color-mix(in srgb,var(--text) 5%,transparent)}
+html[data-platform=darwin] .tree-row:focus-visible{outline-offset:-2px}
+.mac-explorer-footer{display:flex;align-items:center;gap:8px;padding:10px 12px 12px;flex:none;order:20}
+.mac-explorer-footer>#explorer-create{width:34px;height:34px;min-height:34px;padding:6px;flex:none;border:1px solid color-mix(in srgb,var(--text) 15%,transparent);border-radius:50%;background:color-mix(in srgb,var(--text) 7%,transparent);color:var(--muted)}
+html[data-platform=darwin] .mac-explorer-footer>.filter{display:flex;flex:1;min-width:0;height:34px;padding:0 8px;gap:6px;border:1px solid color-mix(in srgb,var(--text) 15%,transparent);border-radius:18px;background:color-mix(in srgb,var(--text) 6%,transparent)}
+.mac-explorer-footer .filter>svg{width:15px;height:15px;flex:none}
+.mac-explorer-footer .filter input{flex:1;min-width:0;width:0;font-size:12px}
+.mac-explorer-footer .explorer-history{width:24px;height:24px;min-height:24px;flex:none;padding:3px;border-radius:50%;color:var(--muted)}
+.mac-explorer-footer .explorer-history svg{width:16px;height:16px}
+.explorer-create-menu{position:fixed;inset:auto;margin:0;padding:6px;width:310px;max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);overflow:auto;border:1px solid color-mix(in srgb,var(--text) 15%,var(--border));border-radius:12px;background:var(--panel);color:var(--text);box-shadow:0 10px 30px #0004}
+.explorer-create-menu button{display:flex;justify-content:flex-start;width:100%;min-height:32px;padding:6px 10px;gap:10px;text-align:left;font-size:13px;border-radius:6px}
+.explorer-create-menu button>svg{width:16px;height:16px;color:var(--muted)}
+.explorer-create-menu hr{border:0;border-top:1px solid var(--border);margin:6px 8px}
+.explorer-menu-context{padding:4px 10px 6px;font-size:11px;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+@media print{.mac-explorer-footer,.explorer-create-menu{display:none!important}}
