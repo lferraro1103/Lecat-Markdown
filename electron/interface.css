@@ -5,9 +5,12 @@
 
 /* Tabs: ellipsis for long names, centered close icon and no scrollbar eating the tab height. */
 #tabs{scrollbar-width:none}
+html[data-platform=darwin] #tabs .tab{max-width:min(210px,100%);min-width:min(105px,100%)}
 .tab>button:first-child{min-width:0}
 .tab>button:first-child span{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.tab .close-tab{width:24px;min-width:24px;height:24px;padding:0;flex:none}
+#tabs .tab .close-tab,#tabs .tab .tab-details{width:24px;min-width:24px;height:24px;min-height:24px;padding:0;flex:0 0 24px;align-self:center;border-radius:5px}
+.tab>button:first-child{height:100%;min-height:0;align-self:stretch}
+.tab>button:focus-visible{outline-offset:-2px}
 .tab .close-tab svg,.tab .close-tab svg.lucide{width:13px;height:13px}
 
 /* Sidebar rows share one height in places, recents and the file list. */
@@ -47,8 +50,9 @@ html[data-platform=darwin] .cm-panel.cm-search{font-family:-apple-system,BlinkMa
 .cm-panel.cm-search button[name=close]{position:absolute;top:13px;right:8px;margin:0!important;width:26px;height:26px;min-height:26px;padding:0;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;color:var(--muted);border-radius:6px}
 .cm-panel.cm-search button[name=close]:hover{background:var(--selection);color:var(--accent)}
 
-/* Keep the floating format bar from covering the first lines of the document. */
-#panes:has(>#formatbar[data-floating]:not([hidden]):not([data-position=left]):not([data-position=right])) :is(.visual-document,#preview){padding-top:68px}
+/* Reserve the measured toolbar footprint, including wrapped rows and side positions. */
+:is(#panes,[data-pane-part=panes]){padding-top:var(--format-reserve-top,0px);padding-left:var(--format-reserve-left,0px);padding-right:var(--format-reserve-right,0px)}
+:is(#panes,[data-pane-part=panes])>:is(#outline,[data-pane-part=outline],.inspector){top:var(--format-reserve-top,0px);right:var(--format-reserve-right,0px)}
 
 /* Inspector header aligned with its close button. */
 .inspector-header{min-height:40px}
@@ -65,4 +69,4 @@ html[data-platform=darwin] .cm-panel.cm-search{font-family:-apple-system,BlinkMa
 .finder-tag[data-label=red]{background:#ff3b30}
 .finder-tag[data-label=orange]{background:#ff9500}
 
-@media print{#panes :is(.visual-document,#preview){padding-top:0!important}}
+@media print{:is(#panes,[data-pane-part=panes]){padding:0!important}}

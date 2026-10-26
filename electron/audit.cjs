@@ -18,6 +18,7 @@ exports.run=async({win,docs,openDoc,saveDoc,confirmClose,saveDrafts,draftFile,di
  await require('./visual-audit.cjs').run({execute,check,temp,openDoc,win,wait,out});
  await require('./session-audit.cjs').run({execute,check,temp,openDoc,sessionFile,persistSession,approveWindowClose,dialog});
  await require('./toolbar-audit.cjs').run({execute,check,win,out,temp,openDoc});
+ await require('./interface-audit.cjs').run({execute,check,win,out,temp,openDoc});
  if(process.env.CLARO_AUDIT_NATIVE_WINDOW_STATE==='1')await require('./window-state-audit.cjs').run({win,app,temp,windowState,windowStateFile,execute,check,wait});
  win.setSize(900,650);await execute('window.__claroTest.setMode("split");window.__claroTest.setTheme("light")');await new Promise(r=>setTimeout(r,600));await fs.writeFile(path.join(out,'compact.png'),(await win.webContents.capturePage()).toPNG());check('900px window has no horizontal shell overflow',await execute('document.documentElement.scrollWidth<=innerWidth'));check('offline renderer makes no network connections',await execute('performance.getEntriesByType("resource").every(e=>!/^https?:/.test(e.name))'));check('multiple tabs preserve edits',await execute('window.__claroTest.documents.size>=2'));
  results.push('SUCCESS');await fs.writeFile(path.join(out,'AUDIT-RESULTS.txt'),results.join('\n'));console.log(results.join('\n'));await fs.rm(temp,{recursive:true,force:true});app.exit(0);

@@ -26,11 +26,11 @@ export function createDocumentChrome(){
  document.querySelector('#tabs').addEventListener('scroll',()=>{if(isOpen())position();});
  // Tabs overflow horizontally without a visible scrollbar, so map the wheel to that axis.
  document.querySelector('#tabs').addEventListener('wheel',event=>{const tabs=event.currentTarget;if(!event.deltaY||Math.abs(event.deltaX)>Math.abs(event.deltaY)||tabs.scrollWidth<=tabs.clientWidth)return;event.preventDefault();tabs.scrollLeft+=event.deltaY;},{passive:false});
- new ResizeObserver(()=>{if(isOpen())position();}).observe(document.querySelector('#tabs'));
+ new ResizeObserver(()=>{document.querySelector('#tabs .tab.active')?.scrollIntoView({block:'nearest',inline:'nearest'});if(isOpen())position();}).observe(document.querySelector('#tabs'));
  return {
   addDisclosure(tab,id){
    const button=document.createElement('button');button.type='button';button.className='tab-details';
-   button.title=t('Información del documento');button.setAttribute('aria-label',button.title);
+   button.setAttribute('aria-label',t('Información del documento'));
    button.setAttribute('aria-controls',popup.id);button.setAttribute('aria-expanded',String(isOpen()&&id===activeId));
    const icon=document.createElement('i');icon.dataset.lucide='chevron-down';button.append(icon);
    button.onclick=()=>{if(isOpen())popup.hidePopover();else{popup.showPopover();position();}};

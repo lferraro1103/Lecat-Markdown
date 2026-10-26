@@ -1,8 +1,8 @@
-# Lecat Markdown 3.7.0-macos12.1 — Monterey
+# Lecat Markdown 3.7.1-macos12.1 — Monterey
 
 Compatible con macOS 12, Intel y Apple Silicon. Conserva su canal de actualización firmado; no reemplaza la stable para macOS 13+. Para Monterey usá los DMG o ZIP de esta release.
 
-# Lecat Markdown 3.7.0
+# Lecat Markdown 3.7.1
 
 ## Explorador con Finder en macOS
 
@@ -23,7 +23,7 @@ Compatible con macOS 12, Intel y Apple Silicon. Conserva su canal de actualizaci
 - Barras de desplazamiento finas que siguen el tema claro u oscuro y filas del explorador con la misma altura.
 
 Windows instalado, macOS y Linux mantienen sus canales de actualización. macOS 12 utiliza
-la release separada **3.7.0-macos12.1**. Se conserva la firma ad-hoc de Mac.
+la release separada **3.7.1-macos12.1**. Se conserva la firma ad-hoc de Mac.
 
 ## English
 
