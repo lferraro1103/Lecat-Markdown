@@ -1,0 +1,68 @@
+/* Interface audit fixes: alignment, consistent controls and quieter scrollbars. Loaded after the feature stylesheets. */
+
+/* Thin scrollbars that follow the theme instead of the classic Windows arrows. */
+*{scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--muted) 45%,transparent) transparent}
+
+/* Tabs: ellipsis for long names, centered close icon and no scrollbar eating the tab height. */
+#tabs{scrollbar-width:none}
+.tab>button:first-child{min-width:0}
+.tab>button:first-child span{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.tab .close-tab{width:24px;min-width:24px;height:24px;padding:0;flex:none}
+.tab .close-tab svg,.tab .close-tab svg.lucide{width:13px;height:13px}
+
+/* Sidebar rows share one height in places, recents and the file list. */
+.place,.file{min-height:32px}
+#places details>summary.place-group{display:flex;align-items:center;gap:7px;min-height:32px;padding:6px 9px 6px 12px;border-radius:6px;list-style:none;cursor:pointer;color:var(--muted);font-size:12px}
+#places details>summary.place-group::-webkit-details-marker{display:none}
+#places details>summary.place-group:hover{background:var(--selection);color:var(--accent)}
+#places details>summary.place-group svg{width:15px;height:15px;transition:transform .15s}
+#places details[open]>summary.place-group svg{transform:rotate(90deg)}
+#places details>summary.place-group:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
+/* Dialog headers: title and close button on the same axis, same icon everywhere. */
+.modal-tools{align-items:center;min-height:52px}
+.modal-tools>button{width:30px;height:30px;min-height:30px;padding:0;flex:none}
+.update-current strong{margin-left:4px}
+
+/* Preference actions look like buttons and line up with the section content. */
+.preference-section>button,.preferences-body section>button{align-self:flex-start;min-height:32px;padding:6px 14px;border:1px solid var(--border);border-radius:8px;background:var(--panel);font-size:13px}
+#preference-status:empty{display:none}
+.preference-section>button:hover,.preferences-body section>button:hover{border-color:var(--accent)}
+
+/* Visual find bar: inputs and actions share a baseline. */
+:is(#visual-search,[data-pane-part="visual-search"]){align-items:center}
+:is(#visual-search,[data-pane-part="visual-search"]) input{height:32px}
+:is(#visual-search,[data-pane-part="visual-search"]) button[data-search=close]{width:30px;padding:0;margin-left:auto}
+
+/* CodeMirror find panel styled like the rest of the app. */
+.cm-panel.cm-search{position:relative;padding:6px 40px 6px 8px!important;line-height:40px;font:12px 'Segoe UI',sans-serif!important}
+html[data-platform=darwin] .cm-panel.cm-search{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif!important}
+.cm-panel.cm-search>*{vertical-align:middle;margin:0 3px!important}
+.cm-panel.cm-search .cm-textfield{height:30px;min-width:170px;padding:4px 8px!important;border:1px solid var(--border)!important;border-radius:6px!important;font:inherit!important;font-size:12px!important}
+.cm-panel.cm-search .cm-textfield:focus{outline:2px solid var(--accent);outline-offset:0}
+.cm-panel.cm-search .cm-button{height:30px;padding:4px 10px!important;border:1px solid var(--border)!important;border-radius:6px!important;background:var(--canvas)!important;background-image:none!important;color:var(--text)!important;font:inherit!important;font-size:12px!important;cursor:pointer}
+.cm-panel.cm-search .cm-button:hover{border-color:var(--accent)!important;color:var(--accent)!important}
+.cm-panel.cm-search label{display:inline-flex;align-items:center;gap:5px;font-size:12px!important;color:var(--muted)}
+.cm-panel.cm-search input[type=checkbox]{margin:0;width:14px;height:14px;accent-color:var(--accent)}
+.cm-panel.cm-search button[name=close]{position:absolute;top:13px;right:8px;margin:0!important;width:26px;height:26px;min-height:26px;padding:0;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;color:var(--muted);border-radius:6px}
+.cm-panel.cm-search button[name=close]:hover{background:var(--selection);color:var(--accent)}
+
+/* Keep the floating format bar from covering the first lines of the document. */
+#panes:has(>#formatbar[data-floating]:not([hidden]):not([data-position=left]):not([data-position=right])) :is(.visual-document,#preview){padding-top:68px}
+
+/* Inspector header aligned with its close button. */
+.inspector-header{min-height:40px}
+.inspector-header button{width:28px;height:28px;min-height:28px;padding:0}
+
+/* macOS file panel with Finder icons and tag colors (see finder-panel.js). */
+.finder-icon{width:16px;height:16px;flex:none;object-fit:contain;-webkit-user-drag:none}
+.file .finder-tags,.place .finder-tags{display:inline-flex;gap:3px;margin-left:auto;padding-left:6px;flex:none}
+.finder-tag{width:8px;height:8px;border-radius:50%;background:#8e8e93;box-shadow:0 0 0 1px color-mix(in srgb,var(--canvas) 70%,transparent)}
+.finder-tag[data-label=green]{background:#34c759}
+.finder-tag[data-label=purple]{background:#af52de}
+.finder-tag[data-label=blue]{background:#007aff}
+.finder-tag[data-label=yellow]{background:#ffcc00}
+.finder-tag[data-label=red]{background:#ff3b30}
+.finder-tag[data-label=orange]{background:#ff9500}
+
+@media print{#panes :is(.visual-document,#preview){padding-top:0!important}}

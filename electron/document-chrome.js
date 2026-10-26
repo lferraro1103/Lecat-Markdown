@@ -24,6 +24,8 @@ export function createDocumentChrome(){
  popup.addEventListener('toggle',expanded);
  window.addEventListener('resize',()=>{if(isOpen())position();});
  document.querySelector('#tabs').addEventListener('scroll',()=>{if(isOpen())position();});
+ // Tabs overflow horizontally without a visible scrollbar, so map the wheel to that axis.
+ document.querySelector('#tabs').addEventListener('wheel',event=>{const tabs=event.currentTarget;if(!event.deltaY||Math.abs(event.deltaX)>Math.abs(event.deltaY)||tabs.scrollWidth<=tabs.clientWidth)return;event.preventDefault();tabs.scrollLeft+=event.deltaY;},{passive:false});
  new ResizeObserver(()=>{if(isOpen())position();}).observe(document.querySelector('#tabs'));
  return {
   addDisclosure(tab,id){
