@@ -8,22 +8,22 @@ if(process.versions.electron){
  app.on('browser-window-created',(_event,win)=>win.webContents.once('did-finish-load',async()=>{try{
   const execute=source=>win.webContents.executeJavaScript(source);
   await wait(()=>execute('window.__claroInitialized===true'));
-  const names=await execute('Array.from(document.querySelectorAll(".tab")).map(t=>t.title)');
+  const names=await execute('Array.from(document.querySelectorAll(".tab")).map(t=>t.getAttribute("aria-label"))');
   const title=await execute('document.querySelector("#doc-title").textContent');
   if(round==='first')assert.equal(title,'Bienvenido.md');
   if(round==='open'){
    assert.equal(title,'Sin título.md');assert(!names.includes('Bienvenido.md'));
-   for(const file of [a,b]){const result=await execute(`window.claro.open(${JSON.stringify(file)})`);assert.equal(result.ok,true);win.webContents.send('command',{openDoc:result.value});await wait(()=>execute(`Array.from(document.querySelectorAll('.tab')).some(t=>t.title===${JSON.stringify(file)})`));}
-   await execute(`Array.from(document.querySelectorAll('.tab')).find(t=>t.title===${JSON.stringify(a)}).querySelector('button').click()`);
+   for(const file of [a,b]){const result=await execute(`window.claro.open(${JSON.stringify(file)})`);assert.equal(result.ok,true);win.webContents.send('command',{openDoc:result.value});await wait(()=>execute(`Array.from(document.querySelectorAll('.tab')).some(t=>t.getAttribute("aria-label")===${JSON.stringify(path.basename(file))})`));}
+   await execute(`Array.from(document.querySelectorAll('.tab')).find(t=>t.getAttribute("aria-label")===${JSON.stringify(path.basename(a))}).querySelector('button').click()`);
    await wait(()=>fs.existsSync(sessionFile)&&JSON.parse(fs.readFileSync(sessionFile,'utf8')).activePath===a);
   }
   if(round==='restore'){
-   assert.deepEqual(names,[a,b]);assert.equal(title,'A.md');
-   await execute(`Array.from(document.querySelectorAll('.tab')).find(t=>t.title===${JSON.stringify(b)}).querySelector('.close-tab').click()`);
+   assert.deepEqual(names,[path.basename(a),path.basename(b)]);assert.equal(title,'A.md');
+   await execute(`Array.from(document.querySelectorAll('.tab')).find(t=>t.getAttribute("aria-label")===${JSON.stringify(path.basename(b))}).querySelector('.close-tab').click()`);
    await wait(()=>!JSON.parse(fs.readFileSync(sessionFile,'utf8')).paths.includes(b));
   }
-  if(round==='closed'){assert.deepEqual(names,[a]);assert.equal(title,'A.md');}
-  if(round==='explicit'){assert.deepEqual(names,[a,b]);assert.equal(title,'B.md');}
+  if(round==='closed'){assert.deepEqual(names,[path.basename(a)]);assert.equal(title,'A.md');}
+  if(round==='explicit'){assert.deepEqual(names,[path.basename(a),path.basename(b)]);assert.equal(title,'B.md');}
   fs.writeFileSync(path.join(profile,round+'.json'),JSON.stringify({passed:true,names,title}));
   if(process.platform==='darwin')app.quit();else win.close();
  }catch(error){fs.writeFileSync(path.join(profile,round+'.json'),JSON.stringify({passed:false,error:error.stack}));app.exit(1);}}));
