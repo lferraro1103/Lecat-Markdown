@@ -1,4 +1,4 @@
-# Lecat Markdown 3.9.4
+# Lecat Markdown 3.9.5
 
 ## Español
 
@@ -8,7 +8,7 @@ Ajustes visuales de la botonera y las pestañas.
 - El resaltado al pasar el mouse sobre el nombre de una pestaña tiene la misma altura que los botones de la pestaña y ya no toca su borde.
 - En Windows, la pestaña activa se une con el documento, sin la línea inferior.
 
-Incluye instalador y portable de Windows, macOS Intel/ARM64 y Linux AppImage/deb. macOS 12 utiliza **3.9.4-macos12.1**.
+Incluye instalador y portable de Windows, macOS Intel/ARM64 y Linux AppImage/deb. macOS 12 utiliza **3.9.5-macos12.1**.
 
 ## English
 
