@@ -4,7 +4,8 @@ exports.run=async({execute,check,wait,win,out,temp,openDoc,saveDoc,docs})=>{
  check('PDF descriptors contain no decoded source',d.kind==='pdf'&&!Object.hasOwn(d,'content')&&!d.dirty);
  await execute(`{const t=window.__claroTest;t.documentGroups.closeSplit(false);t.accept(${JSON.stringify(m)});}`);await new Promise(resolve=>setTimeout(resolve,200));
  // Remember where the toolbar actions sit for Markdown; focusing a PDF must not move them.
- await execute(`window.__pdfToolbarLayout=Array.from(document.querySelectorAll('.appbar button,.document-controls button,.document-controls #zoom')).filter(n=>n.getClientRects().length).map(n=>{const r=n.getBoundingClientRect();return {node:n,left:Math.round(r.left),top:Math.round(r.top)};});`);
+ // Tabs are excluded: on macOS they live inside the toolbar and opening the PDF adds one.
+ await execute(`window.__pdfToolbarLayout=Array.from(document.querySelectorAll('.appbar button,.document-controls button,.document-controls #zoom')).filter(n=>n.getClientRects().length&&!n.closest('#tabs')).map(n=>{const r=n.getBoundingClientRect();return {node:n,left:Math.round(r.left),top:Math.round(r.top)};});`);
  await execute(`window.__claroTest.accept(${JSON.stringify(d)})`);
  await wait('window.__claroTest.focusedPdf()?.total===3&&document.querySelector("#panes .pdf-page canvas")!==null');await execute('window.__claroTest.render()');
  check('PDF renders offline using a sandboxed worker',await execute('window.__claroTest.focusedPdf().total===3&&performance.getEntriesByType("resource").every(e=>!/^https?:/.test(e.name))'));
