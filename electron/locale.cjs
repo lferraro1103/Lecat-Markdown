@@ -1,6 +1,13 @@
 const LANGUAGES=[['es','Español'],['en','English'],['pt','Português'],['fr','Français'],['de','Deutsch'],['zh-Hans','中文（简体）'],['zh-Hant','中文（繁體）'],['ja','日本語']];
 // Spanish is the source language. User documents and file names are never translated.
 const rows={
+"Mostrar PDF en el explorador":["Show PDFs in explorer","Mostrar PDFs no explorador","Afficher les PDF dans l’explorateur","PDF im Explorer anzeigen","在资源管理器中显示 PDF","在檔案總管中顯示 PDF","エクスプローラーにPDFを表示"],
+"Solo lectura":["Read only","Somente leitura","Lecture seule","Schreibgeschützt","只读","唯讀","読み取り専用"],
+"Página {page} de {total}":["Page {page} of {total}","Página {page} de {total}","Page {page} sur {total}","Seite {page} von {total}","第 {page} 页，共 {total} 页","第 {page} 頁，共 {total} 頁","{total}ページ中{page}ページ"],
+"Abriendo PDF…":["Opening PDF…","Abrindo PDF…","Ouverture du PDF…","PDF wird geöffnet…","正在打开 PDF…","正在開啟 PDF…","PDFを開いています…"],
+"Contraseña del PDF":["PDF password","Senha do PDF","Mot de passe du PDF","PDF-Passwort","PDF 密码","PDF 密碼","PDFのパスワード"],
+"Contraseña incorrecta. Contraseña del PDF":["Incorrect password. PDF password","Senha incorreta. Senha do PDF","Mot de passe incorrect. Mot de passe du PDF","Falsches Passwort. PDF-Passwort","密码错误。PDF 密码","密碼錯誤。PDF 密碼","パスワードが違います。PDFのパスワード"],
+"Apertura cancelada.":["Opening canceled.","Abertura cancelada.","Ouverture annulée.","Öffnen abgebrochen.","已取消打开。","已取消開啟。","開く操作をキャンセルしました。"],
  'Configuración':['Settings','Configurações','Paramètres','Einstellungen','设置','設定','設定'],
  'General':['General','Geral','Général','Allgemein','常规','一般','一般'],
  'Idioma':['Language','Idioma','Langue','Sprache','语言','語言','言語'],

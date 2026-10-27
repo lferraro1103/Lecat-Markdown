@@ -14,7 +14,7 @@ export function createFloatingFormat({api,toast}){
  function scheduleMeasure(){if(layoutFrame===null)layoutFrame=requestAnimationFrame(measure);}
  bar.dataset.floating='true';bar.hidden=true;panes.append(bar);
  const closeMenus=()=>{for(const menu of bar.querySelectorAll('.format-menu[open]')){menu.open=false;const popup=menu.querySelector('.format-popover');if(popup?.matches(':popover-open'))popup.hidePopover();}};
- function render(){bar.hidden=!state.visible;bar.dataset.position=state.position;for(const button of buttons){button.setAttribute('aria-expanded',String(state.visible));button.setAttribute('aria-pressed',String(state.visible));button.classList.toggle('active',state.visible);}scheduleMeasure();document.dispatchEvent(new Event('format-toolbar-layout'));}
+ function render(){bar.hidden=!state.visible||document.body.dataset.documentKind==='pdf';bar.dataset.position=state.position;for(const button of buttons){button.setAttribute('aria-expanded',String(state.visible));button.setAttribute('aria-pressed',String(state.visible));button.classList.toggle('active',state.visible);}scheduleMeasure();document.dispatchEvent(new Event('format-toolbar-layout'));}
  async function persist(patch){const previous={...state},ticket=++revision;state={...state,...patch};closeMenus();render();const snapshot={...state};const job=saveQueue.catch(()=>{}).then(()=>api('formatToolbar',snapshot));saveQueue=job;try{const saved=await job;if(ticket===revision){state=saved;render();}}catch(error){if(ticket===revision){state=previous;render();}toast(error.message);}}
  async function showMenu(){closeMenus();try{await saveQueue.catch(()=>{});await api('formatToolbarMenu');}catch(error){toast(error.message);}}
  function toggleButton(className){const button=document.createElement('button');button.type='button';button.className='format-toggle '+className;button.title=t('Herramientas de formato');button.dataset.i18nTitle='Herramientas de formato';button.setAttribute('aria-label',t('Herramientas de formato'));button.dataset.i18nAriaLabel='Herramientas de formato';button.setAttribute('aria-controls','formatbar');const icon=document.createElement('i');icon.dataset.lucide='sliders-horizontal';button.append(icon);button.onclick=()=>persist({visible:!state.visible});button.oncontextmenu=event=>{event.preventDefault();showMenu();};button.onkeydown=event=>{if(event.key==='ContextMenu'||(event.shiftKey&&event.key==='F10')){event.preventDefault();showMenu();}};buttons.push(button);return button;}
@@ -25,7 +25,7 @@ export function createFloatingFormat({api,toast}){
  window.claro.onCommand(command=>{if(command?.formatToolbar){revision++;state=command.formatToolbar;closeMenus();render();}});
  new ResizeObserver(closeMenus).observe(panes);
  new ResizeObserver(scheduleMeasure).observe(bar);
- document.addEventListener('format-toolbar-layout',scheduleMeasure);
+ document.addEventListener('format-toolbar-layout',scheduleMeasure);document.addEventListener('document-kind-changed',render);
  render();const ticket=revision;api('desktopState').then(value=>{if(ticket===revision){state=value.formatToolbar;render();}}).catch(error=>toast(error.message));
  return {closeMenus,setState:persist};
 }

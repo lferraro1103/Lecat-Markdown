@@ -55,5 +55,5 @@ export function createFileTree({api,finder,container,icons,activePath,onOpen,onE
  return {enabled,render,contains,get folder(){return selected||root;},async setRoot(folder,items){
   if(root!==folder){revision++;root=folder;selected=folder;cache.clear();pending.clear();loads.clear();expanded.clear();expanded.add(folder);}
   loads.set(folder,(loads.get(folder)||0)+1);pending.delete(folder);cache.set(folder,items);render();const ticket=revision;await finder.enrich([{path:folder,name:name(folder),directory:true},...items]);if(ticket===revision)render();
- },async reload(folder=root){await read(folder,{fresh:true});},selectionChanged(){if(enabled())for(const row of container.querySelectorAll('[role=treeitem]')){const active=row.dataset.path===activePath();row.classList.toggle('active',active);row.setAttribute('aria-selected',String(active));}}};
+ },async reloadAll(){revision++;cache.clear();pending.clear();loads.clear();render();await Promise.all([...expanded].map(folder=>read(folder,{fresh:true})));},async reload(folder=root){await read(folder,{fresh:true});},selectionChanged(){if(enabled())for(const row of container.querySelectorAll('[role=treeitem]')){const active=row.dataset.path===activePath();row.classList.toggle('active',active);row.setAttribute('aria-selected',String(active));}}};
 }

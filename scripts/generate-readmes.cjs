@@ -15,7 +15,7 @@ const escape=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>',
 const table=(headers,rows)=>['| '+headers.join(' | ')+' |','| '+headers.map(()=>'---').join(' | ')+' |',...rows.map(row=>'| '+row.join(' | ')+' |')].join('\n');
 const code=text=>'```sh\n'+text+'\n```';
 const read=id=>JSON.parse(fs.readFileSync(path.join(root,'docs','readme',id+'.json'),'utf8'));
-const expected={headings:10,features:12,installHeaders:3,platforms:7,packages:7,installation:7,work:3,updates:3,shortcutHeaders:2,shortcutActions:14,dataHeaders:2,buildHeaders:2,buildLabels:6,docLabels:6,license:2};
+const expected={headings:10,features:13,installHeaders:3,platforms:7,packages:7,installation:7,work:3,updates:3,shortcutHeaders:2,shortcutActions:14,dataHeaders:2,buildHeaders:2,buildLabels:6,docLabels:6,license:2};
 const output=new Map();
 for(const [id,label,file]of languages){
  const c=read(id);

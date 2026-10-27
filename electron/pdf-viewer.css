@@ -1,0 +1,18 @@
+.pdf-pane{position:absolute;inset:0;overflow:auto;overscroll-behavior:contain;padding:16px 20px;background:var(--bg);box-sizing:border-box;isolation:isolate;scrollbar-gutter:stable;outline:none}
+.pdf-pane[hidden]{display:none}
+.pdf-page{position:relative;margin:0 auto 16px;background:white;color:#111;box-shadow:0 2px 9px #0004;flex:none;overflow:hidden}
+.pdf-page canvas{display:block}
+.pdf-message{margin:32px auto;max-width:600px;color:var(--text);text-align:center}
+.pdf-match{background:#ffca4880!important}
+.pdf-page-error{padding:24px;box-sizing:border-box}
+[data-document-pane][data-kind=pdf]>:not(.pdf-pane):not(#inspector){display:none!important}
+body[data-document-kind=pdf] .segmented,body[data-document-kind=pdf] .toolbar-modes,body[data-document-kind=pdf] .toolbar-save,body[data-document-kind=pdf] .format-toggle,body[data-document-kind=pdf]:not([data-pdf-outline=true]) [data-command=outline],body[data-document-kind=pdf] [data-command=pdf],body[data-document-kind=pdf] [data-command=print],body[data-document-kind=pdf] [data-command=export],body[data-document-kind=pdf] #save-state{display:none!important}
+html[data-platform=win32] body.pdf-search-active #toolbar-search{display:flex!important}
+
+[data-document-pane][data-kind=pdf][data-pdf-outline=true]>[data-pane-part=outline]:not([hidden]){display:block!important;position:absolute;right:0;top:0;bottom:0;z-index:5;background:var(--canvas);box-shadow:var(--shadow)}
+[data-pdf-toggle][aria-checked=true]::before{content:"✓"}
+
+#edit-value[hidden]{display:none}
+#edit-dialog input[type=password]{display:block;width:calc(100% - 36px);margin:18px;padding:12px;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;font:14px/1.6 system-ui}
+
+#edit-dialog[data-pdf-password]{height:fit-content;min-height:0;max-height:80vh}

@@ -2,7 +2,18 @@
   "intro": "適用於 Windows、macOS 與 Linux 的離線 Markdown 編輯器與閱讀器。直接編輯繪製後的文件、瀏覽本機資料夾，使用圖表、公式、表格與圖片。內含 Electron 與 Chromium；本機編輯不需要帳號、WebView2 或 .NET。",
   "download": "下載最新版",
   "releaseNotes": "版本說明",
-  "headings": ["主要功能", "下載與安裝", "Homebrew（macOS）", "文件操作", "更新", "鍵盤快捷鍵", "本機資料與格式", "開發", "文件指南", "授權"],
+  "headings": [
+    "主要功能",
+    "下載與安裝",
+    "Homebrew（macOS）",
+    "文件操作",
+    "更新",
+    "鍵盤快捷鍵",
+    "本機資料與格式",
+    "開發",
+    "文件指南",
+    "授權"
+  ],
   "features": [
     "**三種文件模式：** 視覺編輯、閱讀、Markdown 原始碼與預覽，提供格式工具、復原/重做及尋找/取代。",
     "**兩份文件並排顯示：** 拖曳分頁或使用右鍵選單。各窗格獨立編輯、記錄歷程、切換模式與捲動；可調整分隔線並還原已儲存檔案的配置。",
@@ -15,29 +26,107 @@
     "**工作區：** 大綱、專注模式、縮放、觸控板捏合、視窗置頂，以及淺色、深色或系統主題。",
     "**還原：** 還原開啟的文件與選取的分頁、復原未儲存草稿，並在覆寫檔案前偵測外部修改。歡迎文件僅在首次啟動時出現。",
     "**設定：** 英文、西班牙文、葡萄牙文、法文、德文、簡體中文、繁體中文與日文介面；可選擇接收測試版更新。",
-    "**指令與連結：** 在設定中安裝 `lecat` 指令，使用 `lecat://file/…` 連結。開啟自訂應用程式連結前需確認，已儲存的權限可以撤銷。"
+    "**指令與連結：** 在設定中安裝 `lecat` 指令，使用 `lecat://file/…` 連結。開啟自訂應用程式連結前需確認，已儲存的權限可以撤銷。",
+    "**PDF 閱讀：** 在分頁和分割面板中開啟本機 PDF，使用既有控制項選取文字、搜尋、查看書籤和縮放。在「+」選單中啟用顯示 PDF（預設關閉）。PDF 為唯讀，支援還原頁碼和縮放比例及密碼保護文件，不提供 OCR 或 PDF 編輯。"
   ],
   "stable": "目前穩定版：**{version}**。下表連結指向已發布的安裝套件；版本附件也包含 SHA256 校驗檔。",
-  "installHeaders": ["平台", "下載", "安裝方式"],
-  "platforms": ["Windows 10/11 · x64", "Windows 10/11 · x64", "macOS 13+ · Apple Silicon", "macOS 13+ · Intel", "macOS 12 Monterey · Apple Silicon / Intel", "Linux · x64", "Debian / Ubuntu · x64"],
-  "packages": ["安裝程式（.exe）", "可攜版（.zip）", "DMG · arm64", "DMG · x64", "Monterey 相容版本", "AppImage · x86_64", "Debian 套件 · amd64"],
-  "installation": ["執行安裝程式，選擇安裝位置並建立捷徑。", "完整解壓縮 ZIP，開啟 `Lecat - Markdown.exe`，並將隨附檔案保存在一起。", "首次開啟前將應用程式移入「應用程式」。版本附件也提供 ZIP。", "首次開啟前將應用程式移入「應用程式」。版本附件也提供 ZIP。", "在獨立相容版本中選擇符合處理器的 DMG 或 ZIP。", "為 AppImage 加上執行權限後開啟。部分發行版需要 FUSE 支援。", "透過套件管理員安裝 `.deb`，例如 `sudo apt install ./file.deb`。"],
+  "installHeaders": [
+    "平台",
+    "下載",
+    "安裝方式"
+  ],
+  "platforms": [
+    "Windows 10/11 · x64",
+    "Windows 10/11 · x64",
+    "macOS 13+ · Apple Silicon",
+    "macOS 13+ · Intel",
+    "macOS 12 Monterey · Apple Silicon / Intel",
+    "Linux · x64",
+    "Debian / Ubuntu · x64"
+  ],
+  "packages": [
+    "安裝程式（.exe）",
+    "可攜版（.zip）",
+    "DMG · arm64",
+    "DMG · x64",
+    "Monterey 相容版本",
+    "AppImage · x86_64",
+    "Debian 套件 · amd64"
+  ],
+  "installation": [
+    "執行安裝程式，選擇安裝位置並建立捷徑。",
+    "完整解壓縮 ZIP，開啟 `Lecat - Markdown.exe`，並將隨附檔案保存在一起。",
+    "首次開啟前將應用程式移入「應用程式」。版本附件也提供 ZIP。",
+    "首次開啟前將應用程式移入「應用程式」。版本附件也提供 ZIP。",
+    "在獨立相容版本中選擇符合處理器的 DMG 或 ZIP。",
+    "為 AppImage 加上執行權限後開啟。部分發行版需要 FUSE 支援。",
+    "透過套件管理員安裝 `.deb`，例如 `sudo apt install ./file.deb`。"
+  ],
   "macNote": "Mac 套件採用 ad-hoc 完整性簽署，未使用 Developer ID 簽署，也未經 Apple 公證。請參閱「文件指南」中的 macOS 安裝與簽署說明。",
-  "work": ["開啟 Markdown 檔案或建立文件。預設使用**視覺編輯**：點選標題、段落、清單或表格儲存格即可輸入。需要時可切換到**閱讀**或**原始碼與預覽**。圖表和公式提供專用編輯對話框；未修改的內容區塊會保留原始 Markdown。", "比較文件時，將一個分頁拖到另一個分頁上並選擇左側或右側，也可使用分頁右鍵選單。點選窗格後，搜尋、格式、儲存、分享與輸出會作用於該文件。可調整分隔線，或回到單一窗格而不關閉其他分頁。還原配置需要兩個檔案都有已儲存的路徑。", "儲存需要手動執行，只有儲存時才會修改原始檔案。如果其他應用程式修改檔案，Lecat 會提示衝突並允許另存副本。若要恢復自動主題，請選擇**檢視 → 使用系統主題**。"],
-  "updates": ["**已安裝的 Windows 應用程式與支援的 Mac 版本：** 使用「說明 → 檢查更新」尋找、下載及安裝公開版本。Windows 可攜 ZIP 版需要手動更新。", "**macOS 12：** 使用獨立的 Monterey 更新通道。Mac 3.2.5 或更早版本需要先手動安裝一次較新版本，才能啟用目前的更新程式。", "**Linux：** 手動下載並安裝新的 AppImage 或 `.deb`。可在設定中選擇接收測試版。檢查及下載更新需要網路連線。"],
+  "work": [
+    "開啟 Markdown 檔案或建立文件。預設使用**視覺編輯**：點選標題、段落、清單或表格儲存格即可輸入。需要時可切換到**閱讀**或**原始碼與預覽**。圖表和公式提供專用編輯對話框；未修改的內容區塊會保留原始 Markdown。",
+    "比較文件時，將一個分頁拖到另一個分頁上並選擇左側或右側，也可使用分頁右鍵選單。點選窗格後，搜尋、格式、儲存、分享與輸出會作用於該文件。可調整分隔線，或回到單一窗格而不關閉其他分頁。還原配置需要兩個檔案都有已儲存的路徑。",
+    "儲存需要手動執行，只有儲存時才會修改原始檔案。如果其他應用程式修改檔案，Lecat 會提示衝突並允許另存副本。若要恢復自動主題，請選擇**檢視 → 使用系統主題**。"
+  ],
+  "updates": [
+    "**已安裝的 Windows 應用程式與支援的 Mac 版本：** 使用「說明 → 檢查更新」尋找、下載及安裝公開版本。Windows 可攜 ZIP 版需要手動更新。",
+    "**macOS 12：** 使用獨立的 Monterey 更新通道。Mac 3.2.5 或更早版本需要先手動安裝一次較新版本，才能啟用目前的更新程式。",
+    "**Linux：** 手動下載並安裝新的 AppImage 或 `.deb`。可在設定中選擇接收測試版。檢查及下載更新需要網路連線。"
+  ],
   "shortcutNote": "Windows/Linux 使用 `Ctrl`，macOS 使用 `⌘`。快捷鍵作用於目前選取的文件窗格。",
-  "shortcutHeaders": ["操作", "快捷鍵"],
-  "shortcutActions": ["新增文件 / 開啟檔案 / 開啟資料夾", "儲存 / 另存新檔", "關閉分頁", "閱讀 / 視覺編輯 / 原始碼與預覽", "尋找", "尋找與取代", "粗體 / 斜體", "顯示或隱藏檔案側邊欄", "專注模式 / 切換主題", "輸出 PDF", "輸出選項", "列印", "放大 / 縮小 / 重設縮放", "分頁右鍵選單"],
+  "shortcutHeaders": [
+    "操作",
+    "快捷鍵"
+  ],
+  "shortcutActions": [
+    "新增文件 / 開啟檔案 / 開啟資料夾",
+    "儲存 / 另存新檔",
+    "關閉分頁",
+    "閱讀 / 視覺編輯 / 原始碼與預覽",
+    "尋找",
+    "尋找與取代",
+    "粗體 / 斜體",
+    "顯示或隱藏檔案側邊欄",
+    "專注模式 / 切換主題",
+    "輸出 PDF",
+    "輸出選項",
+    "列印",
+    "放大 / 縮小 / 重設縮放",
+    "分頁右鍵選單"
+  ],
   "dataIntro": "偏好設定與復原草稿保存在本機。為保持相容，使用者設定資料夾沿用歷史名稱 `ClaroMD`。",
-  "dataHeaders": ["系統", "設定資料位置"],
+  "dataHeaders": [
+    "系統",
+    "設定資料位置"
+  ],
   "dataNote": "Linux 未設定 `XDG_CONFIG_HOME` 時使用 `~/.config`。不提供雲端同步，也不收集遙測資料。",
   "formats": "支援 UTF-8、附 BOM 的 UTF-8 與 UTF-16 LE，保留 LF/CRLF 換行。每份文件上限為 20 MB。為避免資料損毀，不接受 UTF-16 BE 或無效的 UTF-8。",
   "security": "不會自動下載遠端圖片。網頁連結僅在點選後開啟；不會執行 Markdown 中的指令碼。Mermaid 錯誤僅影響對應區塊。PlantUML 與 Graphviz 區塊顯示為原始碼。",
   "developmentIntro": "環境需求：Node.js **22.12 或更新版本**、npm，以及支援的桌面平台。",
-  "buildHeaders": ["工作", "指令"],
-  "buildLabels": ["Windows 可攜版", "Windows 安裝程式", "macOS Apple Silicon 套件", "macOS Intel 套件", "Linux x64 AppImage 與 .deb", "現有 Electron 整合稽核"],
+  "buildHeaders": [
+    "工作",
+    "指令"
+  ],
+  "buildLabels": [
+    "Windows 可攜版",
+    "Windows 安裝程式",
+    "macOS Apple Silicon 套件",
+    "macOS Intel 套件",
+    "Linux x64 AppImage 與 .deb",
+    "現有 Electron 整合稽核"
+  ],
   "developmentNote": "應用程式入口位於 `electron/`；`src/` 保留歷史 WinForms/WebView2 實作。相依套件版本鎖定於 `package-lock.json`。稽核擷圖與結果產生於 `docs/previews/electron`，因為可能包含本機路徑，不納入 Git。編輯 `docs/readme/*.json` 後，執行 `node scripts/generate-readmes.cjs` 重新產生六種語言的 README；使用 `node scripts/generate-readmes.cjs --check` 檢查一致性。",
   "docsNote": "以下詳細指南目前以西班牙文撰寫。所有語言的 README 均連結到同一組指南。",
-  "docLabels": ["兩份文件並排顯示", "浮動工具列與分享", "Linux 套件", "應用程式更新", "macOS 安裝", "macOS 簽署"],
-  "license": ["發行版應用程式的條款見 [LICENCIA.txt](build/LICENCIA.txt)。公開存取儲存庫本身不代表授予專案原始碼的授權。", "第三方程式庫保留各自的授權。建置時會產生 `electron/ui/THIRD-PARTY-LICENSES.txt`；發行套件也包含 Electron 與 Chromium 的聲明。"]
+  "docLabels": [
+    "兩份文件並排顯示",
+    "浮動工具列與分享",
+    "Linux 套件",
+    "應用程式更新",
+    "macOS 安裝",
+    "macOS 簽署"
+  ],
+  "license": [
+    "發行版應用程式的條款見 [LICENCIA.txt](build/LICENCIA.txt)。公開存取儲存庫本身不代表授予專案原始碼的授權。",
+    "第三方程式庫保留各自的授權。建置時會產生 `electron/ui/THIRD-PARTY-LICENSES.txt`；發行套件也包含 Electron 與 Chromium 的聲明。"
+  ]
 }

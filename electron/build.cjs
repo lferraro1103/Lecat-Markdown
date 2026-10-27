@@ -1,6 +1,10 @@
 const fs=require('node:fs'),path=require('node:path');
 fs.mkdirSync(path.join(__dirname,'ui'),{recursive:true});
-const result=require('esbuild').buildSync({entryPoints:[path.join(__dirname,'renderer.js')],bundle:true,outfile:path.join(__dirname,'ui/bundle.js'),platform:'browser',target:'chrome140',loader:{'.woff2':'file','.woff':'file','.ttf':'file'},assetNames:'fonts/[name]-[hash]',minify:true,metafile:true});
+const worker=require('esbuild').buildSync({entryPoints:[require.resolve('pdfjs-dist/build/pdf.worker.mjs')],bundle:true,format:'iife',platform:'browser',target:'chrome140',minify:true,write:false}).outputFiles[0].text;
+const workerModule=path.join(__dirname,'ui/pdf-worker-source.js');fs.writeFileSync(workerModule,'export default '+JSON.stringify(worker)+';');
+for(const folder of ['cmaps','standard_fonts','wasm'])fs.cpSync(path.join(__dirname,'../node_modules/pdfjs-dist',folder),path.join(__dirname,'ui/pdf-resources',folder),{recursive:true});
+const pdfCSS=fs.readFileSync(require.resolve('pdfjs-dist/web/pdf_viewer.css'),'utf8');fs.writeFileSync(path.join(__dirname,'ui/pdf-text-layer.css'),pdfCSS.slice(pdfCSS.indexOf('.textLayer {'),pdfCSS.indexOf('.textLayerImages {')));
+const result=require('esbuild').buildSync({entryPoints:[path.join(__dirname,'renderer.js')],bundle:true,outfile:path.join(__dirname,'ui/bundle.js'),platform:'browser',target:'chrome140',alias:{'lecat-pdf-worker':workerModule},loader:{'.woff2':'file','.woff':'file','.ttf':'file'},assetNames:'fonts/[name]-[hash]',minify:true,metafile:true});
 fs.copyFileSync(path.join(__dirname,'startup-theme.js'),path.join(__dirname,'ui/startup-theme.js'));
 fs.copyFileSync(path.join(__dirname,'index.html'),path.join(__dirname,'ui/index.html'));
 fs.copyFileSync(path.join(__dirname,'style.css'),path.join(__dirname,'ui/style.css'));

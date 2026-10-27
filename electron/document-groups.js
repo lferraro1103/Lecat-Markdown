@@ -38,18 +38,18 @@ export function createDocumentGroups(options){
  divider.onpointerdown=event=>{if(event.button!==0)return;event.preventDefault();divider.setPointerCapture(event.pointerId);const bounds=groups.getBoundingClientRect();divider.onpointermove=e=>setRatio((e.clientX-bounds.left)/bounds.width);};
  const stopResize=()=>{divider.onpointermove=null;persist();};divider.onpointerup=stopResize;divider.onpointercancel=stopResize;divider.onlostpointercapture=stopResize;
  divider.onkeydown=event=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){event.preventDefault();setRatio(event.key==='Home' ? .25 : event.key==='End' ? .75 : ratio+(event.key==='ArrowLeft'?-.05:.05));}};
- function saveSecondary(){if(!secondary)return;const d=documents.get(secondary.id);if(d){d.state=secondary.view.state;d.content=secondary.view.state.doc.toString();}}
- function destroySecondary(){if(!secondary)return;saveSecondary();secondary.renderer.dispose();secondary.visual.destroy();secondary.view.destroy();secondary.root.remove();secondary=null;}
+ function saveSecondary(){if(!secondary)return;const d=documents.get(secondary.id);if(d&&d.kind!=='pdf'){d.state=secondary.view.state;d.content=secondary.view.state.doc.toString();}}
+ function destroySecondary(){if(!secondary)return;saveSecondary();secondary.pdf.dispose();secondary.renderer.dispose();secondary.visual.destroy();secondary.view.destroy();secondary.root.remove();secondary=null;}
  function closeSplit(keepSecondary=focused){if(!secondary)return;const keep=secondary.id;focus(false);destroySecondary();if(keepSecondary&&documents.has(keep))activatePrimary(keep);layout();onChange();}
  function createSecondary(id){
   const pane=template.cloneNode(true);pane.id='secondary-panes';pane.dataset.documentPane='secondary';pane.style.setProperty('--editor-width','50%');
   for(const node of pane.querySelectorAll('[id]'))node.id='secondary-'+node.id;
   second.append(pane);
   const owner={id,root:pane,mode:options.primaryMode(),visualOrigin:false};secondary=owner;
-  const d=documents.get(id);owner.view=new EditorView({state:d.state||makeState(d.content),parent:part(pane,'editor')});
+  const d=documents.get(id);owner.view=new EditorView({state:d.state||makeState(d.content||''),parent:part(pane,'editor')});
   owner.visual=createVisual({element:part(pane,'visual-editor'),md,getSource:()=>owner.view.state.doc.toString(),getId:()=>owner.id,onChange:source=>{const old=owner.view.state.doc.toString();if(old===source)return;owner.visualOrigin=true;try{owner.view.dispatch({changes:{from:0,to:owner.view.state.doc.length,insert:source}});}finally{owner.visualOrigin=false;}},run:command=>{focus(true);return run(command);},api,ask,toast,getTheme,isActive:()=>focused&&secondary===owner,getScroll:()=>part(pane,'visual-scroll'),getTableTools:()=>part(pane,'table-tools')});
   owner.renderer=createPaneRenderer({root:pane,getView:()=>owner.view,getDocument:()=>documents.get(owner.id),getTheme,api,accept:options.accept,textButton,expand,scrollHeading:id=>scrollHeading(owner,id),toast});
-  owner.visual.load(owner.view.state.doc.toString(),true);setMode(owner.mode);setZoom(getZoom());
+  owner.pdf=options.createPdf(pane);owner.pdf.load(d);owner.visual.load(owner.view.state.doc.toString(),true);setMode(owner.mode);setZoom(getZoom());
   part(pane,'table-tools').onpointerdown=e=>e.preventDefault();part(pane,'table-tools').onclick=e=>{const action=e.target.dataset.table;if(action)owner.visual.tableAction(action);};
   part(pane,'visual-search').onclick=e=>{const action=e.target.closest('[data-search]')?.dataset.search;if(!action)return;if(action==='close'){part(pane,'visual-search').hidden=true;owner.visual.focus();return;}owner.visual.search(part(pane,'visual-find').value,action==='previous'?-1:1,['replace','all'].includes(action)?part(pane,'visual-replace').value:null,action==='all');};
   part(pane,'visual-find').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();owner.visual.search(e.target.value,e.shiftKey?-1:1);}if(e.key==='Escape')part(pane,'visual-search').hidden=true;};
@@ -59,12 +59,12 @@ export function createDocumentGroups(options){
  }
  function setMode(value){if(!secondary)return;secondary.mode=value;secondary.root.dataset.mode=value;if(value==='edit')secondary.visual.load(secondary.view.state.doc.toString());secondary.view.requestMeasure();}
  function setZoom(value){if(!secondary)return;for(const name of ['editor','visual-editor','preview'])part(secondary.root,name).style.zoom=value;secondary.view.requestMeasure();}
- function activate(id){if(!secondary||!documents.has(id))return;saveSecondary();secondary.id=id;const d=documents.get(id);secondary.muting=true;try{secondary.view.setState(d.state||makeState(d.content));}finally{secondary.muting=false;}secondary.visual.load(secondary.view.state.doc.toString(),true);secondary.renderer.schedule();labels();}
+ function activate(id){if(!secondary||!documents.has(id))return;saveSecondary();secondary.id=id;const d=documents.get(id);secondary.muting=true;try{secondary.view.setState(d.kind==='pdf'?makeState(''):d.state||makeState(d.content));}finally{secondary.muting=false;}secondary.pdf.load(d);secondary.visual.load(secondary.view.state.doc.toString(),true);secondary.renderer.schedule();labels();}
  function openPair(source,target,position='right'){
   if(!documents.has(source)||!documents.has(target)||source===target)return;
   focus(false);destroySecondary();activatePrimary(target);side=position;createSecondary(source);layout();focus(true);onChange();
  }
- function editorUpdated(update){if(!secondary||update.view!==secondary.view)return false;const d=documents.get(secondary.id);if(!d)return true;d.state=update.state;
+ function editorUpdated(update){if(!secondary||update.view!==secondary.view)return false;const d=documents.get(secondary.id);if(!d||d.kind==='pdf')return true;d.state=update.state;
   if(update.docChanged&&!secondary.muting){d.content=update.state.doc.toString();d.dirty=true;const content=d.content;api('update',d.id,content).then(dirty=>{if(documents.get(d.id)===d&&d.content===content){d.dirty=dirty;onChange();labels();}}).catch(e=>toast(e.message));if(!secondary.visualOrigin&&secondary.mode==='edit')secondary.visual.load(content);secondary.renderer.schedule();}
   if(focused)options.onSelection();if(update.docChanged){onChange();labels();}return true;
  }

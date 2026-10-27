@@ -8,8 +8,8 @@ function createWindowsShare({app,win,core,notify}){
   const root=path.resolve(app.getPath('temp'));let folder;try{folder=await fs.mkdtemp(path.join(root,'lecat-share-win-'));}catch(error){opening=false;throw error;}
   const cleanup=async()=>{if(path.dirname(path.resolve(folder))===root&&path.basename(folder).startsWith('lecat-share-win-'))await fs.rm(folder,{recursive:true,force:true}).catch(()=>{});};
   try{
-   const title=path.basename(document.name).replace(/[<>:"/\\|?*\x00-\x1f]/g,'_')||'documento.md',file=path.join(folder,/\.(md|markdown)$/i.test(title)?title:title+'.md'),payload=path.join(folder,'request.json');
-   await fs.writeFile(file,core.encode(document.content,document),{flag:'wx'});await fs.writeFile(payload,JSON.stringify({title,text:document.content,file}),{flag:'wx'});
+   const title=path.basename(document.name).replace(/[<>:"/\\|?*\x00-\x1f]/g,'_')||'documento.md',file=path.join(folder,/\.(md|markdown|pdf)$/i.test(title)?title:title+'.md'),payload=path.join(folder,'request.json');
+   if(document.kind==='pdf')await fs.copyFile(document.path,file,require('node:fs').constants.COPYFILE_EXCL);else await fs.writeFile(file,core.encode(document.content,document),{flag:'wx'});await fs.writeFile(payload,JSON.stringify({title,text:document.content||'',file}),{flag:'wx'});
    const handle=win.getNativeWindowHandle(),owner=(handle.length===8?handle.readBigUInt64LE():BigInt(handle.readUInt32LE())).toString(16);
    await new Promise((resolve,reject)=>{let ready=false,settled=false,buffer='';const helperProcess=spawn(helper,[owner,payload],{windowsHide:true,stdio:['ignore','pipe','pipe']});child=helperProcess;
     const timer=setTimeout(()=>{if(!ready){helperProcess.kill();fail(Error('Windows no pudo abrir la ventana de compartir.'));}},20000);

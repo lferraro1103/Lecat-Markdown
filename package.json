@@ -1,6 +1,6 @@
 {
   "name": "lecat-markdown",
-  "version": "3.8.0",
+  "version": "3.9.0",
   "description": "Editor y lector Markdown para Windows y macOS, con gráficos sin conexión",
   "main": "electron/main.cjs",
   "author": "Lecat",
@@ -8,13 +8,13 @@
   "scripts": {
     "build": "node electron/build.cjs",
     "start": "npm run build && electron .",
-    "test": "node --test electron/core.test.cjs electron/persistence.test.cjs scripts/prepare-electron.test.cjs electron/updater.test.cjs scripts/merge-update-metadata.test.cjs electron/session.test.cjs electron/window-chrome.test.cjs electron/window-state.test.cjs electron/macos-locations.test.cjs",
+    "test": "node --test electron/core.test.cjs electron/persistence.test.cjs scripts/prepare-electron.test.cjs electron/updater.test.cjs scripts/merge-update-metadata.test.cjs electron/session.test.cjs electron/window-chrome.test.cjs electron/window-state.test.cjs electron/macos-locations.test.cjs electron/pdf-service.test.cjs",
     "audit": "npm run build && electron . --audit",
     "dist": "npm run build && electron-builder --win dir",
     "installer": "npm run build && electron-builder --win nsis --x64 --publish never",
     "dist:mac": "npm run build && electron-builder --mac dmg zip --publish never",
     "dist:mac:signed": "npm run build && electron-builder --config electron-builder.developer-id.cjs --mac dmg zip --publish never",
-    "verify:session": "npm run build && node scripts/verify-session-restart.cjs",
+    "verify:session": "npm run build && node scripts/verify-session-restart.cjs && node scripts/verify-pdf-restart.cjs",
     "verify:window": "npm run build && node scripts/verify-window-restart.cjs",
     "dist:linux": "npm run build && electron-builder --linux AppImage deb --x64 --publish never"
   },
@@ -41,6 +41,7 @@
     "markdown-it": "^14.1.0",
     "markdown-it-task-lists": "^2.1.1",
     "mermaid": "11.17.2",
+    "pdfjs-dist": "6.4.299",
     "yaml": "2.9.1"
   },
   "build": {
@@ -86,7 +87,10 @@
       "electron/epub.cjs",
       "electron/cli.cjs",
       "electron/locale-desktop.cjs",
-      "electron/windows-share.cjs"
+      "electron/windows-share.cjs",
+      "electron/pdf-service.cjs",
+      "electron/pdf-audit.cjs",
+      "electron/pdf-fixture.cjs"
     ],
     "win": {
       "icon": "branding/Lecat.ico",
@@ -186,7 +190,7 @@
       "url": "https://github.com/lferraro1103/Lecat-Markdown/releases/latest/download"
     },
     "releaseInfo": {
-      "releaseNotesFile": "docs/RELEASE-3.8.0.md"
+      "releaseNotesFile": "docs/RELEASE-3.9.0.md"
     },
     "afterPack": "./scripts/pack-sparkle.cjs",
     "protocols": [

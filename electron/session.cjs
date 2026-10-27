@@ -3,7 +3,7 @@ function samePath(a,b){return process.platform==='win32'?path.resolve(a).toLower
 function snapshotSession(documents,activeId){
  const saved=documents.filter(d=>typeof d.path==='string'&&path.isAbsolute(d.path));
  const active=documents.find(d=>d.id===activeId);
- return {version:1,initialized:true,paths:saved.map(d=>d.path),activePath:active?.path||null,activeDraftId:active?.dirty&&!active.path?active.id:null};
+ return {...(saved.some(d=>d.kind==='pdf')?{pdfViews:saved.filter(d=>d.kind==='pdf').map(d=>({path:d.path,...require('./pdf-service.cjs').state(d.pdfState)}))}:{}),version:1,initialized:true,paths:saved.map(d=>d.path),activePath:active?.path||null,activeDraftId:active?.dirty&&!active.path?active.id:null};
 }
 function validSession(value){return value?.version===1&&value.initialized===true&&Array.isArray(value.paths)&&value.paths.length<=1000&&value.paths.every(p=>typeof p==='string'&&path.isAbsolute(p))&&(value.activePath===null||typeof value.activePath==='string'&&path.isAbsolute(value.activePath));}
 async function readSession(file){
@@ -17,7 +17,7 @@ async function restoreSession(session,recovered,openFile,warnings){
   if(documents.some(d=>d.path&&samePath(d.path,file)))continue;
   const draft=recovered.find(d=>d.path&&samePath(d.path,file));
   if(draft){documents.push(draft);continue;}
-  try{documents.push(await openFile(file));}catch(error){warnings.push('No se pudo restaurar '+file+': '+error.message);}
+  try{const opened=await openFile(file);if(opened.kind==='pdf')opened.pdfState=require('./pdf-service.cjs').state((Array.isArray(session?.pdfViews)?session.pdfViews:[]).find(v=>v?.path===file));documents.push(opened);}catch(error){warnings.push('No se pudo restaurar '+file+': '+error.message);}
  }
  for(const draft of recovered)if(!documents.some(d=>d.id===draft.id||d.path&&draft.path&&samePath(d.path,draft.path)))documents.push(draft);
  const active=documents.find(d=>d.path&&session?.activePath&&samePath(d.path,session.activePath))||documents.find(d=>session?.activeDraftId&&d.recoveryId===session.activeDraftId);
