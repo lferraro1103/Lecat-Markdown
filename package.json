@@ -1,6 +1,6 @@
 {
   "name": "lecat-markdown",
-  "version": "3.9.3",
+  "version": "3.9.4",
   "description": "Editor y lector Markdown para Windows y macOS, con gráficos sin conexión",
   "main": "electron/main.cjs",
   "author": "Lecat",
@@ -190,7 +190,7 @@
       "url": "https://github.com/lferraro1103/Lecat-Markdown/releases/latest/download"
     },
     "releaseInfo": {
-      "releaseNotesFile": "docs/RELEASE-3.9.3.md"
+      "releaseNotesFile": "docs/RELEASE-3.9.4.md"
     },
     "afterPack": "./scripts/pack-sparkle.cjs",
     "protocols": [
