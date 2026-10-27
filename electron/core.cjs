@@ -11,6 +11,7 @@ function decode(buffer){
 function encode(content,doc){const body=Buffer.from(content,doc.encoding||'utf8');return doc.bom?Buffer.concat([doc.encoding==='utf16le'?Buffer.from([255,254]):Buffer.from([239,187,191]),body]):body;}
 async function read(file){if(!/\.(md|markdown)$/i.test(file))throw Error('Elegí un archivo Markdown (.md o .markdown).');const stat=await fs.stat(file);if(!stat.isFile()||stat.size>MAX)throw Error('Archivo no válido o mayor que 20 MB.');const buffer=await fs.readFile(file);if(buffer.length>MAX)throw Error('Documento mayor que 20 MB.');return {...decode(buffer),path:path.resolve(file),name:path.basename(file)};}
 async function atomicSave(doc,content,{allowOverwrite=false}={}){
+ if(doc.kind==='pdf'||/\.pdf$/i.test(doc.path||''))throw Error('Los PDF se abren solo para lectura.');
  if(typeof content!=='string'||Buffer.byteLength(content,'utf8')>MAX)throw Error('Documento mayor que 20 MB.');
  let current;try{current=await fs.readFile(doc.path);}catch(e){if(e.code!=='ENOENT')throw e;}
  if(!allowOverwrite&&((current&&digest(current)!==doc.hash)||(!current&&doc.hash)))throw Error('El archivo cambió fuera de Lecat - Markdown. Guardá una copia con Guardar como para conservar ambas versiones.');
@@ -23,5 +24,5 @@ async function atomicSave(doc,content,{allowOverwrite=false}={}){
  }}finally{await fs.unlink(temp).catch(()=>{});}
  return {...doc,content,hash:digest(buffer)};
 }
-async function list(folder){const entries=await fs.readdir(folder,{withFileTypes:true});return entries.filter(e=>e.isDirectory()||e.isFile()&&/\.(md|markdown)$/i.test(e.name)).map(e=>({name:e.name,path:path.join(folder,e.name),directory:e.isDirectory()})).sort((a,b)=>Number(b.directory)-Number(a.directory)||a.name.localeCompare(b.name));}
+async function list(folder,{showPdfFiles=false}={}){const entries=await fs.readdir(folder,{withFileTypes:true});return entries.filter(e=>e.isDirectory()||e.isFile()&&(/\.(md|markdown)$/i.test(e.name)||showPdfFiles&&/\.pdf$/i.test(e.name))).map(e=>({name:e.name,path:path.join(folder,e.name),directory:e.isDirectory()})).sort((a,b)=>Number(b.directory)-Number(a.directory)||a.name.localeCompare(b.name));}
 module.exports={MAX,decode,encode,digest,read,atomicSave,list};

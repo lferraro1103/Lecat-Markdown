@@ -2,7 +2,18 @@
   "intro": "An offline Markdown editor and reader for Windows, macOS and Linux. Write directly in the rendered document, browse local folders, and work with diagrams, equations, tables and images. Electron and Chromium are included; local editing needs no account, WebView2 or .NET.",
   "download": "Download the latest release",
   "releaseNotes": "Release notes",
-  "headings": ["Features", "Download and installation", "Homebrew (macOS)", "Working with documents", "Updates", "Keyboard shortcuts", "Local data and formats", "Development", "Documentation", "Licensing"],
+  "headings": [
+    "Features",
+    "Download and installation",
+    "Homebrew (macOS)",
+    "Working with documents",
+    "Updates",
+    "Keyboard shortcuts",
+    "Local data and formats",
+    "Development",
+    "Documentation",
+    "Licensing"
+  ],
   "features": [
     "**Three document modes:** visual editing, reading, and Markdown source with preview. Includes formatting, undo/redo and find/replace.",
     "**Two documents side by side:** drag tabs or use their context menu. Independent editing, history, mode and scrolling, an adjustable divider, and layout restoration for saved files.",
@@ -15,29 +26,107 @@
     "**Workspace:** outline, focus mode, zoom, trackpad pinch, always-on-top windows, and light, dark or system themes.",
     "**Recovery:** restore open documents and the selected tab, recover unsaved drafts and detect external changes before overwriting files. Welcome appears only on first use.",
     "**Settings:** English, Spanish, Portuguese, French, German, Simplified Chinese, Traditional Chinese and Japanese; optional beta updates.",
-    "**Commands and links:** install the `lecat` command from Settings and use `lecat://file/…` links. Custom application links require confirmation; saved permissions can be revoked."
+    "**Commands and links:** install the `lecat` command from Settings and use `lecat://file/…` links. Custom application links require confirmation; saved permissions can be revoked.",
+    "**PDF reading:** local documents in tabs and panes, selectable text, search, bookmarks and zoom through the existing controls. Enable “Show PDFs in explorer” in the “+” menu; it is off by default. PDFs are read only, with page/zoom restoration and password support. No OCR or PDF editing."
   ],
   "stable": "Current stable release: **{version}**. Download names below point to the published packages; releases also include SHA256 checksums.",
-  "installHeaders": ["Platform", "Download", "Installation"],
-  "platforms": ["Windows 10/11 · x64", "Windows 10/11 · x64", "macOS 13+ · Apple Silicon", "macOS 13+ · Intel", "macOS 12 Monterey · Apple Silicon / Intel", "Linux · x64", "Debian / Ubuntu · x64"],
-  "packages": ["Installer (.exe)", "Portable (.zip)", "DMG · arm64", "DMG · x64", "Monterey release", "AppImage · x86_64", "Debian package · amd64"],
-  "installation": ["Run the installer to choose the destination and create shortcuts.", "Extract the whole ZIP and open `Lecat - Markdown.exe`; keep the bundled files together.", "Move the app to Applications before opening it. A ZIP is also available in the release.", "Move the app to Applications before opening it. A ZIP is also available in the release.", "Choose the DMG or ZIP for your processor from the separate compatibility release.", "Make the AppImage executable and open it. Some distributions require FUSE support.", "Install the `.deb` using your package manager, for example `sudo apt install ./file.deb`."],
+  "installHeaders": [
+    "Platform",
+    "Download",
+    "Installation"
+  ],
+  "platforms": [
+    "Windows 10/11 · x64",
+    "Windows 10/11 · x64",
+    "macOS 13+ · Apple Silicon",
+    "macOS 13+ · Intel",
+    "macOS 12 Monterey · Apple Silicon / Intel",
+    "Linux · x64",
+    "Debian / Ubuntu · x64"
+  ],
+  "packages": [
+    "Installer (.exe)",
+    "Portable (.zip)",
+    "DMG · arm64",
+    "DMG · x64",
+    "Monterey release",
+    "AppImage · x86_64",
+    "Debian package · amd64"
+  ],
+  "installation": [
+    "Run the installer to choose the destination and create shortcuts.",
+    "Extract the whole ZIP and open `Lecat - Markdown.exe`; keep the bundled files together.",
+    "Move the app to Applications before opening it. A ZIP is also available in the release.",
+    "Move the app to Applications before opening it. A ZIP is also available in the release.",
+    "Choose the DMG or ZIP for your processor from the separate compatibility release.",
+    "Make the AppImage executable and open it. Some distributions require FUSE support.",
+    "Install the `.deb` using your package manager, for example `sudo apt install ./file.deb`."
+  ],
   "macNote": "Mac packages use ad-hoc integrity signatures; they are not Developer ID signed or notarized. See the macOS installation and signing guides in Documentation.",
-  "work": ["Open a Markdown file or create a document. **Visual editing** is the default: click a heading, paragraph, list or table cell and type. Switch to **Reading** or **Code and preview** when needed. Diagrams and equations have focused editing dialogs; unchanged blocks retain their original Markdown.", "To compare documents, drag one tab onto another and choose the left or right side, or use the tab's context menu. Click a pane to select it: search, formatting, saving, sharing and export follow that document. Resize the divider or return to a single pane without closing the other tabs. Layout restoration requires both files to have saved paths.", "Saving is explicit: the original file changes only when you save. If another application modifies it, Lecat reports the conflict and lets you save a separate copy. To restore automatic theme selection, choose **View → Use system theme**."],
-  "updates": ["**Installed Windows app and supported Mac editions:** use Help → Check for updates to find, download and install public releases. The Windows portable ZIP requires a manual update.", "**macOS 12:** stay on the separate Monterey release channel. Mac 3.2.5 or earlier needs one manual installation of a newer edition to enable the current updater.", "**Linux:** download and install the new AppImage or `.deb` manually. Beta releases are optional in Settings. Checking and downloading updates requires internet access."],
+  "work": [
+    "Open a Markdown file or create a document. **Visual editing** is the default: click a heading, paragraph, list or table cell and type. Switch to **Reading** or **Code and preview** when needed. Diagrams and equations have focused editing dialogs; unchanged blocks retain their original Markdown.",
+    "To compare documents, drag one tab onto another and choose the left or right side, or use the tab's context menu. Click a pane to select it: search, formatting, saving, sharing and export follow that document. Resize the divider or return to a single pane without closing the other tabs. Layout restoration requires both files to have saved paths.",
+    "Saving is explicit: the original file changes only when you save. If another application modifies it, Lecat reports the conflict and lets you save a separate copy. To restore automatic theme selection, choose **View → Use system theme**."
+  ],
+  "updates": [
+    "**Installed Windows app and supported Mac editions:** use Help → Check for updates to find, download and install public releases. The Windows portable ZIP requires a manual update.",
+    "**macOS 12:** stay on the separate Monterey release channel. Mac 3.2.5 or earlier needs one manual installation of a newer edition to enable the current updater.",
+    "**Linux:** download and install the new AppImage or `.deb` manually. Beta releases are optional in Settings. Checking and downloading updates requires internet access."
+  ],
   "shortcutNote": "Use `Ctrl` on Windows/Linux and `⌘` on macOS. Shortcuts act on the selected document pane.",
-  "shortcutHeaders": ["Action", "Shortcut"],
-  "shortcutActions": ["New document / open file / open folder", "Save / Save As", "Close tab", "Reading / visual editing / source and preview", "Find", "Find and replace", "Bold / italic", "Toggle file explorer", "Focus mode / change theme", "Export PDF", "Export options", "Print", "Zoom in / out / reset", "Tab context menu"],
+  "shortcutHeaders": [
+    "Action",
+    "Shortcut"
+  ],
+  "shortcutActions": [
+    "New document / open file / open folder",
+    "Save / Save As",
+    "Close tab",
+    "Reading / visual editing / source and preview",
+    "Find",
+    "Find and replace",
+    "Bold / italic",
+    "Toggle file explorer",
+    "Focus mode / change theme",
+    "Export PDF",
+    "Export options",
+    "Print",
+    "Zoom in / out / reset",
+    "Tab context menu"
+  ],
   "dataIntro": "Preferences and recovery drafts stay on your computer. The historical profile folder name `ClaroMD` is retained for compatibility.",
-  "dataHeaders": ["System", "Profile location"],
+  "dataHeaders": [
+    "System",
+    "Profile location"
+  ],
   "dataNote": "On Linux, `~/.config` is the fallback when `XDG_CONFIG_HOME` is unset. There is no cloud synchronization or telemetry.",
   "formats": "Supports UTF-8, UTF-8 BOM and UTF-16 LE, preserving LF/CRLF line endings. The document limit is 20 MB. UTF-16 BE and invalid UTF-8 are rejected to prevent data corruption.",
   "security": "Remote images are not downloaded automatically. Web links open only when clicked; Markdown scripts do not execute. Mermaid errors are isolated to their blocks. PlantUML and Graphviz blocks are displayed as source code.",
   "developmentIntro": "Requirements: Node.js **22.12 or later**, npm and a supported desktop platform.",
-  "buildHeaders": ["Task", "Command"],
-  "buildLabels": ["Windows portable distribution", "Windows installer", "macOS Apple Silicon packages", "macOS Intel packages", "Linux x64 AppImage and .deb", "Existing Electron integration audit"],
+  "buildHeaders": [
+    "Task",
+    "Command"
+  ],
+  "buildLabels": [
+    "Windows portable distribution",
+    "Windows installer",
+    "macOS Apple Silicon packages",
+    "macOS Intel packages",
+    "Linux x64 AppImage and .deb",
+    "Existing Electron integration audit"
+  ],
   "developmentNote": "The application entry point is `electron/`; `src/` contains the historical WinForms/WebView2 implementation. Dependencies are pinned in `package-lock.json`. Audit screenshots and results are generated in `docs/previews/electron` and excluded from Git because they can contain local paths. Regenerate all six READMEs with `node scripts/generate-readmes.cjs` after editing `docs/readme/*.json`; check consistency with `node scripts/generate-readmes.cjs --check`.",
   "docsNote": "The following detailed guides are currently written in Spanish. Every README links to the same guides.",
-  "docLabels": ["Two documents side by side", "Floating toolbar and sharing", "Linux packages", "Application updates", "macOS installation", "macOS signatures"],
-  "license": ["The distributed application's terms are in [LICENCIA.txt](build/LICENCIA.txt). Public repository access does not itself grant a license to the project source code.", "Third-party libraries retain their respective licenses. The build generates bundled notices in `electron/ui/THIRD-PARTY-LICENSES.txt`; distributed packages also include Electron and Chromium notices."]
+  "docLabels": [
+    "Two documents side by side",
+    "Floating toolbar and sharing",
+    "Linux packages",
+    "Application updates",
+    "macOS installation",
+    "macOS signatures"
+  ],
+  "license": [
+    "The distributed application's terms are in [LICENCIA.txt](build/LICENCIA.txt). Public repository access does not itself grant a license to the project source code.",
+    "Third-party libraries retain their respective licenses. The build generates bundled notices in `electron/ui/THIRD-PARTY-LICENSES.txt`; distributed packages also include Electron and Chromium notices."
+  ]
 }

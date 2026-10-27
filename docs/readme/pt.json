@@ -2,7 +2,18 @@
   "intro": "Editor e leitor Markdown offline para Windows, macOS e Linux. Escreva diretamente no documento renderizado, explore pastas locais e trabalhe com diagramas, fórmulas, tabelas e imagens. Inclui Electron e Chromium; a edição local não exige conta, WebView2 nem .NET.",
   "download": "Baixar a versão mais recente",
   "releaseNotes": "Notas de versão",
-  "headings": ["Recursos", "Download e instalação", "Homebrew (macOS)", "Trabalhando com documentos", "Atualizações", "Atalhos de teclado", "Dados locais e formatos", "Desenvolvimento", "Documentação", "Licenças"],
+  "headings": [
+    "Recursos",
+    "Download e instalação",
+    "Homebrew (macOS)",
+    "Trabalhando com documentos",
+    "Atualizações",
+    "Atalhos de teclado",
+    "Dados locais e formatos",
+    "Desenvolvimento",
+    "Documentação",
+    "Licenças"
+  ],
   "features": [
     "**Três modos de documento:** edição visual, leitura e código Markdown com pré-visualização. Inclui formatação, desfazer/refazer e localizar/substituir.",
     "**Dois documentos lado a lado:** arraste abas ou use o menu de contexto. Edição, histórico, modo e rolagem independentes, divisor ajustável e restauração do layout de arquivos salvos.",
@@ -15,29 +26,107 @@
     "**Área de trabalho:** sumário, modo de foco, zoom, gesto de pinça no trackpad, janela sempre no topo e temas claro, escuro ou do sistema.",
     "**Recuperação:** restaure os documentos abertos e a aba selecionada, recupere rascunhos não salvos e detecte alterações externas antes de sobrescrever arquivos. As boas-vindas aparecem apenas no primeiro uso.",
     "**Configurações:** inglês, espanhol, português, francês, alemão, chinês simplificado, chinês tradicional e japonês; atualizações beta opcionais.",
-    "**Comandos e links:** instale o comando `lecat` nas configurações e use links `lecat://file/…`. Links personalizados de aplicativos exigem confirmação; permissões salvas podem ser revogadas."
+    "**Comandos e links:** instale o comando `lecat` nas configurações e use links `lecat://file/…`. Links personalizados de aplicativos exigem confirmação; permissões salvas podem ser revogadas.",
+    "**Leitura de PDF:** documentos locais em abas e painéis, seleção de texto, busca, marcadores e zoom pelos controles existentes. Ative “Mostrar PDFs no explorador” no menu “+”; vem desativado. Os PDFs são somente leitura, com restauração de página/zoom e suporte a senha. Sem OCR ou edição de PDF."
   ],
   "stable": "Versão estável atual: **{version}**. Os links abaixo levam aos pacotes publicados; as releases também incluem somas SHA256.",
-  "installHeaders": ["Plataforma", "Download", "Instalação"],
-  "platforms": ["Windows 10/11 · x64", "Windows 10/11 · x64", "macOS 13+ · Apple Silicon", "macOS 13+ · Intel", "macOS 12 Monterey · Apple Silicon / Intel", "Linux · x64", "Debian / Ubuntu · x64"],
-  "packages": ["Instalador (.exe)", "Portátil (.zip)", "DMG · arm64", "DMG · x64", "Release para Monterey", "AppImage · x86_64", "Pacote Debian · amd64"],
-  "installation": ["Execute o instalador para escolher o destino e criar atalhos.", "Extraia o ZIP completo e abra `Lecat - Markdown.exe`; mantenha os arquivos incluídos juntos.", "Mova o aplicativo para Aplicativos antes de abri-lo. A release também oferece um ZIP.", "Mova o aplicativo para Aplicativos antes de abri-lo. A release também oferece um ZIP.", "Na release de compatibilidade separada, escolha o DMG ou ZIP do seu processador.", "Conceda permissão de execução ao AppImage e abra-o. Algumas distribuições exigem suporte ao FUSE.", "Instale o `.deb` com seu gerenciador de pacotes, por exemplo `sudo apt install ./file.deb`."],
+  "installHeaders": [
+    "Plataforma",
+    "Download",
+    "Instalação"
+  ],
+  "platforms": [
+    "Windows 10/11 · x64",
+    "Windows 10/11 · x64",
+    "macOS 13+ · Apple Silicon",
+    "macOS 13+ · Intel",
+    "macOS 12 Monterey · Apple Silicon / Intel",
+    "Linux · x64",
+    "Debian / Ubuntu · x64"
+  ],
+  "packages": [
+    "Instalador (.exe)",
+    "Portátil (.zip)",
+    "DMG · arm64",
+    "DMG · x64",
+    "Release para Monterey",
+    "AppImage · x86_64",
+    "Pacote Debian · amd64"
+  ],
+  "installation": [
+    "Execute o instalador para escolher o destino e criar atalhos.",
+    "Extraia o ZIP completo e abra `Lecat - Markdown.exe`; mantenha os arquivos incluídos juntos.",
+    "Mova o aplicativo para Aplicativos antes de abri-lo. A release também oferece um ZIP.",
+    "Mova o aplicativo para Aplicativos antes de abri-lo. A release também oferece um ZIP.",
+    "Na release de compatibilidade separada, escolha o DMG ou ZIP do seu processador.",
+    "Conceda permissão de execução ao AppImage e abra-o. Algumas distribuições exigem suporte ao FUSE.",
+    "Instale o `.deb` com seu gerenciador de pacotes, por exemplo `sudo apt install ./file.deb`."
+  ],
   "macNote": "Os pacotes Mac usam assinatura ad-hoc de integridade; não têm assinatura Developer ID nem notarização da Apple. Consulte os guias de instalação e assinatura do macOS em Documentação.",
-  "work": ["Abra um arquivo Markdown ou crie um documento. **Edição visual** é o modo padrão: clique em um título, parágrafo, lista ou célula e digite. Alterne para **Leitura** ou **Código e pré-visualização** quando precisar. Diagramas e fórmulas têm diálogos específicos de edição; blocos não modificados mantêm o Markdown original.", "Para comparar documentos, arraste uma aba sobre outra e escolha esquerda ou direita, ou use o menu de contexto da aba. Clique em um painel para selecioná-lo: busca, formatação, salvamento, compartilhamento e exportação seguem esse documento. Ajuste o divisor ou volte a um único painel sem fechar as outras abas. Restaurar o layout exige que os dois arquivos tenham caminhos salvos.", "O salvamento é explícito: o arquivo original só muda quando você salva. Se outro aplicativo o modificar, o Lecat informa o conflito e permite salvar uma cópia separada. Para restaurar a seleção automática de tema, escolha **Exibir → Usar tema do sistema**."],
-  "updates": ["**Aplicativo Windows instalado e edições compatíveis do Mac:** use Ajuda → Buscar atualizações para localizar, baixar e instalar versões públicas. O ZIP portátil do Windows exige atualização manual.", "**macOS 12:** mantenha o canal separado para Monterey. No Mac 3.2.5 ou anterior, instale uma edição mais nova manualmente uma vez para habilitar o atualizador atual.", "**Linux:** baixe e instale o novo AppImage ou `.deb` manualmente. Versões beta são opcionais nas configurações. Buscar e baixar atualizações exige internet."],
+  "work": [
+    "Abra um arquivo Markdown ou crie um documento. **Edição visual** é o modo padrão: clique em um título, parágrafo, lista ou célula e digite. Alterne para **Leitura** ou **Código e pré-visualização** quando precisar. Diagramas e fórmulas têm diálogos específicos de edição; blocos não modificados mantêm o Markdown original.",
+    "Para comparar documentos, arraste uma aba sobre outra e escolha esquerda ou direita, ou use o menu de contexto da aba. Clique em um painel para selecioná-lo: busca, formatação, salvamento, compartilhamento e exportação seguem esse documento. Ajuste o divisor ou volte a um único painel sem fechar as outras abas. Restaurar o layout exige que os dois arquivos tenham caminhos salvos.",
+    "O salvamento é explícito: o arquivo original só muda quando você salva. Se outro aplicativo o modificar, o Lecat informa o conflito e permite salvar uma cópia separada. Para restaurar a seleção automática de tema, escolha **Exibir → Usar tema do sistema**."
+  ],
+  "updates": [
+    "**Aplicativo Windows instalado e edições compatíveis do Mac:** use Ajuda → Buscar atualizações para localizar, baixar e instalar versões públicas. O ZIP portátil do Windows exige atualização manual.",
+    "**macOS 12:** mantenha o canal separado para Monterey. No Mac 3.2.5 ou anterior, instale uma edição mais nova manualmente uma vez para habilitar o atualizador atual.",
+    "**Linux:** baixe e instale o novo AppImage ou `.deb` manualmente. Versões beta são opcionais nas configurações. Buscar e baixar atualizações exige internet."
+  ],
   "shortcutNote": "Use `Ctrl` no Windows/Linux e `⌘` no macOS. Os atalhos atuam sobre o painel de documento selecionado.",
-  "shortcutHeaders": ["Ação", "Atalho"],
-  "shortcutActions": ["Novo documento / abrir arquivo / abrir pasta", "Salvar / Salvar como", "Fechar aba", "Leitura / edição visual / código e pré-visualização", "Localizar", "Localizar e substituir", "Negrito / itálico", "Mostrar ou ocultar explorador", "Modo de foco / alterar tema", "Exportar PDF", "Opções de exportação", "Imprimir", "Ampliar / reduzir / redefinir zoom", "Menu de contexto da aba"],
+  "shortcutHeaders": [
+    "Ação",
+    "Atalho"
+  ],
+  "shortcutActions": [
+    "Novo documento / abrir arquivo / abrir pasta",
+    "Salvar / Salvar como",
+    "Fechar aba",
+    "Leitura / edição visual / código e pré-visualização",
+    "Localizar",
+    "Localizar e substituir",
+    "Negrito / itálico",
+    "Mostrar ou ocultar explorador",
+    "Modo de foco / alterar tema",
+    "Exportar PDF",
+    "Opções de exportação",
+    "Imprimir",
+    "Ampliar / reduzir / redefinir zoom",
+    "Menu de contexto da aba"
+  ],
   "dataIntro": "As preferências e os rascunhos de recuperação ficam no seu computador. O nome histórico da pasta de perfil `ClaroMD` é mantido por compatibilidade.",
-  "dataHeaders": ["Sistema", "Localização do perfil"],
+  "dataHeaders": [
+    "Sistema",
+    "Localização do perfil"
+  ],
   "dataNote": "No Linux, usa-se `~/.config` quando `XDG_CONFIG_HOME` não está definido. Não há sincronização na nuvem nem telemetria.",
   "formats": "Suporta UTF-8, UTF-8 com BOM e UTF-16 LE, preservando finais de linha LF/CRLF. O limite é de 20 MB por documento. UTF-16 BE e UTF-8 inválido são rejeitados para evitar corrupção de dados.",
   "security": "Imagens remotas não são baixadas automaticamente. Links web só abrem ao clicar; scripts do Markdown não são executados. Erros do Mermaid ficam isolados nos respectivos blocos. Blocos PlantUML e Graphviz são exibidos como código-fonte.",
   "developmentIntro": "Requisitos: Node.js **22.12 ou posterior**, npm e uma plataforma de desktop compatível.",
-  "buildHeaders": ["Tarefa", "Comando"],
-  "buildLabels": ["Distribuição portátil do Windows", "Instalador do Windows", "Pacotes para Mac Apple Silicon", "Pacotes para Mac Intel", "AppImage e .deb para Linux x64", "Auditoria de integração existente do Electron"],
+  "buildHeaders": [
+    "Tarefa",
+    "Comando"
+  ],
+  "buildLabels": [
+    "Distribuição portátil do Windows",
+    "Instalador do Windows",
+    "Pacotes para Mac Apple Silicon",
+    "Pacotes para Mac Intel",
+    "AppImage e .deb para Linux x64",
+    "Auditoria de integração existente do Electron"
+  ],
   "developmentNote": "O ponto de entrada do aplicativo é `electron/`; `src/` contém a implementação histórica WinForms/WebView2. As dependências estão fixadas em `package-lock.json`. As capturas e os resultados de auditoria são gerados em `docs/previews/electron` e excluídos do Git porque podem conter caminhos locais. Regenere os seis README com `node scripts/generate-readmes.cjs` após editar `docs/readme/*.json`; confira a consistência com `node scripts/generate-readmes.cjs --check`.",
   "docsNote": "Os guias detalhados abaixo estão atualmente escritos em espanhol. Todos os README apontam para os mesmos guias.",
-  "docLabels": ["Dois documentos lado a lado", "Barra flutuante e compartilhamento", "Pacotes para Linux", "Atualizações do aplicativo", "Instalação no macOS", "Assinaturas do macOS"],
-  "license": ["Os termos do aplicativo distribuído estão em [LICENCIA.txt](build/LICENCIA.txt). O acesso público ao repositório, por si só, não concede uma licença sobre o código-fonte do projeto.", "As bibliotecas de terceiros mantêm suas respectivas licenças. A compilação gera os avisos em `electron/ui/THIRD-PARTY-LICENSES.txt`; os pacotes distribuídos também incluem os avisos do Electron e Chromium."]
+  "docLabels": [
+    "Dois documentos lado a lado",
+    "Barra flutuante e compartilhamento",
+    "Pacotes para Linux",
+    "Atualizações do aplicativo",
+    "Instalação no macOS",
+    "Assinaturas do macOS"
+  ],
+  "license": [
+    "Os termos do aplicativo distribuído estão em [LICENCIA.txt](build/LICENCIA.txt). O acesso público ao repositório, por si só, não concede uma licença sobre o código-fonte do projeto.",
+    "As bibliotecas de terceiros mantêm suas respectivas licenças. A compilação gera os avisos em `electron/ui/THIRD-PARTY-LICENSES.txt`; os pacotes distribuídos também incluem os avisos do Electron e Chromium."
+  ]
 }
