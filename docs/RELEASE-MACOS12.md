@@ -1,36 +1,38 @@
-# Lecat Markdown 3.8.0-macos12.1 — Monterey
+# Lecat Markdown 3.9.2-macos12.1 — Monterey
 
 Compatible con macOS 12, Intel y Apple Silicon. Para Monterey usá los DMG o ZIP de esta release.
 
-# Lecat Markdown 3.8.0
+# Lecat Markdown 3.9.2
 
 ## Español
 
-- Windows: explorador más compacto, con lupa para desplegar el filtro y menú «+» para crear archivos, carpetas, pegar desde el portapapeles y consultar recientes.
-- La separación entre accesos superiores y archivos en Windows se puede arrastrar. La aplicación recuerda la proporción elegida; doble clic restaura la distribución inicial. También se ajusta con las flechas del teclado.
-- macOS: árbol de carpetas desplegable, filtro y recientes en el pie y menú «+» para crear y abrir. Se eliminan los botones repetidos de Nuevo/Abrir de la barra derecha.
-- El tema se configura en Configuración → Apariencia en ambas plataformas: Sistema, Claro y Oscuro.
-- En Mac, Guardado/Sin guardar aparece en el pie del documento, junto a los datos de codificación.
-- Actualizar el árbol tras crear elementos seguidos ya no reutiliza una lectura anterior pendiente.
+Actualización de seguridad de componentes internos. No cambia la interfaz ni el formato de los documentos.
 
-Incluye instalador y portable de Windows, paquetes de macOS Intel/ARM64 y Linux AppImage/deb. macOS 12 utiliza la release separada **3.8.0-macos12.1**.
+- Electron 44.9.3: incorpora la mitigación de Chromium para certificados intermedios comprometidos.
+- DOMPurify 3.4.17: corrige tres formas de evitar la limpieza de HTML en documentos.
+- markdown-it 14.3.3: evita bloqueos con documentos Markdown preparados para tardar mucho en procesarse.
+- electron-updater 6.8.11: corrige el manejo de credenciales en redirecciones durante las actualizaciones.
+
+Se mantienen la lectura de PDF sin conexión, el explorador y las preferencias de la 3.9.1.
+
+Incluye instalador y portable de Windows, macOS Intel/ARM64 y Linux AppImage/deb. macOS 12 utiliza **3.9.2-macos12.1**.
 
 ## English
 
-Windows has a compact search/plus row and a draggable divider between shortcuts and files. The chosen proportion is remembered; double-click resets it. macOS gains an expandable folder tree and bottom filter, recents and create/open menu, with duplicate toolbar actions removed. Theme selection lives in Settings → Appearance on both platforms. Mac save status moves to the footer. Refreshing newly created folders no longer reuses a pending older read.
-
-## 简体中文
-
-Windows 资源管理器新增紧凑的搜索和「+」菜单，可拖动分隔线并记住面板比例。macOS 新增可展开的文件夹树及底部筛选、最近文件和新建/打开菜单。两平台均可在设置中选择系统、浅色或深色主题；Mac 的保存状态移至底部。
-
-## 繁體中文
-
-Windows 檔案總管新增精簡的搜尋和「+」選單，可拖曳分隔線並記住面板比例。macOS 新增可展開的資料夾樹及底部篩選、最近檔案和新增/開啟選單。兩平台均可在設定中選擇系統、淺色或深色主題；Mac 的儲存狀態移至底部。
-
-## 日本語
-
-Windowsのエクスプローラーにコンパクトな検索と「+」メニューを追加しました。パネル間の仕切りをドラッグして比率を保存できます。macOSには展開可能なフォルダツリーと下部のフィルター、履歴、作成/開くメニューを追加しました。両プラットフォームでテーマを設定から選択でき、Macの保存状態は下部に表示されます。
+Security update for internal components, with no interface or document format changes. Electron 44.9.3 includes Chromium’s mitigation for compromised intermediate certificates; DOMPurify 3.4.17 fixes three HTML sanitization bypasses; markdown-it 14.3.3 prevents slowdowns from crafted Markdown; electron-updater 6.8.11 fixes credential handling on redirects. Offline PDF reading, the explorer and preferences from 3.9.1 are unchanged.
 
 ## Português
 
-O Windows ganha busca e menu «+» compactos, com divisor arrastável e proporção memorizada. No macOS, há uma árvore de pastas e filtro, recentes e menu de criar/abrir na parte inferior. O tema fica em Configurações → Aparência nas duas plataformas, e o estado de salvamento do Mac passa para o rodapé.
+Atualização de segurança de componentes internos, sem mudanças na interface ou no formato dos documentos. Electron 44.9.3, DOMPurify 3.4.17, markdown-it 14.3.3 e electron-updater 6.8.11 corrigem certificados comprometidos, limpeza de HTML, lentidão com Markdown preparado e credenciais em redirecionamentos.
+
+## 简体中文
+
+内部组件安全更新，界面和文档格式不变。Electron 44.9.3、DOMPurify 3.4.17、markdown-it 14.3.3 和 electron-updater 6.8.11 修复了被盗用的中间证书、HTML 清理绕过、恶意 Markdown 导致的卡顿以及更新重定向中的凭据处理问题。
+
+## 繁體中文
+
+內部元件安全性更新，介面和文件格式不變。Electron 44.9.3、DOMPurify 3.4.17、markdown-it 14.3.3 和 electron-updater 6.8.11 修正了遭盜用的中繼憑證、HTML 清理繞過、惡意 Markdown 造成的延遲以及更新重新導向中的憑證處理問題。
+
+## 日本語
+
+内部コンポーネントのセキュリティ更新です。インターフェイスや書類の形式は変わりません。Electron 44.9.3、DOMPurify 3.4.17、markdown-it 14.3.3、electron-updater 6.8.11により、侵害された中間証明書、HTMLサニタイズの回避、細工されたMarkdownによる遅延、更新時のリダイレクトでの資格情報の扱いを修正しました。
