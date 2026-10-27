@@ -6,7 +6,9 @@
 .pdf-match{background:#ffca4880!important}
 .pdf-page-error{padding:24px;box-sizing:border-box}
 [data-document-pane][data-kind=pdf]>:not(.pdf-pane):not(#inspector){display:none!important}
-body[data-document-kind=pdf] .segmented,body[data-document-kind=pdf] .toolbar-modes,body[data-document-kind=pdf] .toolbar-save,body[data-document-kind=pdf] .format-toggle,body[data-document-kind=pdf]:not([data-pdf-outline=true]) [data-command=outline],body[data-document-kind=pdf] [data-command=pdf],body[data-document-kind=pdf] [data-command=print],body[data-document-kind=pdf] [data-command=export],body[data-document-kind=pdf] #save-state{display:none!important}
+/* Toolbar controls that do not apply to PDFs keep their slot so zoom and the other actions do not shift. */
+body[data-document-kind=pdf] .segmented,body[data-document-kind=pdf] .toolbar-modes,body[data-document-kind=pdf] .toolbar-save,body[data-document-kind=pdf] .format-toggle,body[data-document-kind=pdf]:not([data-pdf-outline=true]) [data-command=outline],body[data-document-kind=pdf] #save-state{visibility:hidden!important;pointer-events:none!important}
+body[data-document-kind=pdf] [data-command=pdf],body[data-document-kind=pdf] [data-command=print],body[data-document-kind=pdf] [data-command=export]{display:none!important}
 html[data-platform=win32] body.pdf-search-active #toolbar-search{display:flex!important}
 
 [data-document-pane][data-kind=pdf][data-pdf-outline=true]>[data-pane-part=outline]:not([hidden]){display:block!important;position:absolute;right:0;top:0;bottom:0;z-index:5;background:var(--canvas);box-shadow:var(--shadow)}

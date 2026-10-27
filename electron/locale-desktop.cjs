@@ -26,6 +26,8 @@ module.exports={
 
  'Seleccionar archivos…':['Select files…','Selecionar arquivos…','Sélectionner des fichiers…','Dateien auswählen…','选择文件…','選擇檔案…','ファイルを選択…'],
  'Compartir':['Share','Compartilhar','Partager','Teilen','分享','分享','共有'],
+ 'Abriendo Compartir…':['Opening Share…','Abrindo Compartilhar…','Ouverture du partage…','Teilen wird geöffnet…','正在打开分享…','正在開啟分享…','共有を開いています…'],
+ 'Compartir se está abriendo.':['Share is already opening.','O compartilhamento já está abrindo.','Le partage est déjà en cours d’ouverture.','Teilen wird bereits geöffnet.','分享正在打开。','分享正在開啟。','共有を開いています。'],
  'Compartir texto':['Share text','Compartilhar texto','Partager le texte','Text teilen','分享文本','分享文字','テキストを共有'],
  'Compartir archivo…':['Share file…','Compartilhar arquivo…','Partager le fichier…','Datei teilen…','分享文件…','分享檔案…','ファイルを共有…'],
  'Copiar Markdown':['Copy Markdown','Copiar Markdown','Copier le Markdown','Markdown kopieren','复制 Markdown','複製 Markdown','Markdownをコピー'],

@@ -1,34 +1,32 @@
-# Lecat Markdown 3.9.2
+# Lecat Markdown 3.9.3
 
 ## Español
 
-Actualización de seguridad de componentes internos. No cambia la interfaz ni el formato de los documentos.
+Correcciones para PDF y Compartir.
 
-- Electron 44.9.3: incorpora la mitigación de Chromium para certificados intermedios comprometidos.
-- DOMPurify 3.4.17: corrige tres formas de evitar la limpieza de HTML en documentos.
-- markdown-it 14.3.3: evita bloqueos con documentos Markdown preparados para tardar mucho en procesarse.
-- electron-updater 6.8.11: corrige el manejo de credenciales en redirecciones durante las actualizaciones.
+- Al abrir un PDF, el zoom y el resto de la botonera quedan en el mismo lugar. Los botones que no corresponden a PDF se ocultan sin mover los demás.
+- Windows: si la ventana de Compartir quedaba abierta en segundo plano, volver a compartir ya no muestra «ya está abierta»; se abre una nueva.
+- Windows: los PDF se comparten desde su archivo original, sin copiarlos antes, por lo que Compartir abre más rápido con archivos grandes.
+- Windows: mientras se prepara la ventana aparece «Abriendo Compartir…».
 
-Se mantienen la lectura de PDF sin conexión, el explorador y las preferencias de la 3.9.1.
-
-Incluye instalador y portable de Windows, macOS Intel/ARM64 y Linux AppImage/deb. macOS 12 utiliza **3.9.2-macos12.1**.
+Incluye instalador y portable de Windows, macOS Intel/ARM64 y Linux AppImage/deb. macOS 12 utiliza **3.9.3-macos12.1**.
 
 ## English
 
-Security update for internal components, with no interface or document format changes. Electron 44.9.3 includes Chromium’s mitigation for compromised intermediate certificates; DOMPurify 3.4.17 fixes three HTML sanitization bypasses; markdown-it 14.3.3 prevents slowdowns from crafted Markdown; electron-updater 6.8.11 fixes credential handling on redirects. Offline PDF reading, the explorer and preferences from 3.9.1 are unchanged.
+PDF and Share fixes. Zoom and the other toolbar actions stay in place when a PDF is focused. On Windows, sharing again replaces a Share window left open in the background instead of reporting that it is already open, PDFs are shared from the original file without copying it first, and “Opening Share…” is shown while the sheet is prepared.
 
 ## Português
 
-Atualização de segurança de componentes internos, sem mudanças na interface ou no formato dos documentos. Electron 44.9.3, DOMPurify 3.4.17, markdown-it 14.3.3 e electron-updater 6.8.11 corrigem certificados comprometidos, limpeza de HTML, lentidão com Markdown preparado e credenciais em redirecionamentos.
+Correções para PDF e Compartilhar. O zoom e os demais botões ficam no lugar ao abrir um PDF. No Windows, compartilhar de novo substitui uma janela que ficou aberta em segundo plano, os PDF são compartilhados a partir do arquivo original sem cópia prévia e aparece «Abrindo Compartilhar…».
 
 ## 简体中文
 
-内部组件安全更新，界面和文档格式不变。Electron 44.9.3、DOMPurify 3.4.17、markdown-it 14.3.3 和 electron-updater 6.8.11 修复了被盗用的中间证书、HTML 清理绕过、恶意 Markdown 导致的卡顿以及更新重定向中的凭据处理问题。
+PDF 和分享修复。打开 PDF 时，缩放和其他工具栏按钮保持原位。在 Windows 上，再次分享会替换在后台残留的分享窗口，不再提示已打开；PDF 直接从原文件分享，无需先复制；准备时显示“正在打开分享…”。
 
 ## 繁體中文
 
-內部元件安全性更新，介面和文件格式不變。Electron 44.9.3、DOMPurify 3.4.17、markdown-it 14.3.3 和 electron-updater 6.8.11 修正了遭盜用的中繼憑證、HTML 清理繞過、惡意 Markdown 造成的延遲以及更新重新導向中的憑證處理問題。
+PDF 與分享修正。開啟 PDF 時，縮放與其他工具列按鈕保持原位。在 Windows 上，再次分享會取代在背景殘留的分享視窗，不再顯示已開啟；PDF 直接從原始檔案分享，不必先複製；準備時顯示「正在開啟分享…」。
 
 ## 日本語
 
-内部コンポーネントのセキュリティ更新です。インターフェイスや書類の形式は変わりません。Electron 44.9.3、DOMPurify 3.4.17、markdown-it 14.3.3、electron-updater 6.8.11により、侵害された中間証明書、HTMLサニタイズの回避、細工されたMarkdownによる遅延、更新時のリダイレクトでの資格情報の扱いを修正しました。
+PDFと共有の修正です。PDFを表示してもズームなどのツールバーのボタンは同じ位置に残ります。Windowsでは、背景に残った共有ウィンドウを再度の共有で置き換え、「すでに開いています」と表示されなくなりました。PDFは元のファイルから直接共有し、準備中は「共有を開いています…」と表示します。
