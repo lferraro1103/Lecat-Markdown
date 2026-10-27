@@ -1,9 +1,9 @@
 cask "lecat-markdown" do
   arch arm: "arm64", intel: "x64"
 
-  version "3.9.3"
-  sha256 arm: "c253ce92b23e599dc06a457c0b3be7d58f37c4ae3f3c1ef44e3e15fed09362b6",
-         intel: "7d8f393e8236ad36efe36f309c921ec94ab82613c457ec276fd26bce71654fc7"
+  version "3.9.5"
+  sha256 arm: "e17fcfd895ffdaf46af5dadf49184b786755a295e3c8354621d4be326139ed3d",
+         intel: "7c91a908f7f4afbffe1b14d20f939eb536d63bdcffb398cdc5affd62d6ad8647"
 
   url "https://github.com/lferraro1103/Lecat-Markdown/releases/download/v#{version}/Lecat-Markdown-#{version}-macOS-#{arch}.dmg"
   name "Lecat Markdown"
