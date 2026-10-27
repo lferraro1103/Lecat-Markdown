@@ -1,6 +1,6 @@
 {
   "name": "lecat-markdown",
-  "version": "3.9.1",
+  "version": "3.9.2",
   "description": "Editor y lector Markdown para Windows y macOS, con gráficos sin conexión",
   "main": "electron/main.cjs",
   "author": "Lecat",
@@ -31,14 +31,14 @@
     "@tiptap/markdown": "3.31.4",
     "@tiptap/starter-kit": "3.31.4",
     "codemirror": "^6.0.2",
-    "dompurify": "^3.2.7",
-    "electron": "44.5.1",
+    "dompurify": "^3.4.17",
+    "electron": "44.9.3",
     "electron-builder": "26.15.3",
     "esbuild": "^0.25.10",
     "highlight.js": "^11.11.1",
     "katex": "0.16.22",
     "lucide": "^0.468.0",
-    "markdown-it": "^14.1.0",
+    "markdown-it": "^14.3.3",
     "markdown-it-task-lists": "^2.1.1",
     "mermaid": "11.17.2",
     "pdfjs-dist": "6.4.299",
@@ -190,7 +190,7 @@
       "url": "https://github.com/lferraro1103/Lecat-Markdown/releases/latest/download"
     },
     "releaseInfo": {
-      "releaseNotesFile": "docs/RELEASE-3.9.1.md"
+      "releaseNotesFile": "docs/RELEASE-3.9.2.md"
     },
     "afterPack": "./scripts/pack-sparkle.cjs",
     "protocols": [
@@ -218,7 +218,7 @@
     }
   },
   "dependencies": {
-    "electron-updater": "6.8.3",
+    "electron-updater": "6.8.11",
     "semver": "7.8.5"
   },
   "homepage": "https://github.com/lferraro1103/Lecat-Markdown"
