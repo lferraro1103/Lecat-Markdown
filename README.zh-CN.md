@@ -32,17 +32,17 @@
 
 ## 下载与安装
 
-当前稳定版：**3.9.4**。下表链接指向已发布的安装包；版本附件中也包含 SHA256 校验文件。
+当前稳定版：**3.9.5**。下表链接指向已发布的安装包；版本附件中也包含 SHA256 校验文件。
 
 | 平台 | 下载 | 安装方式 |
 | --- | --- | --- |
-| Windows 10/11 · x64 | [安装程序（.exe）](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.4/Lecat-Markdown-3.9.4-Setup-x64.exe) | 运行安装程序，选择安装位置并创建快捷方式。 |
-| Windows 10/11 · x64 | [便携版（.zip）](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.4/Lecat-Markdown-3.9.4-Windows-x64.zip) | 完整解压 ZIP，打开 `Lecat - Markdown.exe`，并将附带文件保存在一起。 |
-| macOS 13+ · Apple Silicon | [DMG · arm64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.4/Lecat-Markdown-3.9.4-macOS-arm64.dmg) | 首次打开前将应用移入“应用程序”。版本附件也提供 ZIP。 |
-| macOS 13+ · Intel | [DMG · x64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.4/Lecat-Markdown-3.9.4-macOS-x64.dmg) | 首次打开前将应用移入“应用程序”。版本附件也提供 ZIP。 |
-| macOS 12 Monterey · Apple Silicon / Intel | [Monterey 兼容版本](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.9.4-macos12.1) | 在独立兼容版本中选择与处理器匹配的 DMG 或 ZIP。 |
-| Linux · x64 | [AppImage · x86_64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.4/Lecat-Markdown-3.9.4-Linux-x86_64.AppImage) | 为 AppImage 添加执行权限后运行。部分发行版需要 FUSE 支持。 |
-| Debian / Ubuntu · x64 | [Debian 安装包 · amd64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.4/Lecat-Markdown-3.9.4-Linux-amd64.deb) | 通过包管理器安装 `.deb`，例如 `sudo apt install ./file.deb`。 |
+| Windows 10/11 · x64 | [安装程序（.exe）](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.5/Lecat-Markdown-3.9.5-Setup-x64.exe) | 运行安装程序，选择安装位置并创建快捷方式。 |
+| Windows 10/11 · x64 | [便携版（.zip）](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.5/Lecat-Markdown-3.9.5-Windows-x64.zip) | 完整解压 ZIP，打开 `Lecat - Markdown.exe`，并将附带文件保存在一起。 |
+| macOS 13+ · Apple Silicon | [DMG · arm64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.5/Lecat-Markdown-3.9.5-macOS-arm64.dmg) | 首次打开前将应用移入“应用程序”。版本附件也提供 ZIP。 |
+| macOS 13+ · Intel | [DMG · x64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.5/Lecat-Markdown-3.9.5-macOS-x64.dmg) | 首次打开前将应用移入“应用程序”。版本附件也提供 ZIP。 |
+| macOS 12 Monterey · Apple Silicon / Intel | [Monterey 兼容版本](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.9.5-macos12.1) | 在独立兼容版本中选择与处理器匹配的 DMG 或 ZIP。 |
+| Linux · x64 | [AppImage · x86_64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.5/Lecat-Markdown-3.9.5-Linux-x86_64.AppImage) | 为 AppImage 添加执行权限后运行。部分发行版需要 FUSE 支持。 |
+| Debian / Ubuntu · x64 | [Debian 安装包 · amd64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.5/Lecat-Markdown-3.9.5-Linux-amd64.deb) | 通过包管理器安装 `.deb`，例如 `sudo apt install ./file.deb`。 |
 
 Mac 安装包使用 ad-hoc 完整性签名，未使用 Developer ID 签名，也未经 Apple 公证。请参阅“文档指南”中的 macOS 安装与签名说明。
 
