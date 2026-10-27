@@ -32,17 +32,17 @@ Windows、macOS、Linux向けのオフラインMarkdownエディタ・ビュー�
 
 ## ダウンロードとインストール
 
-現在の安定版：**3.9.2**。以下のリンクは公開済みパッケージを指します。リリースにはSHA256チェックサムも含まれます。
+現在の安定版：**3.9.3**。以下のリンクは公開済みパッケージを指します。リリースにはSHA256チェックサムも含まれます。
 
 | プラットフォーム | ダウンロード | インストール |
 | --- | --- | --- |
-| Windows 10/11 · x64 | [インストーラ（.exe）](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.2/Lecat-Markdown-3.9.2-Setup-x64.exe) | インストーラを実行し、インストール先とショートカットを設定します。 |
-| Windows 10/11 · x64 | [ポータブル版（.zip）](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.2/Lecat-Markdown-3.9.2-Windows-x64.zip) | ZIP全体を展開して`Lecat - Markdown.exe`を開きます。同梱ファイルは一緒に保管してください。 |
-| macOS 13+ · Apple Silicon | [DMG · arm64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.2/Lecat-Markdown-3.9.2-macOS-arm64.dmg) | 初回起動前にアプリケーションフォルダへ移動します。リリースにはZIPもあります。 |
-| macOS 13+ · Intel | [DMG · x64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.2/Lecat-Markdown-3.9.2-macOS-x64.dmg) | 初回起動前にアプリケーションフォルダへ移動します。リリースにはZIPもあります。 |
-| macOS 12 Monterey · Apple Silicon / Intel | [Monterey互換版](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.9.2-macos12.1) | 独立した互換リリースから、プロセッサに対応するDMGまたはZIPを選択します。 |
-| Linux · x64 | [AppImage · x86_64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.2/Lecat-Markdown-3.9.2-Linux-x86_64.AppImage) | AppImageに実行権限を付与して開きます。一部のディストリビューションではFUSEが必要です。 |
-| Debian / Ubuntu · x64 | [Debianパッケージ · amd64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.2/Lecat-Markdown-3.9.2-Linux-amd64.deb) | パッケージマネージャで`.deb`をインストールします。例：`sudo apt install ./file.deb`。 |
+| Windows 10/11 · x64 | [インストーラ（.exe）](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.3/Lecat-Markdown-3.9.3-Setup-x64.exe) | インストーラを実行し、インストール先とショートカットを設定します。 |
+| Windows 10/11 · x64 | [ポータブル版（.zip）](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.3/Lecat-Markdown-3.9.3-Windows-x64.zip) | ZIP全体を展開して`Lecat - Markdown.exe`を開きます。同梱ファイルは一緒に保管してください。 |
+| macOS 13+ · Apple Silicon | [DMG · arm64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.3/Lecat-Markdown-3.9.3-macOS-arm64.dmg) | 初回起動前にアプリケーションフォルダへ移動します。リリースにはZIPもあります。 |
+| macOS 13+ · Intel | [DMG · x64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.3/Lecat-Markdown-3.9.3-macOS-x64.dmg) | 初回起動前にアプリケーションフォルダへ移動します。リリースにはZIPもあります。 |
+| macOS 12 Monterey · Apple Silicon / Intel | [Monterey互換版](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.9.3-macos12.1) | 独立した互換リリースから、プロセッサに対応するDMGまたはZIPを選択します。 |
+| Linux · x64 | [AppImage · x86_64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.3/Lecat-Markdown-3.9.3-Linux-x86_64.AppImage) | AppImageに実行権限を付与して開きます。一部のディストリビューションではFUSEが必要です。 |
+| Debian / Ubuntu · x64 | [Debianパッケージ · amd64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.3/Lecat-Markdown-3.9.3-Linux-amd64.deb) | パッケージマネージャで`.deb`をインストールします。例：`sudo apt install ./file.deb`。 |
 
 Macパッケージは整合性確認用のad-hoc署名を使用し、Developer ID署名やAppleの公証は含みません。ドキュメント欄のmacOSインストールガイドと署名ガイドを参照してください。
 

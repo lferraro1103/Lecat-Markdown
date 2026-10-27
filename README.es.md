@@ -32,17 +32,17 @@ Editor y lector Markdown sin conexión para Windows, macOS y Linux. Escribí dir
 
 ## Descarga e instalación
 
-Versión estable actual: **3.9.2**. Los enlaces de abajo dirigen a los paquetes publicados; las releases también incluyen sumas SHA256.
+Versión estable actual: **3.9.3**. Los enlaces de abajo dirigen a los paquetes publicados; las releases también incluyen sumas SHA256.
 
 | Plataforma | Descarga | Instalación |
 | --- | --- | --- |
-| Windows 10/11 · x64 | [Instalador (.exe)](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.2/Lecat-Markdown-3.9.2-Setup-x64.exe) | Ejecutá el instalador para elegir la ubicación y crear accesos directos. |
-| Windows 10/11 · x64 | [Portable (.zip)](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.2/Lecat-Markdown-3.9.2-Windows-x64.zip) | Extraé el ZIP completo y abrí `Lecat - Markdown.exe`; conservá juntos los archivos incluidos. |
-| macOS 13+ · Apple Silicon | [DMG · arm64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.2/Lecat-Markdown-3.9.2-macOS-arm64.dmg) | Mové la aplicación a Aplicaciones antes de abrirla. La release también incluye un ZIP. |
-| macOS 13+ · Intel | [DMG · x64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.2/Lecat-Markdown-3.9.2-macOS-x64.dmg) | Mové la aplicación a Aplicaciones antes de abrirla. La release también incluye un ZIP. |
-| macOS 12 Monterey · Apple Silicon / Intel | [Release para Monterey](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.9.2-macos12.1) | Elegí el DMG o ZIP de tu procesador en la release de compatibilidad separada. |
-| Linux · x64 | [AppImage · x86_64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.2/Lecat-Markdown-3.9.2-Linux-x86_64.AppImage) | Otorgá permiso de ejecución al AppImage y abrilo. Algunas distribuciones requieren soporte FUSE. |
-| Debian / Ubuntu · x64 | [Paquete Debian · amd64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.2/Lecat-Markdown-3.9.2-Linux-amd64.deb) | Instalá el `.deb` con tu gestor de paquetes, por ejemplo `sudo apt install ./file.deb`. |
+| Windows 10/11 · x64 | [Instalador (.exe)](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.3/Lecat-Markdown-3.9.3-Setup-x64.exe) | Ejecutá el instalador para elegir la ubicación y crear accesos directos. |
+| Windows 10/11 · x64 | [Portable (.zip)](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.3/Lecat-Markdown-3.9.3-Windows-x64.zip) | Extraé el ZIP completo y abrí `Lecat - Markdown.exe`; conservá juntos los archivos incluidos. |
+| macOS 13+ · Apple Silicon | [DMG · arm64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.3/Lecat-Markdown-3.9.3-macOS-arm64.dmg) | Mové la aplicación a Aplicaciones antes de abrirla. La release también incluye un ZIP. |
+| macOS 13+ · Intel | [DMG · x64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.3/Lecat-Markdown-3.9.3-macOS-x64.dmg) | Mové la aplicación a Aplicaciones antes de abrirla. La release también incluye un ZIP. |
+| macOS 12 Monterey · Apple Silicon / Intel | [Release para Monterey](https://github.com/lferraro1103/Lecat-Markdown/releases/tag/v3.9.3-macos12.1) | Elegí el DMG o ZIP de tu procesador en la release de compatibilidad separada. |
+| Linux · x64 | [AppImage · x86_64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.3/Lecat-Markdown-3.9.3-Linux-x86_64.AppImage) | Otorgá permiso de ejecución al AppImage y abrilo. Algunas distribuciones requieren soporte FUSE. |
+| Debian / Ubuntu · x64 | [Paquete Debian · amd64](https://github.com/lferraro1103/Lecat-Markdown/releases/download/v3.9.3/Lecat-Markdown-3.9.3-Linux-amd64.deb) | Instalá el `.deb` con tu gestor de paquetes, por ejemplo `sudo apt install ./file.deb`. |
 
 Los paquetes de Mac usan firma ad-hoc de integridad; no tienen firma Developer ID ni notarización. Consultá las guías de instalación y firma de macOS en Documentación.
 
